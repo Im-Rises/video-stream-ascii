@@ -30,5 +30,6 @@ module.exports = {
 			'error',
 			'always',
 		],
+		'capitalized-comments': 'off',
 	},
 };

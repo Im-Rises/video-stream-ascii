@@ -1,5 +1,4 @@
 import '../constants/pixel-ascii';
-import {debug} from 'util';
 
 const convertVideoToAscii = (inputCanvas: HTMLCanvasElement, outputCanvas: HTMLCanvasElement, asciiArray: string[]) => {
 	const outputContext = outputCanvas.getContext('2d');
@@ -15,10 +14,15 @@ const convertVideoToAscii = (inputCanvas: HTMLCanvasElement, outputCanvas: HTMLC
 		const asciiIndex = mapValueToOtherRange(grayAlpha, 0, 255, 0, asciiArray.length - 1);
 		const x = (i / 4) % inputCanvas.width;
 		const y = Math.floor((i / 4) / inputCanvas.width);
-		outputContext!.font = '1px';
-		outputContext!.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
-		outputContext!.fillText(asciiArray[asciiIndex], x, y);
+		// outputContext!.font = '22px';
+		// outputContext!.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+		// outputContext!.fillStyle = `rgba(${gray}, ${gray}, ${gray}, ${a})`;
+		// outputContext!.fillText(asciiArray[asciiIndex], x, y);
+		// debugAsciiArray[x + (y * inputCanvas.width)] = asciiArray[asciiIndex];
 	}
+
+	outputContext!.font = '22px';
+	outputContext!.fillText('Hello World', 10, 10);
 
 	console.log('Done for an image of size: ', inputCanvas.width, inputCanvas.height);
 };

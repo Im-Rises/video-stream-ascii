@@ -6,8 +6,8 @@ import './CameraPanel.css';
 
 // Refresh rate of the camera in milliseconds
 const refreshRate = 1000;
-const videoWidth = 40;
-const videoHeight = 30;
+const videoWidth = 640;
+const videoHeight = 480;
 
 // Webcam variables
 const webcamRef = React.createRef<Webcam>();
@@ -27,7 +27,7 @@ function CameraPanel() {
 		const videoCanvasCtx = videoCanvas!.getContext('2d', {willReadFrequently: true});
 		const asciiCanvas = asciiCanvasRef.current;
 		const asciiCanvasCtx = asciiCanvas!.getContext('2d');
-		asciiCanvasCtx!.fillStyle = 'black';
+		// asciiCanvasCtx!.fillStyle = 'black'; // Set the background color of the canvas (by default it's black)
 		setInterval(() => {
 			videoCanvasCtx!.drawImage(video!, 0, 0, videoWidth, videoHeight);
 			asciiCanvasCtx!.clearRect(0, 0, videoWidth, videoHeight);
