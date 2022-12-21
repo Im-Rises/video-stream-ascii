@@ -1,0 +1,14 @@
+repo:
+  - '*'
+
+github-ations:
+  - '.github/**/*.yml'
+
+readme:
+  - 'README.md'
+
+sources:
+  - 'src/**/*'
+
+test:
+  - 'test/*'
