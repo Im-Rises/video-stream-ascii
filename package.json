@@ -1,7 +1,7 @@
 {
   "name": "video-ascii",
   "version": "0.1.0",
-    "description": "Convert video to ascii art",
+  "description": "Convert video to ascii art",
   "homepage": "https://im-rises.github.io/video-ascii/",
   "private": true,
   "dependencies": {
@@ -15,7 +15,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,6 +44,18 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "eslint": "^8.30.0",
+    "eslint-config-xo": "^0.43.1",
+    "eslint-config-xo-react": "^0.27.0",
+    "eslint-config-xo-typescript": "^0.55.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^4.0.0",
+    "typescript": "^4.9.4"
+  },
+  "xo": {
+    "extends": "xo-react"
   }
 }
