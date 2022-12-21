@@ -3,6 +3,7 @@ import '../constants/pixel-ascii';
 const convertVideoToAscii = (inputCanvas: HTMLCanvasElement, outputCanvas: HTMLCanvasElement, asciiArray: string[]) => {
 	const outputContext = outputCanvas.getContext('2d');
 	const inputContext = inputCanvas.getContext('2d');
+	const fontSize = inputCanvas.width / outputCanvas.width;
 	const imageData = inputContext!.getImageData(0, 0, inputCanvas.width, inputCanvas.height);
 	for (let i = 0; i < imageData.data.length; i += 4) {
 		const r = imageData.data[i];
@@ -14,15 +15,19 @@ const convertVideoToAscii = (inputCanvas: HTMLCanvasElement, outputCanvas: HTMLC
 		const asciiIndex = mapValueToOtherRange(grayAlpha, 0, 255, 0, asciiArray.length - 1);
 		const x = (i / 4) % inputCanvas.width;
 		const y = Math.floor((i / 4) / inputCanvas.width);
-		// outputContext!.font = '22px';
+		// outputContext!.font = '10px';
+		// outputContext!.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
 		// outputContext!.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
 		// outputContext!.fillStyle = `rgba(${gray}, ${gray}, ${gray}, ${a})`;
-		// outputContext!.fillText(asciiArray[asciiIndex], x, y);
-		// debugAsciiArray[x + (y * inputCanvas.width)] = asciiArray[asciiIndex];
+
+		outputContext!.font = `${fontSize}px`;
+		// outputContext!.fillText('Hello World', 10, 10);
+
+		outputContext!.fillText(asciiArray[asciiIndex], x + fontSize, y + fontSize);
 	}
 
 	outputContext!.font = '22px';
-	outputContext!.fillText('Hello World', 10, 10);
+	// outputContext!.fillText('Hello World', 10, 10);
 
 	console.log('Done for an image of size: ', inputCanvas.width, inputCanvas.height);
 };
