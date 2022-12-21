@@ -1,6 +1,8 @@
-const asciiChars = '@B%8WM#*oahkbdpwmZO0QlLnJ1iYwfeEcrgjq'
-    + 'xnuvtDVpPXCJTKUW$RYB?>+<!%&/()=\',.:;-_ ';
+// const asciiChars = '@B%8WM#*oahkbdpwmZO0QlLnJ1iYwfeEcrgjq'
+//     + 'xnuvtDVpPXCJTKUW$RYB?>+<!%&/()=\',.:;-_ ';
 
-const asciiArray = [' ', '.', ',', ':', ';', 'i', '1', 't', 'f', 'c', 'L', 'C', 'X', 'O', '0', 'W', '@'];
+// const asciiChars = '@B%8WM#*oahkbdpwmZO0QlLnJ1iYwfeEcrgjq';
 
-export {asciiArray, asciiChars};
+const asciiChars = ' .,:;i1tfcLCXO0W@';
+
+export {asciiChars};

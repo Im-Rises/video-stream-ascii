@@ -4,9 +4,8 @@ import {asciiChars} from '../constants/pixel-ascii';
 import {getAsciiImage} from '../canvas-handler/video-canvas-ascii';
 import './CameraPanel.css';
 
-const refreshRate = 1000 / 30;
-
 function CameraPanel() {
+	const refreshRate = 1000 / 30;
 	const videoRef = React.createRef<Webcam>();
 	const canvasRef = React.createRef<HTMLCanvasElement>();
 	const asciiRef = React.createRef<HTMLPreElement>();
@@ -32,7 +31,7 @@ function CameraPanel() {
 
 	return (
 		<div>
-			<Webcam ref={videoRef} width={100} height={100}/>
+			<Webcam ref={videoRef} style={{width: 0, height: 0}}/>
 			<canvas ref={canvasRef} width={100} height={100}/>
 			<pre ref={asciiRef} style={{}}/>
 		</div>
