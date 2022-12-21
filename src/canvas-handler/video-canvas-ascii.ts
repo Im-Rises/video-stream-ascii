@@ -20,7 +20,7 @@ const convertVideoToAscii = (inputCanvas: HTMLCanvasElement, outputCanvas: HTMLC
 		outputContext!.fillText(asciiArray[asciiIndex], x, y);
 	}
 
-	console.log('Done');
+	console.log('Done for an image of size: ', inputCanvas.width, inputCanvas.height);
 };
 
 const mapValueToOtherRange = (value: number, baseStartIndex: number, baseEndIndex: number, otherStartIndex: number, otherEndIndex: number) => {

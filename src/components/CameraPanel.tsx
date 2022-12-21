@@ -2,9 +2,12 @@ import React, {useEffect} from 'react';
 import Webcam from 'react-webcam';
 import convertVideoToAscii from '../canvas-handler/video-canvas-ascii';
 import {asciiArray} from '../constants/pixel-ascii';
+import './CameraPanel.css';
 
 // Refresh rate of the camera in milliseconds
 const refreshRate = 1000;
+const videoWidth = 40;
+const videoHeight = 30;
 
 // Webcam variables
 const webcamRef = React.createRef<Webcam>();
@@ -12,8 +15,6 @@ const webcamRef = React.createRef<Webcam>();
 // Video Canvas variables
 const videoCanvasRef = React.createRef<HTMLCanvasElement>();
 const videoCanvasId = 'videoCanvas';
-const videoWidth = 320;
-const videoHeight = 240;
 
 // ASCII Canvas variables
 const asciiCanvasRef = React.createRef<HTMLCanvasElement>();
@@ -37,8 +38,10 @@ function CameraPanel() {
 	return (
 		<div>
 			<Webcam ref={webcamRef} style={{width: 0, height: 0}}/>
-			<canvas ref={videoCanvasRef} id={videoCanvasId} width={videoWidth} height={videoHeight}/>
-			<canvas ref={asciiCanvasRef} id={asciiCanvasId} width={videoWidth} height={videoHeight}/>
+			<canvas ref={videoCanvasRef} id={videoCanvasId} width={videoWidth} height={videoHeight}
+				className={'my-canvas'}/>
+			<canvas ref={asciiCanvasRef} id={asciiCanvasId} width={videoWidth} height={videoHeight}
+				className={'my-canvas'}/>
 		</div>
 	);
 }
