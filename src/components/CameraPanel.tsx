@@ -6,9 +6,9 @@ import './CameraPanel.css';
 
 function CameraPanel() {
 	const refreshRate = 1000 / 30;
-	const videoRef = React.createRef<Webcam>();
-	const canvasRef = React.createRef<HTMLCanvasElement>();
-	const asciiRef = React.createRef<HTMLPreElement>();
+	const videoRef = useRef<Webcam>(null);
+	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const asciiRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
 		const updateAscii = () => {
