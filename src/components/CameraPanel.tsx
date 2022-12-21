@@ -17,11 +17,10 @@ function CameraPanel() {
 			const video = videoRef.current?.video;
 			const ascii = asciiRef.current;
 
-			canvas!.width = video!.videoWidth;
-			canvas!.height = video!.videoHeight;
+			// canvas!.width = video!.videoWidth;
+			// canvas!.height = video!.videoHeight;
 			const context = canvas!.getContext('2d');
-			context!.drawImage(video!, 0, 0);
-			console.log(video!.width, video!.height);
+			context!.drawImage(video!, 0, 0, canvas!.width, canvas!.height);
 			const imageData = context!.getImageData(0, 0, canvas!.width, canvas!.height);
 			ascii!.innerText = getAsciiImage(imageData, asciiChars);
 		};
@@ -34,7 +33,7 @@ function CameraPanel() {
 	return (
 		<div>
 			<Webcam ref={videoRef} width={100} height={100}/>
-			<canvas ref={canvasRef} style={{display: 'none'}}/>
+			<canvas ref={canvasRef} width={100} height={100}/>
 			<pre ref={asciiRef} style={{}}/>
 		</div>
 	);
