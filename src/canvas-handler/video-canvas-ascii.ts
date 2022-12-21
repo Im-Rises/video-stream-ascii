@@ -12,14 +12,11 @@ const convertVideoToAscii = (inputCanvas: HTMLCanvasElement, outputCanvas: HTMLC
 		const a = imageData.data[i + 3];
 		const gray = (r + g + b) / 3;
 		const grayAlpha = gray * a / 255;
-		// Image wut ...?
-		// imageData.data[i] = grayAlpha;
-		// imageData.data[i + 1] = grayAlpha;
-		// imageData.data[i + 2] = grayAlpha;
-		// imageData.data[i + 3] = 255;
 		const asciiIndex = mapValueToOtherRange(grayAlpha, 0, 255, 0, asciiArray.length - 1);
 		const x = (i / 4) % inputCanvas.width;
 		const y = Math.floor((i / 4) / inputCanvas.width);
+		outputContext!.font = '1px';
+		outputContext!.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
 		outputContext!.fillText(asciiArray[asciiIndex], x, y);
 	}
 

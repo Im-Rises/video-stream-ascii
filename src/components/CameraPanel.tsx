@@ -4,7 +4,7 @@ import convertVideoToAscii from '../canvas-handler/video-canvas-ascii';
 import {asciiArray} from '../constants/pixel-ascii';
 
 // Refresh rate of the camera in milliseconds
-const refreshRate = 1000;// = 1000 / 30;
+const refreshRate = 1000;
 
 // Webcam variables
 const webcamRef = React.createRef<Webcam>();
@@ -12,8 +12,8 @@ const webcamRef = React.createRef<Webcam>();
 // Video Canvas variables
 const videoCanvasRef = React.createRef<HTMLCanvasElement>();
 const videoCanvasId = 'videoCanvas';
-const videoWidth = 640;
-const videoHeight = 480;
+const videoWidth = 320;
+const videoHeight = 240;
 
 // ASCII Canvas variables
 const asciiCanvasRef = React.createRef<HTMLCanvasElement>();
@@ -26,6 +26,7 @@ function CameraPanel() {
 		const videoCanvasCtx = videoCanvas!.getContext('2d', {willReadFrequently: true});
 		const asciiCanvas = asciiCanvasRef.current;
 		const asciiCanvasCtx = asciiCanvas!.getContext('2d');
+		asciiCanvasCtx!.fillStyle = 'black';
 		setInterval(() => {
 			videoCanvasCtx!.drawImage(video!, 0, 0, videoWidth, videoHeight);
 			asciiCanvasCtx!.clearRect(0, 0, videoWidth, videoHeight);
