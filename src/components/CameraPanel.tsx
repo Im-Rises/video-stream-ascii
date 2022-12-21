@@ -1,50 +1,41 @@
-import React, {useEffect} from 'react';
-import './CameraPanel.css';
+import React, {useRef, useEffect} from 'react';
 import Webcam from 'react-webcam';
-import convertVideoToAscii from '../canvas-handler/video-canvas-ascii';
-import {asciiArray} from '../constants/pixel-ascii';
+import {asciiChars} from '../constants/pixel-ascii';
+import {getAsciiImage} from '../canvas-handler/video-canvas-ascii';
+import './CameraPanel.css';
 
-// Refresh rate of the camera in milliseconds
-const refreshRate = 1000;
-const videoWidth = 640;
-const videoHeight = 480;
-const asciiVideoWidth = 160;
-const asciiVideoHeight = 120;
-const fontSize = videoHeight / asciiVideoHeight;
-
-// Webcam variables
-const webcamRef = React.createRef<Webcam>();
-
-// Video Canvas variables
-const videoCanvasRef = React.createRef<HTMLCanvasElement>();
-const videoCanvasId = 'videoCanvas';
-
-// ASCII Canvas variables
-const asciiCanvasRef = React.createRef<HTMLCanvasElement>();
-const asciiCanvasId = 'asciiCanvas';
+const refreshRate = 1000 / 30;
 
 function CameraPanel() {
+	const videoRef = React.createRef<Webcam>();
+	const canvasRef = React.createRef<HTMLCanvasElement>();
+	const asciiRef = React.createRef<HTMLPreElement>();
+
 	useEffect(() => {
-		const video = webcamRef.current?.video;
-		const videoCanvas = videoCanvasRef.current;
-		const videoCanvasCtx = videoCanvas!.getContext('2d', {willReadFrequently: true});
-		const asciiCanvas = asciiCanvasRef.current;
-		const asciiCanvasCtx = asciiCanvas!.getContext('2d');
-		// asciiCanvasCtx!.fillStyle = 'black'; // Set the background color of the canvas (by default it's black)
+		const updateAscii = () => {
+			const canvas = canvasRef.current;
+			const video = videoRef.current?.video;
+			const ascii = asciiRef.current;
+
+			canvas!.width = video!.videoWidth;
+			canvas!.height = video!.videoHeight;
+			const context = canvas!.getContext('2d');
+			context!.drawImage(video!, 0, 0);
+			console.log(video!.width, video!.height);
+			const imageData = context!.getImageData(0, 0, canvas!.width, canvas!.height);
+			ascii!.innerText = getAsciiImage(imageData, asciiChars);
+		};
+
 		setInterval(() => {
-			videoCanvasCtx!.drawImage(video!, 0, 0, videoWidth, videoHeight);
-			asciiCanvasCtx!.clearRect(0, 0, videoWidth, videoHeight);
-			convertVideoToAscii(videoCanvas!, asciiCanvas!, asciiArray);
+			updateAscii();
 		}, refreshRate);
-	});
+	}, []);
 
 	return (
 		<div>
-			<Webcam ref={webcamRef} style={{width: 0, height: 0}}/>
-			<canvas ref={videoCanvasRef} id={videoCanvasId} width={videoWidth} height={videoHeight}
-				className={'my-canvas'}/>
-			<canvas ref={asciiCanvasRef} id={asciiCanvasId} width={asciiVideoWidth} height={asciiVideoHeight}
-				className={'my-canvas'}/>
+			<Webcam ref={videoRef} width={100} height={100}/>
+			<canvas ref={canvasRef} style={{display: 'none'}}/>
+			<pre ref={asciiRef} style={{}}/>
 		</div>
 	);
 }
