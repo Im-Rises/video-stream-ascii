@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import './components/P5JsTest';
-import P5JsTest from './components/P5JsTest';
+import CameraPanel from './components/CameraPanel';
 
 const App = () => (
 	<div className='App'>
 		<header className='App-header'>
-			<P5JsTest/>
+			<CameraPanel frameRate={1000 / 30} width={200} height={200} fontSize={16} fontColor={'white'}
+				backgroundColor={'black'}/>
 		</header>
 	</div>
 );
