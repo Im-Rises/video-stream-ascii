@@ -25,7 +25,7 @@ function CameraPanel() {
 			// Get ascii image and draw it to canvas
 			asciiText = getAsciiImage(imageData, asciiChars);
 			asciiTextRef.current!.getContext('2d')!.clearRect(0, 0, asciiTextRef.current!.width, asciiTextRef.current!.height);
-			drawTextInCanvas(asciiTextRef.current!, asciiText, 16);
+			drawTextInCanvas(asciiTextRef.current!, asciiText, 16, 'white');
 		};
 
 		setInterval(() => {

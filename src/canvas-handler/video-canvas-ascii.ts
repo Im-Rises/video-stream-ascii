@@ -19,14 +19,14 @@ const getAsciiImage = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
-const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize: number) => {
+const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize: number, fontColor: string) => {
 	const ctx = canvas.getContext('2d');
 
 	const lines = inputText.split('\n');
 
 	// Set the font size and measure the width of the text
 	ctx!.font = `${fontSize}px monospace`;
-	ctx!.fillStyle = 'white';
+	ctx!.fillStyle = fontColor;
 	let textWidth = ctx!.measureText(lines[0]).width;
 
 	// If the text is too wide, decrease the font size until it fits
