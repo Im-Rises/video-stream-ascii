@@ -26,6 +26,7 @@ const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize
 
 	// Set the font size and measure the width of the text
 	ctx!.font = `${fontSize}px monospace`;
+	ctx!.fillStyle = 'white';
 	let textWidth = ctx!.measureText(lines[0]).width;
 
 	// If the text is too wide, decrease the font size until it fits
@@ -37,15 +38,12 @@ const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize
 
 	if (fontSize < 1) {
 		fontSize = 1;
+		ctx!.font = `${fontSize}px monospace`;
 	}
 
-	// console.log('fontSize', fontSize);
 	for (let i = 0; i < lines.length; i++) {
 		ctx!.fillText(lines[i], 0, (fontSize * i) + fontSize);
 	}
-
-	// // Draw the text on the canvas
-	// ctx!.fillText(inputText, 0, fontSize);
 };
 
 export {getAsciiImage, drawTextInCanvas};

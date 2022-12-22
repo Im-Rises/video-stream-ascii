@@ -1,30 +1,40 @@
 import React, {useRef, useEffect} from 'react';
 import Webcam from 'react-webcam';
-import './CanvasFitText';
 import {asciiChars} from '../constants/pixel-ascii';
 import {getAsciiImage, drawTextInCanvas} from '../canvas-handler/video-canvas-ascii';
 import './CameraPanel.css';
-import CanvasFitText from './CanvasFitText';
-import {text} from 'stream/consumers';
+
+const inputVideoWidth = 200;
+const inputVideoHeight = 200;
+
+const outputCanvasWidth = 200;
+const outputCanvasHeight = 200;
 
 function CameraPanel() {
 	const refreshRate = 1000 / 30;
 	const videoRef = useRef<Webcam>(null);
-	const canvasRef = useRef<HTMLCanvasElement>(null);
-	const asciiTextRef = useRef<HTMLCanvasElement>(null);
+	const canvasBufferRef = useRef<HTMLCanvasElement>(null);
+	const asciiTextCanvasRef = useRef<HTMLCanvasElement>(null);
 	let asciiText = 'Demo text';
 
 	useEffect(() => {
 		const updateAscii = () => {
-			const canvas = canvasRef.current;
 			const video = videoRef.current?.video;
-			const context = canvas!.getContext('2d', {willReadFrequently: true});
-			context!.drawImage(video!, 0, 0, canvas!.width, canvas!.height);
-			const imageData = context!.getImageData(0, 0, canvas!.width, canvas!.height);
+			const canvasBuffer = canvasBufferRef.current;
+			const asciiTextCanvas = asciiTextCanvasRef.current;
+			const asciiTextCanvasContext = asciiTextCanvas?.getContext('2d');
+
+			// Fill canvas buffer with video frame
+			const context = canvasBuffer!.getContext('2d', {willReadFrequently: true});
+			context!.drawImage(video!, 0, 0, canvasBuffer!.width, canvasBuffer!.height);
+
+			// Convert canvas buffer to ascii text
+			const imageData = context!.getImageData(0, 0, canvasBuffer!.width, canvasBuffer!.height);
 			asciiText = getAsciiImage(imageData, asciiChars);
-			asciiTextRef.current!.getContext('2d')!.clearRect(0, 0, asciiTextRef.current!.width, asciiTextRef.current!.height);
-			drawTextInCanvas(asciiTextRef.current!, asciiText, 16);
-			// drawTextInCanvas(asciiTextRef.current!, 'sdsdsqd\nsdsdqdqs', 16);
+
+			// Draw ascii text in canvas
+			asciiTextCanvasContext!.clearRect(0, 0, asciiTextCanvasRef.current!.width, asciiTextCanvasRef.current!.height);
+			drawTextInCanvas(asciiTextCanvasRef.current!, asciiText, 16);
 		};
 
 		setInterval(() => {
@@ -33,11 +43,10 @@ function CameraPanel() {
 	}, []);
 
 	return (
-		<div>
+		<div style={{backgroundColor: 'black'}}>
 			<Webcam ref={videoRef} style={{width: 0, height: 0}}/>
-			<canvas ref={canvasRef} width={200} height={200}/>
-			{/* <CanvasFitText inputText={asciiText} canvasWidth={200} initFontSize={16}/> */}
-			<canvas ref={asciiTextRef} width={2000} height={2000}/>
+			<canvas ref={canvasBufferRef} width={inputVideoWidth} height={inputVideoHeight}/>
+			<canvas ref={asciiTextCanvasRef} width={outputCanvasWidth} height={outputCanvasHeight}/>
 		</div>
 	);
 }
