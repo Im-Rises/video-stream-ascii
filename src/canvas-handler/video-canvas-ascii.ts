@@ -33,7 +33,7 @@ const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize
 	while (textWidth > canvas.width) {
 		fontSize -= 1;
 		ctx!.font = `${fontSize}px monospace`;
-		textWidth = ctx!.measureText(inputText).width;
+		textWidth = ctx!.measureText(lines[0]).width;
 	}
 
 	if (fontSize < 1) {
@@ -46,7 +46,7 @@ const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize
 	}
 };
 
-const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: number, fontColor: string) => {
+const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: number, fontColor: string, screenWidth: number) => {
 	const lines = inputText.split('\n');
 
 	const canvas = document.createElement('canvas');
@@ -56,10 +56,10 @@ const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: n
 	let textWidth = ctx!.measureText(lines[0]).width;
 
 	// If the text is too wide, decrease the font size until it fits
-	while (textWidth > canvas.width) {
+	while (textWidth > screenWidth) {
 		fontSize -= 1;
 		ctx!.font = `${fontSize}px monospace`;
-		textWidth = ctx!.measureText(inputText).width;
+		textWidth = ctx!.measureText(lines[0]).width;
 	}
 
 	if (fontSize < 1) {

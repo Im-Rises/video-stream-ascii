@@ -39,7 +39,7 @@ const CameraPanel = (params: Params) => {
 			// Print real ascii text in pre tag
 			const preTag = preTagRef.current!;
 			// preTag.innerHTML = asciiText;
-			drawTextInPreTag(preTag, asciiText, params.fontSize, params.fontColor);
+			drawTextInPreTag(preTag, asciiText, params.fontSize, params.fontColor, screen.width);
 		};
 
 		setInterval(() => {
@@ -56,7 +56,7 @@ const CameraPanel = (params: Params) => {
 					className={'my-canvas'}/>
 			</div>
 			<div>
-				<pre ref={preTagRef} className={'my-pre'} style={{backgroundColor: 'black'}}></pre>
+				<pre ref={preTagRef} className={'my-pre'} style={{backgroundColor: params.backgroundColor}}></pre>
 			</div>
 		</div>
 	);
