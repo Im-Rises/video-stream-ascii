@@ -1,5 +1,11 @@
+.holder {
+  display: flex;
+  justify-content: center;
+}
+
 .my-canvas {
-  width: 50%;
+  width: 80%;
+  display: flex;
 }
 
 /*# sourceMappingURL=CameraPanel.css.map */

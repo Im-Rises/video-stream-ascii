@@ -4,37 +4,36 @@ import {asciiChars} from '../constants/pixel-ascii';
 import {getAsciiImage, drawTextInCanvas} from '../canvas-handler/video-canvas-ascii';
 import './CameraPanel.css';
 
-const inputVideoWidth = 200;
-const inputVideoHeight = 200;
+type Params = {
+	width: number;
+	height: number;
+	fontSize: number;
+	fontColor: string;
+	backgroundColor: string;
+};
 
-const outputCanvasWidth = 200;
-const outputCanvasHeight = 200;
-
-function CameraPanel() {
+const CameraPanel = (params: Params) => {
 	const refreshRate = 1000 / 30;
 	const videoRef = useRef<Webcam>(null);
-	const canvasBufferRef = useRef<HTMLCanvasElement>(null);
-	const asciiTextCanvasRef = useRef<HTMLCanvasElement>(null);
+	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const asciiTextRef = useRef<HTMLCanvasElement>(null);
 	let asciiText = 'Demo text';
 
 	useEffect(() => {
 		const updateAscii = () => {
+			// Init variables
+			const canvas = canvasRef.current;
 			const video = videoRef.current?.video;
-			const canvasBuffer = canvasBufferRef.current;
-			const asciiTextCanvas = asciiTextCanvasRef.current;
-			const asciiTextCanvasContext = asciiTextCanvas?.getContext('2d');
+			const context = canvas!.getContext('2d', {willReadFrequently: true});
 
-			// Fill canvas buffer with video frame
-			const context = canvasBuffer!.getContext('2d', {willReadFrequently: true});
-			context!.drawImage(video!, 0, 0, canvasBuffer!.width, canvasBuffer!.height);
+			// Draw video to canvas buffer
+			context!.drawImage(video!, 0, 0, canvas!.width, canvas!.height);
+			const imageData = context!.getImageData(0, 0, canvas!.width, canvas!.height);
 
-			// Convert canvas buffer to ascii text
-			const imageData = context!.getImageData(0, 0, canvasBuffer!.width, canvasBuffer!.height);
+			// Get ascii image and draw it to canvas
 			asciiText = getAsciiImage(imageData, asciiChars);
-
-			// Draw ascii text in canvas
-			asciiTextCanvasContext!.clearRect(0, 0, asciiTextCanvasRef.current!.width, asciiTextCanvasRef.current!.height);
-			drawTextInCanvas(asciiTextCanvasRef.current!, asciiText, 16);
+			asciiTextRef.current!.getContext('2d')!.clearRect(0, 0, asciiTextRef.current!.width, asciiTextRef.current!.height);
+			drawTextInCanvas(asciiTextRef.current!, asciiText, params.fontSize, params.fontColor);
 		};
 
 		setInterval(() => {
@@ -43,12 +42,12 @@ function CameraPanel() {
 	}, []);
 
 	return (
-		<div style={{backgroundColor: 'black'}}>
+		<div style={{backgroundColor: params.backgroundColor}} className={'holder'}>
 			<Webcam ref={videoRef} style={{width: 0, height: 0}}/>
-			<canvas ref={canvasBufferRef} width={inputVideoWidth} height={inputVideoHeight}/>
-			<canvas ref={asciiTextCanvasRef} width={outputCanvasWidth} height={outputCanvasHeight}/>
+			<canvas ref={canvasRef} width={params.width} height={params.height} style={{width: 0, height: 0}}/>
+			<canvas ref={asciiTextRef} width={params.width * 10} height={params.height * 10} className={'my-canvas'}/>
 		</div>
 	);
-}
+};
 
 export default CameraPanel;
