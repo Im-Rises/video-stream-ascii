@@ -25,13 +25,13 @@ const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize
 	const lines = inputText.split('\n');
 
 	// Set the font size and measure the width of the text
-	ctx!.font = `${fontSize}px sans-serif`;
+	ctx!.font = `${fontSize}px monospace`;
 	let textWidth = ctx!.measureText(lines[0]).width;
 
 	// If the text is too wide, decrease the font size until it fits
 	while (textWidth > canvas.width) {
 		fontSize -= 1;
-		ctx!.font = `${fontSize}px sans-serif`;
+		ctx!.font = `${fontSize}px monospace`;
 		textWidth = ctx!.measureText(inputText).width;
 	}
 

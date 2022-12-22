@@ -35,9 +35,9 @@ function CameraPanel() {
 	return (
 		<div>
 			<Webcam ref={videoRef} style={{width: 0, height: 0}}/>
-			<canvas ref={canvasRef} width={20} height={20}/>
+			<canvas ref={canvasRef} width={200} height={200}/>
 			{/* <CanvasFitText inputText={asciiText} canvasWidth={200} initFontSize={16}/> */}
-			<canvas ref={asciiTextRef} width={200} height={200}/>
+			<canvas ref={asciiTextRef} width={2000} height={2000}/>
 		</div>
 	);
 }
