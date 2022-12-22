@@ -7,7 +7,7 @@ function App() {
 	return (
 		<div className='App'>
 			<header className='App-header'>
-				<CameraPanel/>
+				<CameraPanel width={200} height={200} fontSize={16} fontColor='white' backgroundColor='black'/>
 			</header>
 		</div>
 	);

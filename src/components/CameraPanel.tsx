@@ -4,7 +4,7 @@ import {asciiChars} from '../constants/pixel-ascii';
 import {getAsciiImage, drawTextInCanvas} from '../canvas-handler/video-canvas-ascii';
 import './CameraPanel.css';
 
-type Props = {
+type Params = {
 	width: number;
 	height: number;
 	// asciiWidth: number;
@@ -16,7 +16,7 @@ type Props = {
 	// canvasBuffer: HTMLCanvasElement;
 };
 
-const CameraPanel = () => {
+const CameraPanel = (params: Params) => {
 	const refreshRate = 1000 / 30;
 	const videoRef = useRef<Webcam>(null);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,7 +37,7 @@ const CameraPanel = () => {
 			// Get ascii image and draw it to canvas
 			asciiText = getAsciiImage(imageData, asciiChars);
 			asciiTextRef.current!.getContext('2d')!.clearRect(0, 0, asciiTextRef.current!.width, asciiTextRef.current!.height);
-			drawTextInCanvas(asciiTextRef.current!, asciiText, 16, 'white');
+			drawTextInCanvas(asciiTextRef.current!, asciiText, params.fontSize, params.fontColor);
 		};
 
 		setInterval(() => {
@@ -46,10 +46,10 @@ const CameraPanel = () => {
 	}, []);
 
 	return (
-		<div style={{backgroundColor: 'black'}}>
+		<div style={{backgroundColor: params.backgroundColor}}>
 			<Webcam ref={videoRef} style={{width: 0, height: 0}}/>
-			<canvas ref={canvasRef} width={200} height={200}/>
-			<canvas ref={asciiTextRef} width={2000} height={2000}/>
+			<canvas ref={canvasRef} width={params.width} height={params.height}/>
+			<canvas ref={asciiTextRef} width={params.width * 10} height={params.height * 10}/>
 		</div>
 	);
 };
