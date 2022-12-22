@@ -7,13 +7,9 @@ import './CameraPanel.css';
 type Params = {
 	width: number;
 	height: number;
-	// asciiWidth: number;
-	// asciiHeight: number;
-	// asciiChars: string;
 	fontSize: number;
 	fontColor: string;
 	backgroundColor: string;
-	// canvasBuffer: HTMLCanvasElement;
 };
 
 const CameraPanel = (params: Params) => {
@@ -46,10 +42,10 @@ const CameraPanel = (params: Params) => {
 	}, []);
 
 	return (
-		<div style={{backgroundColor: params.backgroundColor}}>
+		<div style={{backgroundColor: params.backgroundColor}} className={'holder'}>
 			<Webcam ref={videoRef} style={{width: 0, height: 0}}/>
-			<canvas ref={canvasRef} width={params.width} height={params.height}/>
-			<canvas ref={asciiTextRef} width={params.width * 10} height={params.height * 10}/>
+			<canvas ref={canvasRef} width={params.width} height={params.height} style={{width: 0, height: 0}}/>
+			<canvas ref={asciiTextRef} width={params.width * 10} height={params.height * 10} className={'my-canvas'}/>
 		</div>
 	);
 };
