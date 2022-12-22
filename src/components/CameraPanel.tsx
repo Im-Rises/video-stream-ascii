@@ -4,7 +4,19 @@ import {asciiChars} from '../constants/pixel-ascii';
 import {getAsciiImage, drawTextInCanvas} from '../canvas-handler/video-canvas-ascii';
 import './CameraPanel.css';
 
-function CameraPanel() {
+type Props = {
+	width: number;
+	height: number;
+	// asciiWidth: number;
+	// asciiHeight: number;
+	// asciiChars: string;
+	fontSize: number;
+	fontColor: string;
+	backgroundColor: string;
+	// canvasBuffer: HTMLCanvasElement;
+};
+
+const CameraPanel = () => {
 	const refreshRate = 1000 / 30;
 	const videoRef = useRef<Webcam>(null);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -40,6 +52,6 @@ function CameraPanel() {
 			<canvas ref={asciiTextRef} width={2000} height={2000}/>
 		</div>
 	);
-}
+};
 
 export default CameraPanel;
