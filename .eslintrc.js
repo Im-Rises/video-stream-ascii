@@ -31,5 +31,11 @@ module.exports = {
 			'always',
 		],
 		'capitalized-comments': 'off',
+		// 'max-param': 'off',
+		'max-params': [
+			'error',
+			5,
+		],
 	},
 };
+
