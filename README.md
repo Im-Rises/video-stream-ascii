@@ -20,8 +20,9 @@ Or by copying the following link to your browser:
 https://im-rises.github.io/video-ascii/
 ```
 
-[//]: # (## Screenshots)
+## Screenshots
 
+<img src="https://user-images.githubusercontent.com/59691442/209728294-e10691da-eb4f-43e6-880c-522417da79c6.png" alt="screenshot" style="width: 100%;">
 
 ## Project architecture
 
@@ -51,6 +52,10 @@ video-ascii
 |  ├── components
 │  │   |── CameraAscii.scss
 │  │   |── CameraAscii.tsx
+│  │   |── CameraAsciiPanel.scss
+│  │   |── CameraAsciiPanel.tsx
+│  │   |── GitHubProjectPanel.scss
+│  │   |── GitHubProjectPanel.tsx
 |  ├── constants
 │  │   |── pixel-ascii.ts
 |  ├── settings
@@ -78,6 +83,9 @@ video-ascii
 The project is using React, TypeScript, JavaScript, TensorFlow, SCSS, CSS, etc...
 
 You can find the dependencies in the `dependencies` folder.
+
+It uses the react-webcam library to get the video stream from the webcam.  
+<https://www.npmjs.com/package/react-webcam>
 
 ## Deployment
 
@@ -123,6 +131,9 @@ ESLint:
 
 GitHub gh-pages:  
 <https://github.com/gitname/react-gh-pages>
+
+react-webcam:  
+<https://www.npmjs.com/package/react-webcam>
 
 <!--
 If not publishing anymore, replace the following line:
