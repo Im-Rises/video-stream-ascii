@@ -6,10 +6,10 @@ import './CameraAsciiPanel.css';
 const CameraAsciiPanel = () => {
 	const sliderWidthRef = useRef<HTMLInputElement>(null);
 	const sliderHeightRef = useRef<HTMLInputElement>(null);
-	const [cameraWidth, setCameraWidth] = useState(200);
+	const [cameraWidth, setCameraWidth] = useState(300);
 	const [cameraHeight, setCameraHeight] = useState(200);
 	const checkboxAspectRatioRef = useRef<HTMLInputElement>(null);
-	let aspectRatio = cameraWidth / cameraHeight;
+	const aspectRatio = cameraWidth / cameraHeight;
 
 	return (
 		<div>
@@ -22,29 +22,30 @@ const CameraAsciiPanel = () => {
 					fontColor={'white'}
 					backgroundColor={'black'}/>
 			</div>
-			<div className={'Camera-Controller'}>
-				<p>Width: {cameraWidth} char</p>
-				<input type={'range'} ref={sliderWidthRef} min={10} max={1000} defaultValue={cameraWidth} step={1}
-					onChange={() => {
-						setCameraWidth(parseInt(sliderWidthRef.current!.value, 10));
-						if (checkboxAspectRatioRef.current!.checked) {
-							setCameraHeight(Math.round(cameraWidth / aspectRatio));
-						}
-					}}/>
-				<p>Height: {cameraHeight} char</p>
-				<input type={'range'} ref={sliderHeightRef} min={10} max={1000} defaultValue={cameraHeight} step={1}
-					onChange={() => {
-						setCameraHeight(parseInt(sliderHeightRef.current!.value, 10));
-						if (checkboxAspectRatioRef.current!.checked) {
-							setCameraWidth(Math.round(cameraHeight * aspectRatio));
-						}
-					}}/>
-				<input type={'checkbox'} name={'checkboxRatio'} defaultValue={'checked'} ref={checkboxAspectRatioRef}
-					onChange={() => {
-						aspectRatio = cameraWidth / cameraHeight;
-					}}/>
-				<label htmlFor={'checkboxRatio'}>Keep ratio</label>
-			</div>
+			{/* <div className={'Camera-Controller'}> */}
+			{/*	<p>Width: {cameraWidth} char</p> */}
+			{/*	<input type={'range'} ref={sliderWidthRef} min={10} max={1000} defaultValue={cameraWidth} step={1} */}
+			{/*		onChange={() => { */}
+			{/*			setCameraWidth(parseInt(sliderWidthRef.current!.value, 10)); */}
+			{/*			if (checkboxAspectRatioRef.current!.checked) { */}
+			{/*				setCameraHeight(Math.round(cameraWidth / aspectRatio)); */}
+			{/*			} */}
+			{/*		}}/> */}
+			{/*	<p>Height: {cameraHeight} char</p> */}
+			{/*	<input type={'range'} ref={sliderHeightRef} min={10} max={1000} defaultValue={cameraHeight} step={1} */}
+			{/*		onChange={() => { */}
+			{/*			setCameraHeight(parseInt(sliderHeightRef.current!.value, 10)); */}
+			{/*			if (checkboxAspectRatioRef.current!.checked) { */}
+			{/*				setCameraWidth(Math.round(cameraHeight * aspectRatio)); */}
+			{/*			} */}
+			{/*		}}/> */}
+			{/*	<br/> */}
+			{/*	<input type={'checkbox'} name={'checkboxRatio'} defaultValue={'checked'} ref={checkboxAspectRatioRef} */}
+			{/*		onChange={() => { */}
+			{/*			aspectRatio = cameraWidth / cameraHeight; */}
+			{/*		}}/> */}
+			{/*	<label htmlFor={'checkboxRatio'}>Keep ratio</label> */}
+			{/* </div> */}
 		</div>
 	);
 };
