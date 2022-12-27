@@ -4,6 +4,9 @@
   align-items: center;
   justify-content: center;
 }
+.Project-Panel:hover {
+  color: #fff;
+}
 
 .Project-Link {
   border-radius: 4px;

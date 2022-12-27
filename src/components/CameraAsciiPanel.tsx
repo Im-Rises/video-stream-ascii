@@ -4,11 +4,10 @@ import CameraAscii from './CameraAscii';
 import './CameraAsciiPanel.css';
 
 const CameraAsciiPanel = () => {
-	console.log('CameraAsciiPanel');
 	const sliderWidthRef = useRef<HTMLInputElement>(null);
 	const sliderHeightRef = useRef<HTMLInputElement>(null);
-	const [cameraWidth, setCameraWidth] = useState(320);
-	const [cameraHeight, setCameraHeight] = useState(240);
+	const [cameraWidth, setCameraWidth] = useState(200);
+	const [cameraHeight, setCameraHeight] = useState(200);
 
 	return (
 		<div>
@@ -20,15 +19,13 @@ const CameraAsciiPanel = () => {
 					backgroundColor={'black'}/>
 			</div>
 			<div>
-				<h1>Controls</h1>
-				<h2>Resolution</h2>
-				<p>Width: {sliderWidthRef.current?.value}</p>
-				<input type={'range'} ref={sliderWidthRef} min={10} max={1920} defaultValue={320} step={1}
+				<p>Width: {cameraWidth} char</p>
+				<input type={'range'} ref={sliderWidthRef} min={10} max={1920} defaultValue={cameraWidth} step={1}
 					onChange={() => {
 						setCameraWidth(parseInt(sliderWidthRef.current!.value, 10));
 					}}/>
-				<p>Height: {cameraHeight}</p>
-				<input type={'range'} ref={sliderHeightRef} min={10} max={1080} defaultValue={240} step={1}
+				<p>Height: {cameraHeight} char</p>
+				<input type={'range'} ref={sliderHeightRef} min={10} max={1080} defaultValue={cameraHeight} step={1}
 					onChange={() => {
 						setCameraHeight(parseInt(sliderHeightRef.current!.value, 10));
 					}}/>

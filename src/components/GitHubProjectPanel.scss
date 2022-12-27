@@ -3,6 +3,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:hover {
+    color: #fff;
+  }
 }
 
 .Project-Link {
