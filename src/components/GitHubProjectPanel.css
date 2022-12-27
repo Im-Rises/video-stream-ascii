@@ -9,11 +9,11 @@
 }
 
 .Project-Link {
-  border-radius: 4px;
+  border-radius: 0.4em;
   border-style: solid;
-  border-width: 2px;
+  border-width: 0.2em;
   color: #A9A9A9;
-  font-size: 9px;
+  font-size: 0.6em;
   position: absolute;
   top: 0;
   right: 0;
