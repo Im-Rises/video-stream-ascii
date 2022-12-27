@@ -63,7 +63,7 @@ const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: n
 	}
 
 	// If the text is too tall, decrease the font size until it fits
-	while ((fontSize + 2) * lines.length > screenHeight) {// Offset by 2 to account for the line height
+	while ((fontSize + 1.6) * lines.length > screenHeight) {// Offset by 1.6/2 to account for the line height
 		fontSize -= 1;
 		ctx!.font = `${fontSize}px monospace`;
 	}

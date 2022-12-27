@@ -2,7 +2,7 @@ import React, {useRef, useEffect} from 'react';
 import Webcam from 'react-webcam';
 import {asciiChars} from '../constants/pixel-ascii';
 import {getAsciiFromImage, drawTextInCanvas, drawTextInPreTag} from '../canvas-handler/video-canvas-ascii';
-import './CameraPanel.css';
+import './CameraAscii.css';
 
 type Params = {
 	width: number;
@@ -13,7 +13,7 @@ type Params = {
 	frameRate: number;
 };
 
-const CameraPanel = (params: Params) => {
+const CameraAscii = (params: Params) => {
 	const videoRef = useRef<Webcam>(null);
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
 	const preTagRef = useRef<HTMLPreElement>(null);
@@ -53,4 +53,4 @@ const CameraPanel = (params: Params) => {
 	);
 };
 
-export default CameraPanel;
+export default CameraAscii;

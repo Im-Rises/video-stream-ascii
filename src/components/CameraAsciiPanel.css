@@ -1,0 +1,18 @@
+.Camera-Ascii {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+}
+
+.Camera-Controller {
+  color: white;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
+/*# sourceMappingURL=CameraAsciiPanel.css.map */

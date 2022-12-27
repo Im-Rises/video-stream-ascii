@@ -49,8 +49,8 @@ video-ascii
 |  ├── canvas-handler
 │  │   |── canvas-handler.ts
 |  ├── components
-│  │   |── CameraPanel.scss
-│  │   |── CameraPanel.tsx
+│  │   |── CameraAscii.scss
+│  │   |── CameraAscii.tsx
 |  ├── constants
 │  │   |── pixel-ascii.ts
 |  ├── settings
