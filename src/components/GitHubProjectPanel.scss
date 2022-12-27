@@ -1,0 +1,23 @@
+.Project-Panel {
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2%;
+}
+
+.Project-Link {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 2px;
+  color: #A9A9A9;
+  font-size: 9px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+
+  a {
+    color: gray;
+  }
+}
