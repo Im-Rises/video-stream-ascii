@@ -42,7 +42,6 @@ const CameraAsciiPanel = () => {
 				<input type={'checkbox'} name={'checkboxRatio'} defaultValue={'checked'} ref={checkboxAspectRatioRef}
 					onChange={() => {
 						aspectRatio = cameraWidth / cameraHeight;
-						console.log(aspectRatio);
 					}}/>
 				<label htmlFor={'checkboxRatio'}>Keep ratio</label>
 			</div>
