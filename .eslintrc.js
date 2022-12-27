@@ -34,7 +34,7 @@ module.exports = {
 		// 'max-param': 'off',
 		'max-params': [
 			'error',
-			5,
+			6,
 		],
 	},
 };
