@@ -46,7 +46,7 @@ const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize
 	}
 };
 
-const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: number, fontColor: string, screenWidth: number) => {
+const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: number, fontColor: string, screenWidth: number, screenHeight: number) => {
 	const lines = inputText.split('\n');
 
 	const canvas = document.createElement('canvas');
@@ -61,6 +61,16 @@ const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: n
 		ctx!.font = `${fontSize}px monospace`;
 		textWidth = ctx!.measureText(lines[0]).width;
 	}
+
+	while ((fontSize + 2) * lines.length > screenHeight) {// Offset by 2 to account for the line height
+		fontSize -= 1;
+		ctx!.font = `${fontSize}px monospace`;
+	}
+
+	console.log('------------------');
+	console.log('fontSize', fontSize);
+	console.log('lines.length', lines.length);
+	console.log('screenHeight', screenHeight);
 
 	if (fontSize < 1) {
 		fontSize = 1;

@@ -1,18 +1,7 @@
 .holder {
-  width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.my-canvas {
-  width: 100%;
-  display: flex;
-}
-
-.my-pre {
-  width: 100%;
-  margin: 0;
-  padding: 0;
+  align-items: center;
 }
 
 /*# sourceMappingURL=CameraPanel.css.map */
