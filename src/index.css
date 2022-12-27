@@ -1,11 +1,6 @@
 html {
   font-size: 16px;
 }
-@media (min-width: 200px) {
-  html {
-    font-size: 6px;
-  }
-}
 @media (min-width: 480px) {
   html {
     font-size: 11px;
