@@ -55,22 +55,18 @@ const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: n
 	ctx!.font = `${fontSize}px monospace`;
 	let textWidth = ctx!.measureText(lines[0]).width;
 
-	// If the text is too wide, decrease the font size until it fits
+	// If the text width is too wide, decrease the font size until it fits
 	while (textWidth > screenWidth) {
 		fontSize -= 1;
 		ctx!.font = `${fontSize}px monospace`;
 		textWidth = ctx!.measureText(lines[0]).width;
 	}
 
+	// If the text is too tall, decrease the font size until it fits
 	while ((fontSize + 2) * lines.length > screenHeight) {// Offset by 2 to account for the line height
 		fontSize -= 1;
 		ctx!.font = `${fontSize}px monospace`;
 	}
-
-	console.log('------------------');
-	console.log('fontSize', fontSize);
-	console.log('lines.length', lines.length);
-	console.log('screenHeight', screenHeight);
 
 	if (fontSize < 1) {
 		fontSize = 1;

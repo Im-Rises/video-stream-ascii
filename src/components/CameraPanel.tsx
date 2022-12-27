@@ -48,7 +48,7 @@ const CameraPanel = (params: Params) => {
 			<Webcam ref={videoRef} style={{width: 0, height: 0}}/>
 			<canvas ref={canvasVideoBufferRef} width={params.width} height={params.height}
 				style={{width: 0, height: 0}}/>
-			<pre ref={preTagRef} style={{backgroundColor: params.backgroundColor}}></pre>
+			<pre ref={preTagRef} style={{backgroundColor: params.backgroundColor}} className={'pre-ascii'}/>
 		</div>
 	);
 };
