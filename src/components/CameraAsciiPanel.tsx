@@ -8,29 +8,46 @@ const CameraAsciiPanel = () => {
 	const sliderHeightRef = useRef<HTMLInputElement>(null);
 	const [cameraWidth, setCameraWidth] = useState(200);
 	const [cameraHeight, setCameraHeight] = useState(200);
+	const checkboxAspectRatioRef = useRef<HTMLInputElement>(null);
+	let aspectRatio = cameraWidth / cameraHeight;
 
 	return (
 		<div>
-			<GitHubProjectPanel link={'https://github.com/Im-Rises/video-ascii'}
-				linkText={'Im-Rises/video-ascii'}/>
+			<div>
+				<GitHubProjectPanel link={'https://github.com/Im-Rises/video-ascii'}
+					linkText={'Im-Rises/video-ascii'}/>
+			</div>
 			<div className={'Camera-Ascii'}>
 				<CameraAscii frameRate={1000 / 30} width={cameraWidth} height={cameraHeight} fontSize={16}
 					fontColor={'white'}
 					backgroundColor={'black'}/>
 			</div>
-			<div>
+			<div className={'Camera-Controller'}>
 				<p>Width: {cameraWidth} char</p>
-				<input type={'range'} ref={sliderWidthRef} min={10} max={1920} defaultValue={cameraWidth} step={1}
+				<input type={'range'} ref={sliderWidthRef} min={10} max={1000} defaultValue={cameraWidth} step={1}
 					onChange={() => {
 						setCameraWidth(parseInt(sliderWidthRef.current!.value, 10));
+						if (checkboxAspectRatioRef.current!.checked) {
+							setCameraHeight(Math.round(cameraWidth / aspectRatio));
+						}
 					}}/>
 				<p>Height: {cameraHeight} char</p>
-				<input type={'range'} ref={sliderHeightRef} min={10} max={1080} defaultValue={cameraHeight} step={1}
+				<input type={'range'} ref={sliderHeightRef} min={10} max={1000} defaultValue={cameraHeight} step={1}
 					onChange={() => {
 						setCameraHeight(parseInt(sliderHeightRef.current!.value, 10));
+						if (checkboxAspectRatioRef.current!.checked) {
+							setCameraWidth(Math.round(cameraHeight * aspectRatio));
+						}
 					}}/>
+				<input type={'checkbox'} name={'checkboxRatio'} defaultValue={'checked'} ref={checkboxAspectRatioRef}
+					onChange={() => {
+						aspectRatio = cameraWidth / cameraHeight;
+						console.log(aspectRatio);
+					}}/>
+				<label htmlFor={'checkboxRatio'}>Keep ratio</label>
 			</div>
-		</div>);
+		</div>
+	);
 };
 
 export default CameraAsciiPanel;

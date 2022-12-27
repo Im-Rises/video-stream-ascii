@@ -7,4 +7,12 @@
   background-color: #000;
 }
 
+.Camera-Controller {
+  color: white;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
 /*# sourceMappingURL=CameraAsciiPanel.css.map */

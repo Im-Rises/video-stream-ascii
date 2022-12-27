@@ -6,3 +6,11 @@
   align-items: center;
   background-color: #000;
 }
+
+.Camera-Controller {
+  color:white;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
