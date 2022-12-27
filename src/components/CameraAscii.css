@@ -1,0 +1,12 @@
+.holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pre-ascii {
+  padding: 0;
+  margin: 0;
+}
+
+/*# sourceMappingURL=CameraAscii.css.map */
