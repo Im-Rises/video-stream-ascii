@@ -4,12 +4,12 @@ import CameraAscii from './CameraAscii';
 import './CameraAsciiPanel.css';
 
 const CameraAsciiPanel = () => {
-	const sliderWidthRef = useRef<HTMLInputElement>(null);
-	const sliderHeightRef = useRef<HTMLInputElement>(null);
+	// const sliderWidthRef = useRef<HTMLInputElement>(null);
+	// const sliderHeightRef = useRef<HTMLInputElement>(null);
 	const [cameraWidth, setCameraWidth] = useState(260);
 	const [cameraHeight, setCameraHeight] = useState(200);
-	const checkboxAspectRatioRef = useRef<HTMLInputElement>(null);
-	const aspectRatio = cameraWidth / cameraHeight;
+	// const checkboxAspectRatioRef = useRef<HTMLInputElement>(null);
+	// const aspectRatio = cameraWidth / cameraHeight;
 
 	return (
 		<div>
