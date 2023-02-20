@@ -1,4 +1,4 @@
-const getAsciiCharFromIntensity = (intensity: number, asciiChars: string) => asciiChars[Math.floor(intensity / 256 * asciiChars.length)];
+const pixelToAsciiChar = (intensity: number, asciiChars: string) => asciiChars[Math.floor(intensity / 256 * asciiChars.length)];
 
 const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	const {width} = imageData;
@@ -10,7 +10,7 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 		for (let x = 0; x < width; x++) {
 			const index = ((y * width) + x) * 4;
 			const intensity = (pixels[index] + pixels[index + 1] + pixels[index + 2]) / 3;
-			asciiImage += getAsciiCharFromIntensity(intensity, asciiChars);
+			asciiImage += pixelToAsciiChar(intensity, asciiChars);
 		}
 
 		asciiImage += '\n';
@@ -19,32 +19,32 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
-const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize: number, fontColor: string) => {
-	const ctx = canvas.getContext('2d');
-
-	const lines = inputText.split('\n');
-
-	// Set the font size and measure the width of the text
-	ctx!.font = `${fontSize}px monospace`;
-	ctx!.fillStyle = fontColor;
-	let textWidth = ctx!.measureText(lines[0]).width;
-
-	// If the text is too wide, decrease the font size until it fits
-	while (textWidth > canvas.width) {
-		fontSize -= 1;
-		ctx!.font = `${fontSize}px monospace`;
-		textWidth = ctx!.measureText(lines[0]).width;
-	}
-
-	if (fontSize < 1) {
-		fontSize = 1;
-		ctx!.font = `${fontSize}px monospace`;
-	}
-
-	for (let i = 0; i < lines.length; i++) {
-		ctx!.fillText(lines[i], 0, (fontSize * i) + fontSize);
-	}
-};
+// const drawTextInCanvas = (canvas: HTMLCanvasElement, inputText: string, fontSize: number, fontColor: string) => {
+// 	const ctx = canvas.getContext('2d');
+//
+// 	const lines = inputText.split('\n');
+//
+// 	// Set the font size and measure the width of the text
+// 	ctx!.font = `${fontSize}px monospace`;
+// 	ctx!.fillStyle = fontColor;
+// 	let textWidth = ctx!.measureText(lines[0]).width;
+//
+// 	// If the text is too wide, decrease the font size until it fits
+// 	while (textWidth > canvas.width) {
+// 		fontSize -= 1;
+// 		ctx!.font = `${fontSize}px monospace`;
+// 		textWidth = ctx!.measureText(lines[0]).width;
+// 	}
+//
+// 	if (fontSize < 1) {
+// 		fontSize = 1;
+// 		ctx!.font = `${fontSize}px monospace`;
+// 	}
+//
+// 	for (let i = 0; i < lines.length; i++) {
+// 		ctx!.fillText(lines[i], 0, (fontSize * i) + fontSize);
+// 	}
+// };
 
 const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: number, fontColor: string, screenWidth: number, screenHeight: number) => {
 	const lines = inputText.split('\n');
@@ -78,4 +78,4 @@ const drawTextInPreTag = (pretag: HTMLPreElement, inputText: string, fontSize: n
 	pretag.innerText = inputText;
 };
 
-export {getAsciiFromImage, drawTextInCanvas, drawTextInPreTag};
+export {getAsciiFromImage, drawTextInPreTag};

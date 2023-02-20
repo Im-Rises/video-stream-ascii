@@ -18,7 +18,7 @@ const CameraAsciiPanel = () => {
 					linkText={'Im-Rises/video-ascii'}/>
 			</div>
 			<div className={'Camera-Ascii'}>
-				<CameraAscii frameRate={1000 / 30} width={cameraWidth} height={cameraHeight} fontSize={16}
+				<CameraAscii frameRate={1000 / 30} width={cameraWidth} height={cameraHeight}
 					fontColor={'white'}
 					backgroundColor={'black'}/>
 			</div>

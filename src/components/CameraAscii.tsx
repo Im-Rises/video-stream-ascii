@@ -1,31 +1,30 @@
 import React, {useRef, useEffect} from 'react';
 import Webcam from 'react-webcam';
 import {asciiChars} from '../constants/pixel-ascii';
-import {getAsciiFromImage, drawTextInCanvas, drawTextInPreTag} from '../canvas-handler/video-canvas-ascii';
+import {getAsciiFromImage, drawTextInPreTag} from '../canvas-handler/video-canvas-ascii';
 import './CameraAscii.css';
 
-type Params = {
+type Props = {
 	width: number;
 	height: number;
-	fontSize: number;
 	fontColor: string;
 	backgroundColor: string;
 	frameRate: number;
 };
 
-const CameraAscii = (params: Params) => {
+const CameraAscii = (params: Props) => {
 	const videoRef = useRef<Webcam>(null);
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
 	const preTagRef = useRef<HTMLPreElement>(null);
 	let asciiText = 'Demo text';
 
+	// Init variables
+	const canvas = canvasVideoBufferRef.current;
+	const video = videoRef.current?.video;
+	const context = canvas!.getContext('2d', {willReadFrequently: true});
+
 	useEffect(() => {
 		const updateAscii = () => {
-			// Init variables
-			const canvas = canvasVideoBufferRef.current;
-			const video = videoRef.current?.video;
-			const context = canvas!.getContext('2d', {willReadFrequently: true});
-
 			// Draw video to canvas buffer
 			context!.drawImage(video!, 0, 0, canvas!.width, canvas!.height);
 			const imageData = context!.getImageData(0, 0, canvas!.width, canvas!.height);
