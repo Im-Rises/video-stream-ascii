@@ -19,35 +19,34 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
+const incrementFontValue = 0.1;
+const initFontSize = 0.1;
+const offsetHeightFontSize = 0.4;
+
 const calculateAndSetFontSize = (pretag: HTMLPreElement, asciiTextWidth: number, asciiTextHeight: number, screenWidth: number, screenHeight: number) => {
+	// Create a text fill with the same width as the ascii text and add \n for the end of each line
+	const filledStringLine = String('W').repeat(asciiTextWidth);
+
+	// Create a canvas to measure the width of the text
 	const canvas = document.createElement('canvas');
-	const ctx = canvas.getContext('2d');
+	const context = canvas.getContext('2d');
+	let fontSize = initFontSize;
+	context!.font = `${fontSize}px monospace`;
 
-	let fontSize = 1;
-	ctx!.font = `${fontSize}px monospace`;
-
-	const textToMeasureWidth = String(' ').repeat(asciiTextWidth);
-
-	while (ctx!.measureText(textToMeasureWidth).width < screenWidth) {
-		ctx!.font = `${fontSize}px monospace`;
-		fontSize += 1;
+	// Increase the font size until the text is wider than the screen in width or height
+	while (context!.measureText(filledStringLine).width < screenWidth && asciiTextHeight * (fontSize - offsetHeightFontSize) < screenHeight) {
+		fontSize += incrementFontValue;
+		context!.font = `${fontSize}px monospace`;
 	}
 
-	// const textToMeasureHeight = String('\n').repeat(asciiTextHeight);
-	if (fontSize * asciiTextHeight > screenHeight) {
-		while (fontSize * asciiTextHeight > screenHeight) {
-			fontSize -= 1;
-			ctx!.font = `${fontSize}px monospace`;
-		}
-	}
+	// Decrease the font size by one to get the correct size
+	fontSize -= incrementFontValue;
 
-	if (fontSize < 1) {
-		fontSize = 1;
-	}
-
+	// Set the font size
 	pretag.style.fontSize = `${fontSize}px`;
 
-	console.log('fontSize', fontSize);
+	// Debug
+	console.log(`Setting font size to ${fontSize}`);
 };
 
 export {getAsciiFromImage, calculateAndSetFontSize};

@@ -5,10 +5,11 @@
   justify-content: center;
   align-items: center;
   background-color: #000;
+  overflow: hidden;
 }
 
 .Camera-Controller {
-  color:white;
+  color: white;
   z-index: 1;
   position: absolute;
   left: 0;
