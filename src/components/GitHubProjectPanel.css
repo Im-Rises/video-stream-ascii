@@ -16,11 +16,16 @@
   font-size: 0.6em;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   text-align: center;
+  margin: 0.5em;
+  padding: 0.5em;
 }
 .Project-Link a {
   color: gray;
+}
+.Project-Link a:hover {
+  color: #fff;
 }
 
 /*# sourceMappingURL=GitHubProjectPanel.css.map */
