@@ -19,63 +19,34 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
+const incrementFontValue = 0.1;
+const initFontSize = 0.1;
+const offsetHeightFontSize = 0.4;
+
 const calculateAndSetFontSize = (pretag: HTMLPreElement, asciiTextWidth: number, asciiTextHeight: number, screenWidth: number, screenHeight: number) => {
 	// Create a text fill with the same width as the ascii text and add \n for the end of each line
-	let stringToMeasure = 'W';
-	for (let i = 0; i < asciiTextHeight - 1; i++) {
-		for (let j = 0; j < asciiTextWidth - 1; j++) {
-			stringToMeasure += 'W';
-		}
+	const filledStringLine = String('W').repeat(asciiTextWidth);
 
-		stringToMeasure += '\n';
-	}
-
-	// Split the string into lines
-	const lines = stringToMeasure.split('\n');
-	// console.log(lines[0].length);
-	// console.log(lines.length);
-
+	// Create a canvas to measure the width of the text
 	const canvas = document.createElement('canvas');
 	const context = canvas.getContext('2d');
-	let fontSize = 1;
+	let fontSize = initFontSize;
 	context!.font = `${fontSize}px monospace`;
 
-	while (context!.measureText(lines[0]).width < screenWidth && lines.length * fontSize < screenHeight) {
-		fontSize += 1;
+	// Increase the font size until the text is wider than the screen in width or height
+	while (context!.measureText(filledStringLine).width < screenWidth && asciiTextHeight * (fontSize - offsetHeightFontSize) < screenHeight) {
+		fontSize += incrementFontValue;
 		context!.font = `${fontSize}px monospace`;
 	}
 
-	fontSize -= 1;
+	// Decrease the font size by one to get the correct size
+	fontSize -= incrementFontValue;
 
+	// Set the font size
 	pretag.style.fontSize = `${fontSize}px`;
+
+	// Debug
 	console.log(`Setting font size to ${fontSize}`);
 };
-
-/*
-* 	const fontSizeWidth = Math.floor(screenWidth / asciiTextWidth);
-	const fontSizeHeight = Math.floor(screenHeight / asciiTextHeight);
-	const fontSizeMin = Math.min(fontSizeWidth, fontSizeHeight);
-	const fontSizeMax = Math.max(fontSizeWidth, fontSizeHeight);
-
-	// console.log('fontSizeMax * asciiTextWidth > screenWidth', fontSizeMax * asciiTextWidth > screenWidth);
-	// console.log('fontSizeMax = ', fontSizeMax);
-	// console.log('asciiTextWidth = ', asciiTextWidth);
-	// console.log('screenWidth = ', screenWidth);
-	//
-	// console.log('fontSizeMax * asciiTextHeight > screenHeight', fontSizeMax * asciiTextHeight > screenHeight);
-	// console.log('fontSizeMax = ', fontSizeMax);
-	// console.log('asciiTextHeight = ', asciiTextHeight);
-	// console.log('screenHeight = ', screenHeight);
-	if (fontSizeMax * asciiTextWidth > screenWidth) {
-		pretag.style.fontSize = `${fontSizeMin}px`;
-	} else {
-		pretag.style.fontSize = `${fontSizeMax}px`;
-	}
-
-	console.log('fontSizeMin = ', fontSizeMin);
-	console.log('fontSizeMax = ', fontSizeMax);
-
-	// pretag.style.fontSize = `${fontsize}px`;
-* */
 
 export {getAsciiFromImage, calculateAndSetFontSize};
