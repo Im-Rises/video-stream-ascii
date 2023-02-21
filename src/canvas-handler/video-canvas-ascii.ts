@@ -21,7 +21,6 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 
 const incrementFontValue = 0.1;
 const initFontSize = 0.1;
-const offsetHeightFontSize = 2.2;
 
 const calculateAndSetFontSize = (pretag: HTMLPreElement, asciiTextWidth: number, asciiTextHeight: number, screenWidth: number, screenHeight: number) => {
 	// Create a text fill with the same width as the ascii text and add \n for the end of each line
@@ -34,7 +33,7 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, asciiTextWidth: number,
 	context!.font = `${fontSize}px monospace`;
 
 	// Increase the font size until the text is wider than the screen in width or height
-	while (context!.measureText(filledStringLine).width < screenWidth && asciiTextHeight * (fontSize - offsetHeightFontSize) < screenHeight) {
+	while (context!.measureText(filledStringLine).width < screenWidth && asciiTextHeight * (context!.measureText(filledStringLine).actualBoundingBoxAscent + context!.measureText(filledStringLine).actualBoundingBoxDescent) < screenHeight) {
 		fontSize += incrementFontValue;
 		context!.font = `${fontSize}px monospace`;
 	}
