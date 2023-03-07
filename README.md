@@ -21,11 +21,6 @@ https://im-rises.github.io/video-ascii/
 ```
 
 The package is published on [npm](https://www.npmjs.com/package/video-stream-ascii).
-You can install it by typing the following command in your terminal:
-
-```
-npm install video-stream-ascii
-```
 
 ## Screenshots
 
@@ -89,6 +84,45 @@ video-ascii
 ~~~
 
 </details>
+
+## Install packages
+
+You can install it by typing the following command in your terminal:
+
+```
+npm install video-stream-ascii
+```
+
+## Usage
+
+To use the package, you need to import it into your project:
+
+```js
+import {VideoStreamAscii} from "video-stream-ascii";
+```
+
+Then you can create use the Component:
+
+```js
+<CameraAscii videoStreaming={videoRef.current!.video!} frameRate={1000 / 30} width={cameraWidth}
+             height={cameraHeight}
+             fontColor={'white'}
+             backgroundColor={'black'} isCameraReady={isCameraReady}/>
+```
+
+To use the component, you need to pass the following props:
+
+- `videoStreaming` - The video stream from the camera.
+- `frameRate` - The frame rate of the video output.
+- `width` - The width of the video output.
+- `height` - The height of the video output.
+- `fontColor` - The color of the font.
+- `backgroundColor` - The color of the background.
+- `isCameraReady` - A boolean that indicates if the camera is ready.
+
+> **Warning**  
+> Be careful when using this package, the camera must be working before enable the video stream.
+> You must set the props `isVideoStreamEnabled` to `true` to enable the video stream.
 
 ## Dependencies
 

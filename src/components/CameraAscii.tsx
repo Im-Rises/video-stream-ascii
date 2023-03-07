@@ -1,34 +1,33 @@
 import React, {useRef, useEffect, useState} from 'react';
-import Webcam from 'react-webcam';
 import {asciiChars} from '../constants/pixel-ascii';
 import {calculateAndSetFontSize, getAsciiFromImage} from '../canvas-handler/video-canvas-ascii';
 import './CameraAscii.css';
 
 type Props = {
+	videoStreaming: HTMLVideoElement;
 	width: number;
 	height: number;
 	fontColor: string;
 	backgroundColor: string;
 	frameRate: number;
+	isCameraReady: boolean;
 };
 
 const CameraAscii = (props: Props) => {
-	const [isCameraReady, setIsCameraReady] = useState(false);
-	const [asciiText, setAsciiText] = useState('Loading...');
-	const videoRef = useRef<Webcam>(null);
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
 	const preTagRef = useRef<HTMLPreElement>(null);
 
+	const [asciiText, setAsciiText] = useState('Loading...');
+
 	useEffect(() => {
-		if (isCameraReady) {
+		if (props.isCameraReady) {
 			const canvas = canvasVideoBufferRef.current!;
-			const video = videoRef.current!;
 			const context = canvas.getContext('2d', {willReadFrequently: true})!;
 			calculateAndSetFontSize(preTagRef.current!, props.width, props.height, screen.width, screen.height);
 
 			const updateAscii = () => {
 				// Draw video to canvas buffer
-				context.drawImage(video.video!, 0, 0, canvas.width, canvas.height);
+				context.drawImage(props.videoStreaming, 0, 0, canvas.width, canvas.height);
 				const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
 				// Get ascii from canvas buffer and set it to the text tag
@@ -42,33 +41,16 @@ const CameraAscii = (props: Props) => {
 				clearInterval(intervalId);
 			};
 		}
-	}, [isCameraReady]);
-
-	const handleUserMedia = (stream: MediaStream) => {
-		const video = videoRef.current!.video!;
-		video.srcObject = stream;
-		video.onloadedmetadata = async () => {
-			await video.play();
-			setIsCameraReady(true);
-		};
-	};
+	}, [props.isCameraReady]);
 
 	return (
 		<div style={{backgroundColor: props.backgroundColor}} className={'holder'}>
-			<Webcam ref={videoRef}
-				style={{width: 0, height: 0}}
-				onUserMedia={handleUserMedia}
-			/>
-			{/* {isCameraReady && ( */}
-			{/*	<> */}
 			<canvas ref={canvasVideoBufferRef} width={props.width} height={props.height}
 				style={{display: 'none'}}/>
 			<pre ref={preTagRef} style={{backgroundColor: props.backgroundColor, color: props.fontColor}}
 				className={'pre-ascii'}>
 				{asciiText}
 			</pre>
-			{/* </> */}
-			{/* )} */}
 		</div>
 	);
 };
