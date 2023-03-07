@@ -10,7 +10,7 @@
 
 ## Description
 
-This is a simple web app that converts a video into ASCII art.
+This is a simple web package that converts a video into ASCII art.
 
 You can try it out [here](https://im-rises.github.io/video-ascii/).
 
@@ -20,11 +20,21 @@ Or by copying the following link to your browser:
 https://im-rises.github.io/video-ascii/
 ```
 
+The package is published on [npm](https://www.npmjs.com/package/video-stream-ascii).
+You can install it by typing the following command in your terminal:
+
+```
+npm install video-stream-ascii
+```
+
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/59691442/209728294-e10691da-eb4f-43e6-880c-522417da79c6.png" alt="screenshot" style="width: 100%;">
 
 ## Project architecture
+
+<details>
+    <summary>Click to expand</summary>
 
 ~~~
 video-ascii
@@ -77,6 +87,8 @@ video-ascii
 ├── tsconfig.json
 ├── yarn.lock
 ~~~
+
+</details>
 
 ## Dependencies
 
