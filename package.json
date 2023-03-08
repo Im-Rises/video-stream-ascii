@@ -6,11 +6,14 @@
   "author": "Im-Rises (Quentin MOREL)",
   "private": false,
   "files": [
-    "LICENSE",
     "README.md",
+    "package.json",
     "src/components/VideoAscii.tsx",
-    "src/components/VideoAscii.css"
+    "src/components/VideoAscii.css",
+    "src/constants/pixel-ascii.ts",
+    "src/canvas-handler/video-canvas-ascii.ts"
   ],
+  "main": "src/components/VideoAscii.tsx",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",

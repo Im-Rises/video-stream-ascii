@@ -107,7 +107,7 @@ Then you can create use the Component:
 <VideoAscii videoStreaming={videoRef.current!.video!} frameRate={1000 / 30} width={cameraWidth}
             height={cameraHeight}
             fontColor={'white'}
-            backgroundColor={'black'} isCameraReady={isCameraReady}/>
+            backgroundColor={'black'}/>
 ```
 
 To use the component, you need to pass the following props:
@@ -118,11 +118,66 @@ To use the component, you need to pass the following props:
 - `height` - The height of the video output.
 - `fontColor` - The color of the font.
 - `backgroundColor` - The color of the background.
-- `isCameraReady` - A boolean that indicates if the camera is ready.
 
 > **Warning**  
 > Be careful when using this package, the camera must be working before enable the video stream.
-> You must set the props `isVideoStreamEnabled` to `true` to enable the video stream.
+
+An example in the GitHub repository is available, showing how to use the camera stream to convert it into a real-time
+ASCII video
+here: [video-ascii-example](https://github.com/Im-Rises/video-ascii/blob/main/src/components/CameraAsciiPanel.tsx).
+
+You can also find it below:
+
+<details>
+    <summary>Click to expand</summary>
+
+~~~
+import React, {useRef, useState} from 'react';
+import VideoAscii from './VideoAscii';
+import Webcam from 'react-webcam';
+import './CameraAsciiPanel.css';
+
+const CameraAsciiPanel = () => {
+    const [isCameraReady, setIsCameraReady] = useState(false);
+    const [cameraWidth, cameraHeight] = [260, 200];
+    const videoRef = useRef < Webcam > (null);
+
+    const handleUserMedia = (stream: MediaStream) => {
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
+        video.srcObject = stream;
+        video.onloadedmetadata = async () => {
+            await video.play();
+            setIsCameraReady(true);
+        };
+    };
+
+    return (
+        <div className={'Camera-Ascii-Panel'}>
+            <Webcam ref={videoRef}
+                    style={{width: 0, height: 0}}
+                    onUserMedia={handleUserMedia}
+            />
+            {isCameraReady ? (
+                <VideoAscii videoStreaming={videoRef.current!.video!}
+                            frameRate={1000 / 30} width={cameraWidth}
+                            height={cameraHeight}
+                            fontColor={'white'}
+                            backgroundColor={'black'}/>
+            ) : (
+                <p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...
+                </p>)}
+        </div>
+    );
+};
+
+export default CameraAsciiPanel;
+~~~
+
+</details>
 
 ## Dependencies
 
