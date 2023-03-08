@@ -1,20 +1,25 @@
 {
   "name": "video-stream-ascii",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Convert video stream to ascii art",
   "homepage": "https://im-rises.github.io/video-ascii/",
   "author": "Im-Rises (Quentin MOREL)",
   "private": false,
+  "license": "MIT",
+  "main": "dist/components/VideoAscii.js",
   "files": [
+    "LICENSE",
     "README.md",
     "package.json",
     "tsconfig.json",
-    "src/components/VideoAscii.tsx",
-    "src/components/VideoAscii.css",
-    "src/constants/pixel-ascii.ts",
-    "src/canvas-handler/video-canvas-ascii.ts"
+    "dist/components/VideoAscii.js",
+    "dist/components/VideoAscii.d.ts",
+    "dist/components/VideoAscii.css",
+    "dist/constants/pixel-ascii.js",
+    "dist/constants/pixel-ascii.d.ts",
+    "dist/canvas-handler/video-canvas-ascii.js",
+    "dist/canvas-handler/video-canvas-ascii.d.ts"
   ],
-  "main": "src/components/VideoAscii.tsx",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -35,7 +40,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prepublish": "tsc"
   },
   "eslintConfig": {
     "extends": [
