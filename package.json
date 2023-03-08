@@ -8,6 +8,7 @@
   "files": [
     "README.md",
     "package.json",
+    "tsconfig.json",
     "src/components/VideoAscii.tsx",
     "src/components/VideoAscii.css",
     "src/constants/pixel-ascii.ts",
