@@ -12,7 +12,7 @@
 
 This is a simple web package that converts a video into ASCII art.
 
-You can try it out [here](https://im-rises.github.io/video-ascii/).
+## 🚀🚀 [You can try it out](https://im-rises.github.io/video-ascii/) 🚀🚀
 
 Or by copying the following link to your browser:
 
@@ -20,7 +20,7 @@ Or by copying the following link to your browser:
 https://im-rises.github.io/video-ascii/
 ```
 
-The package is published on [npm](https://www.npmjs.com/package/video-stream-ascii).
+## 🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
 
 ## Screenshots
 
@@ -159,6 +159,7 @@ The project is also set up to use ESLint.
 [![Node.js CI](https://github.com/Im-Rises/video-ascii/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/node.js.yml)
 [![ESLint](https://github.com/Im-Rises/video-ascii/actions/workflows/eslint.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/eslint.yml)
 [![CodeQL](https://github.com/Im-Rises/video-ascii/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/codeql.yml)
+[![Node.js Package](https://github.com/Im-Rises/video-ascii/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/Im-Rises/video-ascii/actions/workflows/npm-publish.yml)
 
 The project is set up to run the following actions:
 
@@ -166,6 +167,7 @@ The project is set up to run the following actions:
 - node.js.yml : Runs the tests for the Node.js project.
 - eslint.yml : Runs the ESLint linter on the project.
 - codeql.yml : Runs the CodeQL linter on the project.
+- npm-publish.yml : Publishes the package to the npm registry.
 
 ## Documentations
 
@@ -189,6 +191,14 @@ with
 then deploy one time and replace it with the original line again
 and deploy another time
 -->
+
+## Links
+
+Check the source code
+on [![github](https://user-images.githubusercontent.com/59691442/223556058-6244e346-8117-43cd-97c6-bf68611bf286.svg)](https://github.com/im-rises/video-ascii)
+
+Check the package
+on [![npm](https://user-images.githubusercontent.com/59691442/223556055-4e9ef014-79d4-4136-ac07-b837b49066c8.svg)](https://www.npmjs.com/package/video-stream-ascii)
 
 ## Contributors
 
