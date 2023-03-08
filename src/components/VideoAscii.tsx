@@ -1,10 +1,10 @@
 import React, {useRef, useEffect, useState} from 'react';
 import {asciiChars} from '../constants/pixel-ascii';
 import {calculateAndSetFontSize, getAsciiFromImage} from '../canvas-handler/video-canvas-ascii';
-import './CameraAscii.css';
+import './VideoAscii.css';
 
 type Props = {
-	videoStreaming: HTMLVideoElement | undefined;
+	videoStreaming: HTMLVideoElement;
 	width: number;
 	height: number;
 	frameRate: number;
@@ -12,11 +12,11 @@ type Props = {
 	backgroundColor: string;
 };
 
-const CameraAscii = (props: Props) => {
+const VideoAscii = (props: Props) => {
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
 	const preTagRef = useRef<HTMLPreElement>(null);
 
-	const [asciiText, setAsciiText] = useState('Loading...');
+	const [asciiText, setAsciiText] = useState('');
 
 	useEffect(() => {
 		const canvas = canvasVideoBufferRef.current!;
@@ -25,7 +25,7 @@ const CameraAscii = (props: Props) => {
 
 		const updateAscii = () => {
 			// Draw video to canvas buffer
-			context.drawImage(props.videoStreaming!, 0, 0, canvas.width, canvas.height);
+			context.drawImage(props.videoStreaming, 0, 0, canvas.width, canvas.height);
 			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
 			// Get ascii from canvas buffer and set it to the text tag
@@ -41,7 +41,7 @@ const CameraAscii = (props: Props) => {
 	}, [props.videoStreaming, props.width, props.height, props.frameRate]);
 
 	return (
-		<div style={{backgroundColor: props.backgroundColor}} className={'holder'}>
+		<div style={{backgroundColor: props.backgroundColor}} className={'video-ascii'}>
 			<canvas ref={canvasVideoBufferRef} width={props.width} height={props.height}
 				style={{display: 'none'}}/>
 			<pre ref={preTagRef} style={{backgroundColor: props.backgroundColor, color: props.fontColor}}
@@ -52,4 +52,4 @@ const CameraAscii = (props: Props) => {
 	);
 };
 
-export default CameraAscii;
+export default VideoAscii;

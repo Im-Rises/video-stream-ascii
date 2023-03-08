@@ -1,4 +1,4 @@
-.Camera-Ascii {
+.Camera-Ascii-Panel {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -7,10 +7,8 @@
   background-color: #000;
 }
 
-.Camera-Controller {
-  color: white;
-  z-index: 1;
-  position: absolute;
-  left: 0;
-  top: 50%;
+.Camera-Ascii-Waiting {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
 }

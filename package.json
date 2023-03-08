@@ -8,8 +8,8 @@
   "files": [
     "LICENSE",
     "README.md",
-    "src/components/CameraAscii.tsx",
-    "src/components/CameraAscii.css"
+    "src/components/VideoAscii.tsx",
+    "src/components/VideoAscii.css"
   ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

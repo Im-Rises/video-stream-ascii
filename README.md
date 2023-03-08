@@ -55,8 +55,8 @@ video-ascii
 |  ├── canvas-handler
 │  │   |── canvas-handler.ts
 |  ├── components
-│  │   |── CameraAscii.scss
-│  │   |── CameraAscii.tsx
+│  │   |── VideoAscii.scss
+│  │   |── VideoAscii.tsx
 │  │   |── CameraAsciiPanel.scss
 │  │   |── CameraAsciiPanel.tsx
 │  │   |── GitHubProjectPanel.scss
@@ -104,10 +104,10 @@ import {VideoStreamAscii} from "video-stream-ascii";
 Then you can create use the Component:
 
 ```js
-<CameraAscii videoStreaming={videoRef.current!.video!} frameRate={1000 / 30} width={cameraWidth}
-             height={cameraHeight}
-             fontColor={'white'}
-             backgroundColor={'black'} isCameraReady={isCameraReady}/>
+<VideoAscii videoStreaming={videoRef.current!.video!} frameRate={1000 / 30} width={cameraWidth}
+            height={cameraHeight}
+            fontColor={'white'}
+            backgroundColor={'black'} isCameraReady={isCameraReady}/>
 ```
 
 To use the component, you need to pass the following props:
