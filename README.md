@@ -10,15 +10,12 @@
 
 ## Description
 
-This is a simple web package that converts a video into ASCII art.
+This is a simple web package that converts a video stream into ASCII art.
 
 ## 🚀🚀 [You can try it out](https://im-rises.github.io/video-ascii/) 🚀🚀
 
-Or by copying the following link to your browser:
-
-```
-https://im-rises.github.io/video-ascii/
-```
+It works on desktop and mobile as well, the example use the camera of your device and convert the video stream into
+ASCII art in real time.
 
 ## 🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
 
