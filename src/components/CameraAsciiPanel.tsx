@@ -7,6 +7,7 @@ const CameraAsciiPanel = () => {
 	const [isCameraReady, setIsCameraReady] = useState(false);
 	const [cameraWidth, cameraHeight] = [260, 200];
 	const videoRef = useRef<Webcam>(null);
+	const parentRef = useRef<HTMLDivElement>(null);
 
 	const handleUserMedia = (stream: MediaStream) => {
 		const video = videoRef.current!.video!;
@@ -18,15 +19,16 @@ const CameraAsciiPanel = () => {
 	};
 
 	return (
-		<div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test'>
+		<div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test' ref={parentRef}>
 			<Webcam ref={videoRef}
 				style={{width: 0, height: 0}}
 				onUserMedia={handleUserMedia}
 			/>
 			{isCameraReady ? (
 				<VideoAscii videoStreaming={videoRef.current!.video!}
-					frameRate={1000 / 30} width={cameraWidth}
-					height={cameraHeight}
+					parentRef={parentRef}
+					frameRate={1000 / 30} charsPerLine={cameraWidth}
+					charsPerColumn={cameraHeight}
 					fontColor={'white'}
 					backgroundColor={'black'}/>
 			) : (
