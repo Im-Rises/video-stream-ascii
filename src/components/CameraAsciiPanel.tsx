@@ -1,51 +1,36 @@
-import React, {useRef, useEffect, useState} from 'react';
-import GitHubProjectPanel from './GitHubProjectPanel';
-import CameraAscii from './CameraAscii';
+import React, {useRef, useState} from 'react';
+import VideoAscii from './VideoAscii';
+import Webcam from 'react-webcam';
 import './CameraAsciiPanel.css';
 
 const CameraAsciiPanel = () => {
-	// const sliderWidthRef = useRef<HTMLInputElement>(null);
-	// const sliderHeightRef = useRef<HTMLInputElement>(null);
-	const [cameraWidth, setCameraWidth] = useState(260);
-	const [cameraHeight, setCameraHeight] = useState(200);
-	// const checkboxAspectRatioRef = useRef<HTMLInputElement>(null);
-	// const aspectRatio = cameraWidth / cameraHeight;
+	const [isCameraReady, setIsCameraReady] = useState(false);
+	const [cameraWidth, cameraHeight] = [260, 200];
+	const videoRef = useRef<Webcam>(null);
+
+	const handleUserMedia = (stream: MediaStream) => {
+		const video = videoRef.current!.video!;
+		video.srcObject = stream;
+		video.onloadedmetadata = async () => {
+			await video.play();
+			setIsCameraReady(true);
+		};
+	};
 
 	return (
-		<div>
-			<div>
-				<GitHubProjectPanel link={'https://github.com/Im-Rises/video-ascii'}
-					linkText={'Im-Rises/video-ascii'}/>
-			</div>
-			<div className={'Camera-Ascii'}>
-				<CameraAscii frameRate={1000 / 30} width={cameraWidth} height={cameraHeight}
+		<div className={'Camera-Ascii-Panel'}>
+			<Webcam ref={videoRef}
+				style={{width: 0, height: 0}}
+				onUserMedia={handleUserMedia}
+			/>
+			{isCameraReady ? (
+				<VideoAscii videoStreaming={videoRef.current!.video!}
+					frameRate={1000 / 30} width={cameraWidth}
+					height={cameraHeight}
 					fontColor={'white'}
 					backgroundColor={'black'}/>
-			</div>
-			{/* <div className={'Camera-Controller'}> */}
-			{/*	<p>Width: {cameraWidth} char</p> */}
-			{/*	<input type={'range'} ref={sliderWidthRef} min={10} max={1000} defaultValue={cameraWidth} step={1} */}
-			{/*		onChange={() => { */}
-			{/*			setCameraWidth(parseInt(sliderWidthRef.current!.value, 10)); */}
-			{/*			if (checkboxAspectRatioRef.current!.checked) { */}
-			{/*				setCameraHeight(Math.round(cameraWidth / aspectRatio)); */}
-			{/*			} */}
-			{/*		}}/> */}
-			{/*	<p>Height: {cameraHeight} char</p> */}
-			{/*	<input type={'range'} ref={sliderHeightRef} min={10} max={1000} defaultValue={cameraHeight} step={1} */}
-			{/*		onChange={() => { */}
-			{/*			setCameraHeight(parseInt(sliderHeightRef.current!.value, 10)); */}
-			{/*			if (checkboxAspectRatioRef.current!.checked) { */}
-			{/*				setCameraWidth(Math.round(cameraHeight * aspectRatio)); */}
-			{/*			} */}
-			{/*		}}/> */}
-			{/*	<br/> */}
-			{/*	<input type={'checkbox'} name={'checkboxRatio'} defaultValue={'checked'} ref={checkboxAspectRatioRef} */}
-			{/*		onChange={() => { */}
-			{/*			aspectRatio = cameraWidth / cameraHeight; */}
-			{/*		}}/> */}
-			{/*	<label htmlFor={'checkboxRatio'}>Keep ratio</label> */}
-			{/* </div> */}
+			) : (
+				<p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...</p>)}
 		</div>
 	);
 };

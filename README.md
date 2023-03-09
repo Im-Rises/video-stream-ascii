@@ -10,21 +10,23 @@
 
 ## Description
 
-This is a simple web app that converts a video into ASCII art.
+This is a simple web package that converts a video stream into ASCII art.
 
-You can try it out [here](https://im-rises.github.io/video-ascii/).
+## 🚀🚀 [You can try it out](https://im-rises.github.io/video-ascii/) 🚀🚀
 
-Or by copying the following link to your browser:
+It works on desktop and mobile as well, the example use the camera of your device and convert the video stream into
+ASCII art in real time.
 
-```
-https://im-rises.github.io/video-ascii/
-```
+## 🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
 
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/59691442/209728294-e10691da-eb4f-43e6-880c-522417da79c6.png" alt="screenshot" style="width: 100%;">
 
 ## Project architecture
+
+<details>
+    <summary>Click to expand</summary>
 
 ~~~
 video-ascii
@@ -50,8 +52,8 @@ video-ascii
 |  ├── canvas-handler
 │  │   |── canvas-handler.ts
 |  ├── components
-│  │   |── CameraAscii.scss
-│  │   |── CameraAscii.tsx
+│  │   |── VideoAscii.scss
+│  │   |── VideoAscii.tsx
 │  │   |── CameraAsciiPanel.scss
 │  │   |── CameraAsciiPanel.tsx
 │  │   |── GitHubProjectPanel.scss
@@ -77,6 +79,102 @@ video-ascii
 ├── tsconfig.json
 ├── yarn.lock
 ~~~
+
+</details>
+
+## Install packages
+
+You can install it by typing the following command in your terminal:
+
+```
+npm install video-stream-ascii
+```
+
+## Usage
+
+To use the package, you need to import it into your project:
+
+```js
+import {VideoStreamAscii} from "video-stream-ascii";
+```
+
+Then you can create use the Component:
+
+```js
+<VideoAscii videoStreaming={videoRef.current!.video!} frameRate={1000 / 30} width={cameraWidth}
+            height={cameraHeight}
+            fontColor={'white'}
+            backgroundColor={'black'}/>
+```
+
+To use the component, you need to pass the following props:
+
+- `videoStreaming` - The video stream from the camera.
+- `frameRate` - The frame rate of the video output.
+- `width` - The width of the video output.
+- `height` - The height of the video output.
+- `fontColor` - The color of the font.
+- `backgroundColor` - The color of the background.
+
+> **Warning**  
+> Be careful when using this package, the camera must be working before enable the video stream.
+
+An example in the GitHub repository is available, showing how to use the camera stream to convert it into a real-time
+ASCII video
+here: [video-ascii-example](https://github.com/Im-Rises/video-ascii/blob/main/src/components/CameraAsciiPanel.tsx).
+
+You can also find it below:
+
+<details>
+    <summary>Click to expand</summary>
+
+~~~
+import React, {useRef, useState} from 'react';
+import VideoAscii from './VideoAscii';
+import Webcam from 'react-webcam';
+import './CameraAsciiPanel.css';
+
+const CameraAsciiPanel = () => {
+    const [isCameraReady, setIsCameraReady] = useState(false);
+    const [cameraWidth, cameraHeight] = [260, 200];
+    const videoRef = useRef < Webcam > (null);
+
+    const handleUserMedia = (stream: MediaStream) => {
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
+        video.srcObject = stream;
+        video.onloadedmetadata = async () => {
+            await video.play();
+            setIsCameraReady(true);
+        };
+    };
+
+    return (
+        <div className={'Camera-Ascii-Panel'}>
+            <Webcam ref={videoRef}
+                    style={{width: 0, height: 0}}
+                    onUserMedia={handleUserMedia}
+            />
+            {isCameraReady ? (
+                <VideoAscii videoStreaming={videoRef.current!.video!}
+                            frameRate={1000 / 30} width={cameraWidth}
+                            height={cameraHeight}
+                            fontColor={'white'}
+                            backgroundColor={'black'}/>
+            ) : (
+                <p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...
+                </p>)}
+        </div>
+    );
+};
+
+export default CameraAsciiPanel;
+~~~
+
+</details>
 
 ## Dependencies
 
@@ -113,6 +211,7 @@ The project is also set up to use ESLint.
 [![Node.js CI](https://github.com/Im-Rises/video-ascii/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/node.js.yml)
 [![ESLint](https://github.com/Im-Rises/video-ascii/actions/workflows/eslint.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/eslint.yml)
 [![CodeQL](https://github.com/Im-Rises/video-ascii/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/codeql.yml)
+[![Node.js Package](https://github.com/Im-Rises/video-ascii/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/Im-Rises/video-ascii/actions/workflows/npm-publish.yml)
 
 The project is set up to run the following actions:
 
@@ -120,6 +219,7 @@ The project is set up to run the following actions:
 - node.js.yml : Runs the tests for the Node.js project.
 - eslint.yml : Runs the ESLint linter on the project.
 - codeql.yml : Runs the CodeQL linter on the project.
+- npm-publish.yml : Publishes the package to the npm registry.
 
 ## Documentations
 
@@ -143,6 +243,14 @@ with
 then deploy one time and replace it with the original line again
 and deploy another time
 -->
+
+## Links
+
+Check the source code
+on [![github](https://user-images.githubusercontent.com/59691442/223556058-6244e346-8117-43cd-97c6-bf68611bf286.svg)](https://github.com/im-rises/video-ascii)
+
+Check the package
+on [![npm](https://user-images.githubusercontent.com/59691442/223556055-4e9ef014-79d4-4136-ac07-b837b49066c8.svg)](https://www.npmjs.com/package/video-stream-ascii)
 
 ## Contributors
 
