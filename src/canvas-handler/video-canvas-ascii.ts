@@ -33,13 +33,23 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	context!.font = `${fontSize}px monospace`;
 
 	// Increase the font size until the text is wider than the screen in width or height
-	while (context!.measureText(filledStringLine).width < parentWidth && charsPerColumn * (context!.measureText(filledStringLine).actualBoundingBoxAscent + context!.measureText(filledStringLine).actualBoundingBoxDescent) < parentHeight) {
+	let textWidth = context!.measureText(filledStringLine).width;
+	let textHeight = charsPerColumn * (context!.measureText(filledStringLine).actualBoundingBoxAscent + context!.measureText(filledStringLine).actualBoundingBoxDescent) * 0.8;
+	while ((textWidth < parentWidth) && textHeight < parentHeight) {
 		fontSize += incrementFontValue;
 		context!.font = `${fontSize}px monospace`;
+		textWidth = context!.measureText(filledStringLine).width;
+		textHeight = charsPerColumn * (context!.measureText(filledStringLine).actualBoundingBoxAscent + context!.measureText(filledStringLine).actualBoundingBoxDescent) * 0.8;
 	}
+
+	// Remove the created canvas
+	canvas.remove();
 
 	// Decrease the font size by one to get the correct size
 	fontSize -= incrementFontValue;
+
+	console.log('Calculate height', textHeight);
+	console.log('parentHeight', parentHeight);
 
 	// Set the font size
 	pretag.style.fontSize = `${fontSize}px`;
