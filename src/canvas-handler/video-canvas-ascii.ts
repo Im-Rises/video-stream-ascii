@@ -6,7 +6,7 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	const pixels = imageData.data;
 
 	let asciiImage = '';
-	for (let y = 0; y < height; y += 2) {
+	for (let y = 0; y < height; y += 1) {
 		for (let x = 0; x < width; x++) {
 			const index = ((y * width) + x) * 4;
 			const intensity = (pixels[index] + pixels[index + 1] + pixels[index + 2]) / 3;
