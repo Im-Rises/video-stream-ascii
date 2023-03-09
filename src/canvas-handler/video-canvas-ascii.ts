@@ -20,7 +20,7 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 };
 
 const incrementFontValue = 0.1;
-const initFontSize = 0.1;
+const initFontSize = 1.0;// A value to small will make the text too small
 
 const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, charsPerColumn: number, parentWidth: number, parentHeight: number) => {
 	// Create one string with, one line of text filled with W
@@ -34,6 +34,13 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	preElementBuffer.style.fontSize = `${fontSize}px`;
 	preElementBuffer.style.fontFamily = 'monospace';
 
+	// Hide the pre buffer element (display: none, or visibility: hidden, or opacity: 0, or width: 0, or height: 0)
+	// preElementBuffer.style.display = 'none';// Setting to none will crash the browser as it becomes null or the height is 0
+	// Hidding the element until it is deleted
+	// preElementBuffer.style.visibility = 'hidden';
+	// preElementBuffer.style.width = '0%';
+	// preElementBuffer.style.height = '0%';
+
 	// Filled the pre element with `filledStringLine` for each line
 	for (let i = 0; i < charsPerColumn; i++) {
 		preElementBuffer.append(filledStringLine);
@@ -44,9 +51,9 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	document.body.appendChild(preElementBuffer);
 
 	// Calculate width and height of the pre element
-	// const preWidth = preElementBuffer.offsetWidth;
+	// let preWidth = preElementBuffer.offsetWidth;
 	let preWidth = preElementBuffer.getBoundingClientRect().width;
-	// const preHeight = preElementBuffer.offsetHeight;
+	// let preHeight = preElementBuffer.offsetHeight;
 	let preHeight = preElementBuffer.getBoundingClientRect().height;
 
 	// Increase the font size until the text is wider than the screen in width or height
