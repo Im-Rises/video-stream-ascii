@@ -18,7 +18,7 @@ const CameraAsciiPanel = () => {
 	};
 
 	return (
-		<div className={'Camera-Ascii-Panel'}>
+		<div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test'>
 			<Webcam ref={videoRef}
 				style={{width: 0, height: 0}}
 				onUserMedia={handleUserMedia}
