@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useState} from 'react';
 import {asciiChars} from '../constants/pixel-ascii';
 import {calculateAndSetFontSize, getAsciiFromImage} from '../canvas-handler/video-canvas-ascii';
-import './VideoAscii.css';
+// import './VideoAscii.css';
 
 type Props = {
 	videoStreaming: HTMLVideoElement;
@@ -41,11 +41,17 @@ const VideoAscii = (props: Props) => {
 	}, [props.videoStreaming, props.width, props.height, props.frameRate]);
 
 	return (
-		<div style={{backgroundColor: props.backgroundColor}} className={'video-ascii'}>
+		<div style={{
+			backgroundColor: props.backgroundColor,
+			padding: 0, margin: 0, display: 'flex', justifyContent: 'center',
+			alignItems: 'center', width: '100%', height: '100%',
+		}}>
 			<canvas ref={canvasVideoBufferRef} width={props.width} height={props.height}
 				style={{display: 'none'}}/>
-			<pre ref={preTagRef} style={{backgroundColor: props.backgroundColor, color: props.fontColor}}
-				className={'pre-ascii'}>
+			<pre ref={preTagRef} style={{
+				backgroundColor: props.backgroundColor,
+				color: props.fontColor, padding: 0, margin: 0,
+			}}>
 				{asciiText}
 			</pre>
 		</div>
