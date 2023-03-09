@@ -19,6 +19,10 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
+const calculateStringWidth = (context: CanvasRenderingContext2D, text: string): number => context.measureText(text).width;
+
+const calculateStringHeight = (context: CanvasRenderingContext2D, text: string, charsPerColumn: number): number => charsPerColumn * (context.measureText(text).actualBoundingBoxAscent + context.measureText(text).actualBoundingBoxDescent) * 0.8;
+
 const incrementFontValue = 0.1;
 const initFontSize = 0.1;
 
@@ -33,13 +37,13 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	context!.font = `${fontSize}px monospace`;
 
 	// Increase the font size until the text is wider than the screen in width or height
-	let textWidth = context!.measureText(filledStringLine).width;
-	let textHeight = charsPerColumn * (context!.measureText(filledStringLine).actualBoundingBoxAscent + context!.measureText(filledStringLine).actualBoundingBoxDescent) * 0.8;
+	let textWidth = calculateStringWidth(context!, filledStringLine);
+	let textHeight = calculateStringHeight(context!, filledStringLine, charsPerColumn);
 	while ((textWidth < parentWidth) && textHeight < parentHeight) {
 		fontSize += incrementFontValue;
 		context!.font = `${fontSize}px monospace`;
-		textWidth = context!.measureText(filledStringLine).width;
-		textHeight = charsPerColumn * (context!.measureText(filledStringLine).actualBoundingBoxAscent + context!.measureText(filledStringLine).actualBoundingBoxDescent) * 0.8;
+		textWidth = calculateStringWidth(context!, filledStringLine);
+		textHeight = calculateStringHeight(context!, filledStringLine, charsPerColumn);
 	}
 
 	// Remove the created canvas
