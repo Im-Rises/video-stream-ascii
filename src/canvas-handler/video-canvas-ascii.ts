@@ -40,6 +40,8 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	// preElementBuffer.style.visibility = 'hidden';
 	// preElementBuffer.style.width = '0%';
 	// preElementBuffer.style.height = '0%';
+	// preElementBuffer.style.opacity = '0';
+	preElementBuffer.style.position = 'absolute';
 
 	// Filled the pre element with `filledStringLine` for each line
 	for (let i = 0; i < charsPerColumn; i++) {
