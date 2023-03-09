@@ -5,7 +5,7 @@ import './CameraAsciiPanel.css';
 
 const CameraAsciiPanel = () => {
 	const [isCameraReady, setIsCameraReady] = useState(false);
-	const [cameraWidth, cameraHeight] = [260, 200];
+	const [cameraWidth, cameraHeight] = [260, 100];
 	const videoRef = useRef<Webcam>(null);
 	const parentRef = useRef<HTMLDivElement>(null);
 

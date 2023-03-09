@@ -19,41 +19,55 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
-const calculateStringWidth = (context: CanvasRenderingContext2D, text: string): number => context.measureText(text).width;
-
-const calculateStringHeight = (context: CanvasRenderingContext2D, text: string, charsPerColumn: number): number => charsPerColumn * (context.measureText(text).actualBoundingBoxAscent + context.measureText(text).actualBoundingBoxDescent) * 0.8;
-
 const incrementFontValue = 0.1;
 const initFontSize = 0.1;
 
 const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, charsPerColumn: number, parentWidth: number, parentHeight: number) => {
-	// Create a text fill with the same width as the ascii text and add \n for the end of each line
+	// Create one string with, one line of text filled with W
 	const filledStringLine = String('W').repeat(charsPerLine);
 
-	// Create a canvas to measure the width of the text
-	const canvas = document.createElement('canvas');
-	const context = canvas.getContext('2d');
+	// Set init font size
 	let fontSize = initFontSize;
-	context!.font = `${fontSize}px monospace`;
 
-	// Increase the font size until the text is wider than the screen in width or height
-	let textWidth = calculateStringWidth(context!, filledStringLine);
-	let textHeight = calculateStringHeight(context!, filledStringLine, charsPerColumn);
-	while ((textWidth < parentWidth) && textHeight < parentHeight) {
-		fontSize += incrementFontValue;
-		context!.font = `${fontSize}px monospace`;
-		textWidth = calculateStringWidth(context!, filledStringLine);
-		textHeight = calculateStringHeight(context!, filledStringLine, charsPerColumn);
+	// Create a pre element to calculate the height of the text
+	const preElementBuffer = document.createElement('pre');
+	preElementBuffer.style.fontSize = `${fontSize}px`;
+	preElementBuffer.style.fontFamily = 'monospace';
+
+	// Filled the pre element with `filledStringLine` for each line
+	for (let i = 0; i < charsPerColumn; i++) {
+		preElementBuffer.append(filledStringLine);
+		preElementBuffer.append('\n');
 	}
 
-	// Remove the created canvas
-	canvas.remove();
+	// Append the pre element to the DOM to calculate the width and height
+	document.body.appendChild(preElementBuffer);
+
+	// Calculate width and height of the pre element
+	// const preWidth = preElementBuffer.offsetWidth;
+	let preWidth = preElementBuffer.getBoundingClientRect().width;
+	// const preHeight = preElementBuffer.offsetHeight;
+	let preHeight = preElementBuffer.getBoundingClientRect().height;
+
+	// Increase the font size until the text is wider than the screen in width or height
+	while ((preWidth < parentWidth) && (preHeight < parentHeight)) {
+		fontSize += incrementFontValue;
+		preElementBuffer.style.fontSize = `${fontSize}px`;
+		preWidth = preElementBuffer.getBoundingClientRect().width;
+		preHeight = preElementBuffer.getBoundingClientRect().height;
+	}
+
+	// Remove the pre tag buffer
+	preElementBuffer.remove();
 
 	// Decrease the font size by one to get the correct size
 	fontSize -= incrementFontValue;
 
-	console.log('Calculate height', textHeight);
+	console.log('parentWidth', parentWidth);
+	console.log('calculated width', preWidth);
+
 	console.log('parentHeight', parentHeight);
+	console.log('Calculate height', preHeight);
 
 	// Set the font size
 	pretag.style.fontSize = `${fontSize}px`;

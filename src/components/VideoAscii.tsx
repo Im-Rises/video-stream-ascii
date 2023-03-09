@@ -22,7 +22,6 @@ const VideoAscii = (props: Props) => {
 	useEffect(() => {
 		const canvas = canvasVideoBufferRef.current!;
 		const context = canvas.getContext('2d', {willReadFrequently: true})!;
-		// calculateAndSetFontSize(preTagRef.current!, props.charsPerLine, props.charsPerColumn, screen.width, screen.height);
 		calculateAndSetFontSize(preTagRef.current!, props.charsPerLine, props.charsPerColumn, props.parentRef.current!.clientWidth, props.parentRef.current!.clientHeight);
 
 		const updateAscii = () => {
