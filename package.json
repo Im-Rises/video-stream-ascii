@@ -27,6 +27,17 @@
     "dist/canvas-handler/video-canvas-ascii.d.ts",
     "dist/canvas-handler/video-canvas-ascii.d.ts.map"
   ],
+  "keywords": [
+    "video",
+    "ascii",
+    "art",
+    "stream",
+    "video-stream",
+    "video-ascii",
+    "video-stream-ascii",
+    "video-ascii-art",
+    "video-stream-ascii-art"
+  ],
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
