@@ -6,7 +6,7 @@ import './CameraAsciiPanel.css';
 const CameraAsciiPanel = () => {
 	// Define the ascii art chars per line
 	const charsPerLine = 200;
-	let charsPerColumn = 0;
+	const [charsPerColumn, setCharsPerColumn] = useState(0);
 
 	// Define the hook state for the webcam
 	const [isCameraReady, setIsCameraReady] = useState(false);
@@ -24,7 +24,7 @@ const CameraAsciiPanel = () => {
 
 			// Calculate the chars per column according to the input video aspect ratio
 			const videoRatio = video.videoWidth / video.videoHeight;
-			charsPerColumn = videoRatio > 1 ? Math.floor(charsPerLine / videoRatio) : Math.floor(charsPerLine * videoRatio);
+			setCharsPerColumn(videoRatio > 1 ? Math.floor(charsPerLine / videoRatio) : Math.floor(charsPerLine * videoRatio));
 			setIsCameraReady(true);
 		};
 	};
