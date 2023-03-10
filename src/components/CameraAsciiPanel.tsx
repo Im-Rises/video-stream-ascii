@@ -4,11 +4,9 @@ import Webcam from 'react-webcam';
 import './CameraAsciiPanel.css';
 
 const CameraAsciiPanel = () => {
-	// Define the ascii art chars per column according to ratio of the screen and the chars per line
-	const screenRatio = screen.width / screen.height;// TODO:need to be based on the input video size
+	// Define the ascii art chars per line
 	const charsPerLine = 200;
-	const charsPerColumn = screenRatio > 1 ? Math.floor(charsPerLine / screenRatio) : Math.floor(charsPerLine * screenRatio);
-	const [cameraWidth, cameraHeight] = [charsPerLine, charsPerColumn];
+	let charsPerColumn = 0;
 
 	// Define the hook state for the webcam
 	const [isCameraReady, setIsCameraReady] = useState(false);
@@ -22,7 +20,11 @@ const CameraAsciiPanel = () => {
 		const video = videoRef.current!.video!;
 		video.srcObject = stream;
 		video.onloadedmetadata = async () => {
-			await video.play();
+			await video.play();// Start the video
+
+			// Calculate the chars per column according to the input video aspect ratio
+			const videoRatio = video.videoWidth / video.videoHeight;
+			charsPerColumn = videoRatio > 1 ? Math.floor(charsPerLine / videoRatio) : Math.floor(charsPerLine * videoRatio);
 			setIsCameraReady(true);
 		};
 	};
@@ -39,8 +41,8 @@ const CameraAsciiPanel = () => {
 				<VideoAscii videoStreaming={videoRef.current!.video!}
 					parentRef={parentRef}
 					frameRate={30}
-					charsPerLine={cameraWidth}
-					charsPerColumn={cameraHeight}
+					charsPerLine={charsPerLine}
+					charsPerColumn={charsPerColumn}
 					fontColor={'white'}
 					backgroundColor={'black'}/>
 			) : (
