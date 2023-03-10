@@ -15,6 +15,8 @@ const CameraAsciiPanel = () => {
 	const videoRef = useRef<Webcam>(null);
 	const parentRef = useRef<HTMLDivElement>(null);
 
+	const calculateCharsPerColumn = (video: HTMLVideoElement) => Math.round(charsPerLine * (video.videoHeight / video.videoWidth));
+
 	// Handle the webcam ready event
 	const handleUserMedia = (stream: MediaStream) => {
 		const video = videoRef.current!.video!;
@@ -24,14 +26,15 @@ const CameraAsciiPanel = () => {
 			await video.play();
 
 			// Calculate the chars per column according to the input video aspect ratio
-			setCharsPerColumn(Math.floor(charsPerLine * (video.videoHeight / video.videoWidth)));
+			setCharsPerColumn(calculateCharsPerColumn(video));
 			setIsCameraReady(true);
 		};
 	};
 
+	// Refresh the VideoAscii component via the useEffect of the VideoAscii when the chars per column change
 	useEffect(() => {
 		const video = videoRef.current!.video!;
-		setCharsPerColumn(Math.floor(charsPerLine * (video.videoHeight / video.videoWidth)));
+		setCharsPerColumn(calculateCharsPerColumn(video));
 	}, [videoRef.current?.video?.videoWidth, videoRef.current?.video?.videoHeight]);
 
 	// Tags of the webcam and video ascii element
