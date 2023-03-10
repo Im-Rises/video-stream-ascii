@@ -31,12 +31,6 @@ const CameraAsciiPanel = () => {
 		};
 	};
 
-	// Refresh the VideoAscii component via the useEffect of the VideoAscii when the chars per column change
-	useEffect(() => {
-		const video = videoRef.current!.video!;
-		setCharsPerColumn(calculateCharsPerColumn(video));
-	}, [videoRef.current?.video?.videoWidth, videoRef.current?.video?.videoHeight]);
-
 	// Tags of the webcam and video ascii element
 	// Show the webcam only when it is ready, otherwise show a loading message
 	return (
