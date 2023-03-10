@@ -103,8 +103,9 @@ Then you can create use the Component:
 ```js
 <VideoAscii videoStreaming={videoRef.current!.video!}
             parentRef={parentRef}
-            frameRate={30} charsPerLine={cameraWidth}
-            charsPerColumn={cameraHeight}
+            frameRate={30}
+            charsPerLine={charsPerLine}
+            charsPerColumn={charsPerColumn}
             fontColor={'white'}
             backgroundColor={'black'}/>
 ```
