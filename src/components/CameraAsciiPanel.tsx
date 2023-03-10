@@ -5,7 +5,7 @@ import './CameraAsciiPanel.css';
 
 const CameraAsciiPanel = () => {
 	// Define the ascii art chars per column according to ratio of the screen and the chars per line
-	const screenRatio = screen.width / screen.height;
+	const screenRatio = screen.width / screen.height;// TODO:need to be based on the input video size
 	const charsPerLine = 200;
 	const charsPerColumn = screenRatio > 1 ? Math.floor(charsPerLine / screenRatio) : Math.floor(charsPerLine * screenRatio);
 	const [cameraWidth, cameraHeight] = [charsPerLine, charsPerColumn];
@@ -38,7 +38,8 @@ const CameraAsciiPanel = () => {
 			{isCameraReady ? (
 				<VideoAscii videoStreaming={videoRef.current!.video!}
 					parentRef={parentRef}
-					frameRate={1000 / 30} charsPerLine={cameraWidth}
+					frameRate={30}
+					charsPerLine={cameraWidth}
 					charsPerColumn={cameraHeight}
 					fontColor={'white'}
 					backgroundColor={'black'}/>
