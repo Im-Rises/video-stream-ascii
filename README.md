@@ -112,15 +112,20 @@ Then you can create use the Component:
 To use the component, you need to pass the following props:
 
 - `videoStreaming` - The video stream from the camera.
-- `parentRef` - The reference of the parent element.
+- `parentRef` - The reference of the parent element, to fit the ascii art in it.
 - `frameRate` - The frame rate of the video output.
 - `charsPerLine` - The number of characters per line.
 - `charsPerColumn` - The number of characters per column.
 - `fontColor` - The color of the font.
 - `backgroundColor` - The color of the background.
 
+The `parentRef` is used to fit the ascii art in the parent element, so you need to pass the reference of the parent
+element like a `div`, you can check the example to see how to use it.
+
 > **Warning**  
-> Be careful when using this package, the camera must be working before enable the video stream.
+> Be careful when using this package, the camera must be working before enabling the video stream.
+> If you want to set the ascii art with a correct aspect ratio, follow the example below, for an example of how to use
+> it.
 
 An example in the GitHub repository is available, showing how to use the camera stream to convert it into a real-time
 ASCII video
@@ -138,40 +143,48 @@ import Webcam from 'react-webcam';
 import './CameraAsciiPanel.css';
 
 const CameraAsciiPanel = () => {
-    const [isCameraReady, setIsCameraReady] = useState(false);
-    const [cameraWidth, cameraHeight] = [260, 200];
-    const videoRef = useRef < Webcam > (null);
+	// Define the ascii art chars per column according to ratio of the screen and the chars per line
+	const screenRatio = screen.width / screen.height;
+	const charsPerLine = 200;
+	const charsPerColumn = screenRatio > 1 ? Math.floor(charsPerLine / screenRatio) : Math.floor(charsPerLine * screenRatio);
+	const [cameraWidth, cameraHeight] = [charsPerLine, charsPerColumn];
 
-    const handleUserMedia = (stream: MediaStream) => {
-        const video = videoRef.current
-        !
-    .
-        video
-        !;
-        video.srcObject = stream;
-        video.onloadedmetadata = async () => {
-            await video.play();
-            setIsCameraReady(true);
-        };
-    };
+	// Define the hook state for the webcam
+	const [isCameraReady, setIsCameraReady] = useState(false);
 
-    return (
-        <div className={'Camera-Ascii-Panel'}>
-            <Webcam ref={videoRef}
-                    style={{width: 0, height: 0}}
-                    onUserMedia={handleUserMedia}
-            />
-            {isCameraReady ? (
-                <VideoAscii videoStreaming={videoRef.current!.video!}
-                            frameRate={1000 / 30} width={cameraWidth}
-                            height={cameraHeight}
-                            fontColor={'white'}
-                            backgroundColor={'black'}/>
-            ) : (
-                <p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...
-                </p>)}
-        </div>
-    );
+	// Define the refs
+	const videoRef = useRef<Webcam>(null);
+	const parentRef = useRef<HTMLDivElement>(null);
+
+	// Handle the webcam ready event
+	const handleUserMedia = (stream: MediaStream) => {
+		const video = videoRef.current!.video!;
+		video.srcObject = stream;
+		video.onloadedmetadata = async () => {
+			await video.play();
+			setIsCameraReady(true);
+		};
+	};
+
+	// Tags of the webcam and video ascii element
+	// Show the webcam only when it is ready, otherwise show a loading message
+	return (
+		<div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test' ref={parentRef}>
+			<Webcam ref={videoRef}
+				style={{width: 0, height: 0}}
+				onUserMedia={handleUserMedia}
+			/>
+			{isCameraReady ? (
+				<VideoAscii videoStreaming={videoRef.current!.video!}
+					parentRef={parentRef}
+					frameRate={1000 / 30} charsPerLine={cameraWidth}
+					charsPerColumn={cameraHeight}
+					fontColor={'white'}
+					backgroundColor={'black'}/>
+			) : (
+				<p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...</p>)}
+		</div>
+	);
 };
 
 export default CameraAsciiPanel;

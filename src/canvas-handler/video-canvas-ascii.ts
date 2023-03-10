@@ -19,8 +19,9 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
-const incrementFontValue = 0.1;
-const initFontSize = 1.0;// A value to small will make the text too small
+const incrementFontValue = 0.1; // The value to increment the font size
+const initFontSize = 1.0;// A value to small will make the text not visible on some devices
+const lineSpacing = 0.6;// Set the line spacing for equal distance between the lines and the letters (use em to fit the font size)
 
 const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, charsPerColumn: number, parentWidth: number, parentHeight: number) => {
 	// Create one string with, one line of text filled with W
@@ -33,6 +34,7 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	const preElementBuffer = document.createElement('pre');
 	preElementBuffer.style.fontSize = `${fontSize}px`;
 	preElementBuffer.style.fontFamily = 'monospace';
+	preElementBuffer.style.letterSpacing = `${lineSpacing}em`;
 
 	// Hide the pre buffer element (display: none, or visibility: hidden, or opacity: 0, or width: 0, or height: 0)
 	// preElementBuffer.style.display = 'none';// Setting to none will crash the browser as it becomes null or the height is 0
@@ -41,7 +43,7 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	// preElementBuffer.style.width = '0%';
 	// preElementBuffer.style.height = '0%';
 	// preElementBuffer.style.opacity = '0';
-	preElementBuffer.style.position = 'absolute';
+	preElementBuffer.style.position = 'absolute';// Setting the position to absolute will in each case set the height
 
 	// Filled the pre element with `filledStringLine` for each line
 	for (let i = 0; i < charsPerColumn; i++) {
@@ -72,12 +74,6 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	// Decrease the font size by one to get the correct size
 	fontSize -= incrementFontValue;
 
-	console.log('parentWidth', parentWidth);
-	console.log('calculated width', preWidth);
-
-	console.log('parentHeight', parentHeight);
-	console.log('Calculate height', preHeight);
-
 	// Set the font size
 	pretag.style.fontSize = `${fontSize}px`;
 
@@ -85,4 +81,4 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	console.log(`Setting font size to ${fontSize}`);
 };
 
-export {getAsciiFromImage, calculateAndSetFontSize};
+export {getAsciiFromImage, calculateAndSetFontSize, lineSpacing};
