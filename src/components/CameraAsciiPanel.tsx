@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import VideoAscii from './VideoAscii';
 import Webcam from 'react-webcam';
 import './CameraAsciiPanel.css';
@@ -20,13 +20,19 @@ const CameraAsciiPanel = () => {
 		const video = videoRef.current!.video!;
 		video.srcObject = stream;
 		video.onloadedmetadata = async () => {
-			await video.play();// Start the video
+			// Start the video
+			await video.play();
 
 			// Calculate the chars per column according to the input video aspect ratio
 			setCharsPerColumn(Math.floor(charsPerLine * (video.videoHeight / video.videoWidth)));
 			setIsCameraReady(true);
 		};
 	};
+
+	useEffect(() => {
+		const video = videoRef.current!.video!;
+		setCharsPerColumn(Math.floor(charsPerLine * (video.videoHeight / video.videoWidth)));
+	}, [videoRef.current?.video?.videoWidth, videoRef.current?.video?.videoHeight]);
 
 	// Tags of the webcam and video ascii element
 	// Show the webcam only when it is ready, otherwise show a loading message
