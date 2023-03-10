@@ -103,7 +103,7 @@ Then you can create use the Component:
 ```js
 <VideoAscii videoStreaming={videoRef.current!.video!}
             parentRef={parentRef}
-            frameRate={1000 / 30} charsPerLine={cameraWidth}
+            frameRate={30} charsPerLine={cameraWidth}
             charsPerColumn={cameraHeight}
             fontColor={'white'}
             backgroundColor={'black'}/>
@@ -113,7 +113,7 @@ To use the component, you need to pass the following props:
 
 - `videoStreaming` - The video stream from the camera.
 - `parentRef` - The reference of the parent element, to fit the ascii art in it.
-- `frameRate` - The frame rate of the video output.
+- `frameRate` - The frame rate of the video output in frames per second.
 - `charsPerLine` - The number of characters per line.
 - `charsPerColumn` - The number of characters per column.
 - `fontColor` - The color of the font.
@@ -136,59 +136,67 @@ You can also find it below:
 <details>
     <summary>Click to expand</summary>
 
-~~~
+```js
 import React, {useRef, useState} from 'react';
 import VideoAscii from './VideoAscii';
 import Webcam from 'react-webcam';
 import './CameraAsciiPanel.css';
 
 const CameraAsciiPanel = () => {
-	// Define the ascii art chars per column according to ratio of the screen and the chars per line
-	const screenRatio = screen.width / screen.height;
-	const charsPerLine = 200;
-	const charsPerColumn = screenRatio > 1 ? Math.floor(charsPerLine / screenRatio) : Math.floor(charsPerLine * screenRatio);
-	const [cameraWidth, cameraHeight] = [charsPerLine, charsPerColumn];
+    // Define the ascii art chars per line
+    const charsPerLine = 200;
+    const [charsPerColumn, setCharsPerColumn] = useState(0);
 
-	// Define the hook state for the webcam
-	const [isCameraReady, setIsCameraReady] = useState(false);
+    // Define the hook state for the webcam
+    const [isCameraReady, setIsCameraReady] = useState(false);
 
-	// Define the refs
-	const videoRef = useRef<Webcam>(null);
-	const parentRef = useRef<HTMLDivElement>(null);
+    // Define the refs
+    const videoRef = useRef < Webcam > (null);
+    const parentRef = useRef < HTMLDivElement > (null);
 
-	// Handle the webcam ready event
-	const handleUserMedia = (stream: MediaStream) => {
-		const video = videoRef.current!.video!;
-		video.srcObject = stream;
-		video.onloadedmetadata = async () => {
-			await video.play();
-			setIsCameraReady(true);
-		};
-	};
+    // Handle the webcam ready event
+    const handleUserMedia = (stream: MediaStream) => {
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
+        video.srcObject = stream;
+        video.onloadedmetadata = async () => {
+            await video.play();// Start the video
 
-	// Tags of the webcam and video ascii element
-	// Show the webcam only when it is ready, otherwise show a loading message
-	return (
-		<div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test' ref={parentRef}>
-			<Webcam ref={videoRef}
-				style={{width: 0, height: 0}}
-				onUserMedia={handleUserMedia}
-			/>
-			{isCameraReady ? (
-				<VideoAscii videoStreaming={videoRef.current!.video!}
-					parentRef={parentRef}
-					frameRate={1000 / 30} charsPerLine={cameraWidth}
-					charsPerColumn={cameraHeight}
-					fontColor={'white'}
-					backgroundColor={'black'}/>
-			) : (
-				<p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...</p>)}
-		</div>
-	);
+            // Calculate the chars per column according to the input video aspect ratio
+            const videoRatio = video.videoWidth / video.videoHeight;
+            setCharsPerColumn(videoRatio > 1 ? Math.floor(charsPerLine / videoRatio) : Math.floor(charsPerLine * videoRatio));
+            setIsCameraReady(true);
+        };
+    };
+
+    // Tags of the webcam and video ascii element
+    // Show the webcam only when it is ready, otherwise show a loading message
+    return (
+        <div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test' ref={parentRef}>
+            <Webcam ref={videoRef}
+                    style={{width: 0, height: 0}}
+                    onUserMedia={handleUserMedia}
+            />
+            {isCameraReady ? (
+                <VideoAscii videoStreaming={videoRef.current!.video!}
+                            parentRef={parentRef}
+                            frameRate={30}
+                            charsPerLine={charsPerLine}
+                            charsPerColumn={charsPerColumn}
+                            fontColor={'white'}
+                            backgroundColor={'black'}/>
+            ) : (
+                <p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...
+                </p>)}
+        </div>
+    );
 };
 
 export default CameraAsciiPanel;
-~~~
+```
 
 </details>
 

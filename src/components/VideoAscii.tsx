@@ -33,7 +33,7 @@ const VideoAscii = (props: Props) => {
 			setAsciiText(text);
 		};
 
-		const intervalId = setInterval(updateAscii, props.frameRate);
+		const intervalId = setInterval(updateAscii, 1000 / props.frameRate);
 
 		return () => {
 			clearInterval(intervalId);
