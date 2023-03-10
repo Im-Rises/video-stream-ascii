@@ -51,7 +51,7 @@ const VideoAscii = (props: Props) => {
 			clearInterval(intervalId);
 			resizeObserver.disconnect();
 		};
-	}, [props.videoStreaming, props.charsPerLine, props.charsPerColumn, props.frameRate]);
+	}, [props.charsPerLine, props.charsPerColumn, props.frameRate]);
 
 	return (
 		<div style={{

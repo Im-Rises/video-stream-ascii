@@ -15,7 +15,7 @@ This is a simple web package that converts a video stream into ASCII art.
 ## 🚀🚀 [You can try it out](https://im-rises.github.io/video-ascii/) 🚀🚀
 
 It works on desktop and mobile as well, the example use the camera of your device and convert the video stream into
-ASCII art in real time.
+ASCII art in real time. The output is real text, so you can copy and paste it directly.
 
 ## 🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
 
@@ -132,13 +132,15 @@ An example in the GitHub repository is available, showing how to use the camera 
 ASCII video
 here: [video-ascii-example](https://github.com/Im-Rises/video-ascii/blob/main/src/components/CameraAsciiPanel.tsx).
 
+You can test the example at this link: [video-ascii-example](https://im-rises.github.io/video-ascii/).
+It will create a video ascii from you camera and output it in real time full screen with auto aspect ratio.
 You can also find it below:
 
 <details>
     <summary>Click to expand</summary>
 
 ```js
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import VideoAscii from './VideoAscii';
 import Webcam from 'react-webcam';
 import './CameraAsciiPanel.css';
@@ -155,6 +157,8 @@ const CameraAsciiPanel = () => {
     const videoRef = useRef < Webcam > (null);
     const parentRef = useRef < HTMLDivElement > (null);
 
+    const calculateCharsPerColumn = (video: HTMLVideoElement) => Math.round(charsPerLine * (video.videoHeight / video.videoWidth));
+
     // Handle the webcam ready event
     const handleUserMedia = (stream: MediaStream) => {
         const video = videoRef.current
@@ -164,13 +168,24 @@ const CameraAsciiPanel = () => {
         !;
         video.srcObject = stream;
         video.onloadedmetadata = async () => {
-            await video.play();// Start the video
+            // Start the video
+            await video.play();
 
             // Calculate the chars per column according to the input video aspect ratio
-            setCharsPerColumn(Math.floor(charsPerLine * (video.videoHeight / video.videoWidth)));
+            setCharsPerColumn(calculateCharsPerColumn(video));
             setIsCameraReady(true);
         };
     };
+
+    // Refresh the VideoAscii component via the useEffect of the VideoAscii when the chars per column change
+    useEffect(() => {
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
+        setCharsPerColumn(calculateCharsPerColumn(video));
+    }, [videoRef.current?.video?.videoWidth, videoRef.current?.video?.videoHeight]);
 
     // Tags of the webcam and video ascii element
     // Show the webcam only when it is ready, otherwise show a loading message
