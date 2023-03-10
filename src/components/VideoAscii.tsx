@@ -23,6 +23,16 @@ const VideoAscii = (props: Props) => {
 		const context = canvas.getContext('2d', {willReadFrequently: true})!;
 		calculateAndSetFontSize(preTagRef.current!, props.charsPerLine, props.charsPerColumn, props.parentRef.current!.clientWidth, props.parentRef.current!.clientHeight);
 
+		// Set a resize observer to the parent element to resize the canvas and the font size
+		const resizeObserver = new ResizeObserver(entries => {
+			const {width, height} = entries[0].contentRect;
+			calculateAndSetFontSize(preTagRef.current!, props.charsPerLine, props.charsPerColumn, width, height);
+		});
+		if (props.parentRef.current) {
+			resizeObserver.observe(props.parentRef.current);
+		}
+
+		// Refresh the ascii art text every frame
 		const updateAscii = () => {
 			// Draw video to canvas buffer
 			context.drawImage(props.videoStreaming, 0, 0, canvas.width, canvas.height);
@@ -33,10 +43,13 @@ const VideoAscii = (props: Props) => {
 			setAsciiText(text);
 		};
 
+		// Start the update loop
 		const intervalId = setInterval(updateAscii, 1000 / props.frameRate);
 
+		// Stop the update loop and the resize observer when the component is unmounted
 		return () => {
 			clearInterval(intervalId);
+			resizeObserver.disconnect();
 		};
 	}, [props.videoStreaming, props.charsPerLine, props.charsPerColumn, props.frameRate]);
 
