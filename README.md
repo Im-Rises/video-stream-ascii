@@ -177,6 +177,29 @@ const CameraAsciiPanel = () => {
         };
     };
 
+    const handleOrientationChange = () => {
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
+        setCharsPerColumn(calculateCharsPerColumn(video));
+    };
+
+    // Get the orientation change event
+    const mediaQuery = window.matchMedia('(orientation: landscape)');
+
+    // Add the event listener of the orientation change
+    useEffect(() => {
+        // On some devices, the change from portrait to landscape need to recalculate the chars per column to fit the aspect ratio
+        mediaQuery.addEventListener('change', handleOrientationChange);
+
+        // Remove the event listener when the component is unmounted
+        return () => {
+            mediaQuery.removeEventListener('change', handleOrientationChange);
+        };
+    }, []);
+
     // Tags of the webcam and video ascii element
     // Show the webcam only when it is ready, otherwise show a loading message
     return (

@@ -41,7 +41,7 @@ const CameraAsciiPanel = () => {
 
 	// Add the event listener of the orientation change
 	useEffect(() => {
-		// On some devices, the change from portrait to landscape is not changing the video aspect ratio so no detection is done
+		// On some devices, the change from portrait to landscape need to recalculate the chars per column to fit the aspect ratio
 		mediaQuery.addEventListener('change', handleOrientationChange);
 
 		// Remove the event listener when the component is unmounted
