@@ -166,8 +166,7 @@ const CameraAsciiPanel = () => {
             await video.play();// Start the video
 
             // Calculate the chars per column according to the input video aspect ratio
-            const videoRatio = video.videoWidth / video.videoHeight;
-            setCharsPerColumn(videoRatio > 1 ? Math.floor(charsPerLine / videoRatio) : Math.floor(charsPerLine * videoRatio));
+            setCharsPerColumn(Math.floor(charsPerLine * (video.videoHeight / video.videoWidth)));
             setIsCameraReady(true);
         };
     };
