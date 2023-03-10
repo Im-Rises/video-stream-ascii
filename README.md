@@ -101,8 +101,10 @@ import {VideoStreamAscii} from "video-stream-ascii";
 Then you can create use the Component:
 
 ```js
-<VideoAscii videoStreaming={videoRef.current!.video!} frameRate={1000 / 30} width={cameraWidth}
-            height={cameraHeight}
+<VideoAscii videoStreaming={videoRef.current!.video!}
+            parentRef={parentRef}
+            frameRate={1000 / 30} charsPerLine={cameraWidth}
+            charsPerColumn={cameraHeight}
             fontColor={'white'}
             backgroundColor={'black'}/>
 ```
@@ -110,9 +112,10 @@ Then you can create use the Component:
 To use the component, you need to pass the following props:
 
 - `videoStreaming` - The video stream from the camera.
+- `parentRef` - The reference of the parent element.
 - `frameRate` - The frame rate of the video output.
-- `width` - The width of the video output.
-- `height` - The height of the video output.
+- `charsPerLine` - The number of characters per line.
+- `charsPerColumn` - The number of characters per column.
 - `fontColor` - The color of the font.
 - `backgroundColor` - The color of the background.
 

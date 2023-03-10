@@ -5,8 +5,9 @@ import {calculateAndSetFontSize, getAsciiFromImage} from '../canvas-handler/vide
 
 type Props = {
 	videoStreaming: HTMLVideoElement;
-	width: number;
-	height: number;
+	parentRef: React.RefObject<HTMLElement>;
+	charsPerLine: number;
+	charsPerColumn: number;
 	frameRate: number;
 	fontColor: string;
 	backgroundColor: string;
@@ -21,7 +22,7 @@ const VideoAscii = (props: Props) => {
 	useEffect(() => {
 		const canvas = canvasVideoBufferRef.current!;
 		const context = canvas.getContext('2d', {willReadFrequently: true})!;
-		calculateAndSetFontSize(preTagRef.current!, props.width, props.height, screen.width, screen.height);
+		calculateAndSetFontSize(preTagRef.current!, props.charsPerLine, props.charsPerColumn, props.parentRef.current!.clientWidth, props.parentRef.current!.clientHeight);
 
 		const updateAscii = () => {
 			// Draw video to canvas buffer
@@ -38,7 +39,7 @@ const VideoAscii = (props: Props) => {
 		return () => {
 			clearInterval(intervalId);
 		};
-	}, [props.videoStreaming, props.width, props.height, props.frameRate]);
+	}, [props.videoStreaming, props.charsPerLine, props.charsPerColumn, props.frameRate]);
 
 	return (
 		<div style={{
@@ -46,7 +47,7 @@ const VideoAscii = (props: Props) => {
 			padding: 0, margin: 0, display: 'flex', justifyContent: 'center',
 			alignItems: 'center', width: '100%', height: '100%',
 		}}>
-			<canvas ref={canvasVideoBufferRef} width={props.width} height={props.height}
+			<canvas ref={canvasVideoBufferRef} width={props.charsPerLine} height={props.charsPerColumn}
 				style={{display: 'none'}}/>
 			<pre ref={preTagRef} style={{
 				backgroundColor: props.backgroundColor,
