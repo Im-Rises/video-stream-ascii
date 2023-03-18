@@ -10,11 +10,12 @@ type Props = {
 	frameRate: number;
 	fontColor: string;
 	backgroundColor: string;
+	preTagRef?: React.RefObject<HTMLPreElement>;
 };
 
 const VideoAscii = (props: Props) => {
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
-	const preTagRef = useRef<HTMLPreElement>(null);
+	const preTagRef = props.preTagRef ?? useRef<HTMLPreElement>(null);
 
 	const [asciiText, setAsciiText] = useState('');
 
