@@ -87,7 +87,7 @@ ASCII video
 here: [video-ascii-example](https://github.com/Im-Rises/video-ascii/blob/main/src/components/CameraAsciiPanel.tsx).
 
 You can test the example at this link: [video-ascii-example](https://im-rises.github.io/video-ascii/).
-It will create a video ascii from you camera and output it in real time full screen with auto aspect ratio.
+It will create a video ascii from you camera and output it in real time full screen with auto aspect ratio and a copy to clipboard button.
 You can also find it below:
 
 <details>
@@ -117,11 +117,7 @@ const CameraAsciiPanel = () => {
 
     // Handle the webcam ready event
     const handleUserMedia = (stream: MediaStream) => {
-        const video = videoRef.current
-        !
-    .
-        video
-        !;
+        const video = videoRef.current!.video!;
         video.srcObject = stream;
         video.onloadedmetadata = async () => {
             // Start the video
@@ -135,11 +131,7 @@ const CameraAsciiPanel = () => {
 
     // Handle orientation change
     const handleOrientationChange = () => {
-        const video = videoRef.current
-        !
-    .
-        video
-        !;
+        const video = videoRef.current!.video!;
         setCharsPerColumn(calculateCharsPerColumn(video));
     };
 
