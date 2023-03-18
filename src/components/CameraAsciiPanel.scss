@@ -12,3 +12,18 @@
   color: #fff;
   text-align: center;
 }
+
+.Button-Copy-Clipboard {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  padding: 0.5rem;
+  border: 0.1rem solid #fff;
+  border-radius: 0.2rem;
+  font-size: 1.0rem;
+  margin: 0.5rem;
+}
