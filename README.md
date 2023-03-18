@@ -51,6 +51,19 @@ Then you can create use the Component:
             backgroundColor={'black'}/>
 ```
 
+You can also pass a pre tag reference to the component, so it can be used to get the ASCII text:
+
+```js
+<VideoAscii videoStreaming={videoRef.current!.video!}
+            parentRef={parentRef}
+            frameRate={30}
+            charsPerLine={charsPerLine}
+            charsPerColumn={charsPerColumn}
+            fontColor={'white'}
+            backgroundColor={'black'}
+            preTagRef={preTagRef}/>
+```
+
 To use the component, you need to pass the following props:
 
 - `videoStreaming` - The video stream from the camera.
@@ -90,6 +103,7 @@ const CameraAsciiPanel = () => {
     // Define the ascii art chars per line
     const charsPerLine = 200;
     const [charsPerColumn, setCharsPerColumn] = useState(0);
+    const preTagRef = useRef < HTMLPreElement > (null);
 
     // Define the hook state for the webcam
     const [isCameraReady, setIsCameraReady] = useState(false);
@@ -98,11 +112,16 @@ const CameraAsciiPanel = () => {
     const videoRef = useRef < Webcam > (null);
     const parentRef = useRef < HTMLDivElement > (null);
 
+    // Calculate the chars per column according to the aspect ratio of the video
     const calculateCharsPerColumn = (video: HTMLVideoElement) => Math.round(charsPerLine * (video.videoHeight / video.videoWidth));
 
     // Handle the webcam ready event
     const handleUserMedia = (stream: MediaStream) => {
-        const video = videoRef.current!.video!;
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
         video.srcObject = stream;
         video.onloadedmetadata = async () => {
             // Start the video
@@ -114,8 +133,13 @@ const CameraAsciiPanel = () => {
         };
     };
 
+    // Handle orientation change
     const handleOrientationChange = () => {
-        const video = videoRef.current!.video!;
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
         setCharsPerColumn(calculateCharsPerColumn(video));
     };
 
@@ -133,25 +157,45 @@ const CameraAsciiPanel = () => {
         };
     }, []);
 
+    // Handle the copy to clipboard button click
+    const copyToClipboard = async (text: string) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            console.log('Text copied to clipboard');
+        } catch (err: unknown) {
+            console.error('Failed to copy text: ', err);
+        }
+    };
+
     // Tags of the webcam and video ascii element
     // Show the webcam only when it is ready, otherwise show a loading message
     return (
         <div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test' ref={parentRef}>
-            <Webcam ref={videoRef}
-                    style={{width: 0, height: 0}}
-                    onUserMedia={handleUserMedia}
-            />
-            {isCameraReady ? (
-                <VideoAscii videoStreaming={videoRef.current!.video!}
-                            parentRef={parentRef}
-                            frameRate={30}
-                            charsPerLine={charsPerLine}
-                            charsPerColumn={charsPerColumn}
-                            fontColor={'white'}
-                            backgroundColor={'black'}/>
-            ) : (
-                <p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...
-                </p>)}
+            <div>
+                <button className={'Button-Copy-Clipboard'}
+                        onClick={async () => copyToClipboard(preTagRef.current!.innerText)}>Copy
+                </button>
+            </div>
+            <div>
+                <Webcam ref={videoRef}
+                        style={{width: 0, height: 0}}
+                        onUserMedia={handleUserMedia}
+                />
+                {isCameraReady ? (
+                    <VideoAscii
+                        videoStreaming={videoRef.current!.video!}
+                        parentRef={parentRef}
+                        frameRate={30}
+                        charsPerLine={charsPerLine}
+                        charsPerColumn={charsPerColumn}
+                        fontColor={'white'}
+                        backgroundColor={'black'}
+                        preTagRef={preTagRef}
+                    />
+                ) : (
+                    <p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...
+                    </p>)}
+            </div>
         </div>
     );
 };
