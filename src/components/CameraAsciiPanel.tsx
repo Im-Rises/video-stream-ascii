@@ -59,7 +59,8 @@ const CameraAsciiPanel = () => {
 				onUserMedia={handleUserMedia}
 			/>
 			{isCameraReady ? (
-				<VideoAscii videoStreaming={videoRef.current!.video!}
+				<VideoAscii
+					videoStreaming={videoRef.current!.video!}
 					parentRef={parentRef}
 					frameRate={30}
 					charsPerLine={charsPerLine}

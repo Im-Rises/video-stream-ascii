@@ -23,65 +23,6 @@ ASCII art in real time. The output is real text, so you can copy and paste it di
 
 <img src="https://user-images.githubusercontent.com/59691442/209728294-e10691da-eb4f-43e6-880c-522417da79c6.png" alt="screenshot" style="width: 100%;">
 
-## Project architecture
-
-<details>
-    <summary>Click to expand</summary>
-
-~~~
-video-ascii
-├── .github
-│  ├── workflows
-│  │   |── codeql.yml
-│  │   |── dependency-review.yml
-│  │   |── eslint.yml
-│  │   |── greetings.yml
-│  │   |── label.yml
-│  │   |── node.yml
-│  │   |── stale.yml
-|  ├── labeler.yml
-|  ├── release.yml
-├── public
-│  ├── face-logo.ico
-│  ├── face-logo192.png
-│  ├── face-logo512.png
-│  ├── index.html
-│  ├── manifest.json
-│  ├── robots.txt
-├── src
-|  ├── canvas-handler
-│  │   |── canvas-handler.ts
-|  ├── components
-│  │   |── VideoAscii.scss
-│  │   |── VideoAscii.tsx
-│  │   |── CameraAsciiPanel.scss
-│  │   |── CameraAsciiPanel.tsx
-│  │   |── GitHubProjectPanel.scss
-│  │   |── GitHubProjectPanel.tsx
-|  ├── constants
-│  │   |── pixel-ascii.ts
-|  ├── settings
-│  │   |── react-app-env.d.ts
-|  ├── web-vitals
-│  │   |── reportWebVitals.ts
-|  ├── App.scss
-|  ├── App.tsx
-|  ├── index.scss
-|  ├── index.tsx
-├── .editorconfig
-├── .eslintignore
-├── .eslintrc.js
-├── .gitattributes
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── README.md
-├── tsconfig.json
-├── yarn.lock
-~~~
-
-</details>
-
 ## Install packages
 
 You can install it by typing the following command in your terminal:
@@ -161,11 +102,7 @@ const CameraAsciiPanel = () => {
 
     // Handle the webcam ready event
     const handleUserMedia = (stream: MediaStream) => {
-        const video = videoRef.current
-        !
-    .
-        video
-        !;
+        const video = videoRef.current!.video!;
         video.srcObject = stream;
         video.onloadedmetadata = async () => {
             // Start the video
@@ -178,11 +115,7 @@ const CameraAsciiPanel = () => {
     };
 
     const handleOrientationChange = () => {
-        const video = videoRef.current
-        !
-    .
-        video
-        !;
+        const video = videoRef.current!.video!;
         setCharsPerColumn(calculateCharsPerColumn(video));
     };
 
