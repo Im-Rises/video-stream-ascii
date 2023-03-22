@@ -72,7 +72,7 @@ const CameraAsciiPanel = () => {
 			</div>
 			<div>
 				<Webcam ref={videoRef}
-					style={{width: 0, height: 0}}
+					style={{width: 0, height: 0, position: 'absolute', top: 0, left: 0}}
 					onUserMedia={handleUserMedia}
 				/>
 				{isCameraReady ? (
