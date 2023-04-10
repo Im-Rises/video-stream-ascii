@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import VideoAscii from './VideoAscii';
 import Webcam from 'react-webcam';
-import './CameraAsciiPanel.css';
+import './CameraAsciiPanel.scss';
 
 const CameraAsciiPanel = () => {
 	// Define the ascii art chars per line

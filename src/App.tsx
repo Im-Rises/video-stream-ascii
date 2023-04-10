@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import './App.css';
+import React from 'react';
+import './App.scss';
 import CameraAsciiPanel from './components/CameraAsciiPanel';
 
 const App = () => (
