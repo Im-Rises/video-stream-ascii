@@ -19,6 +19,8 @@ ASCII art in real time. The output is real text, so you can copy and paste it di
 
 ## 🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
 
+The example is using the webcam of your device, but you can use any video stream, like a video file or a video stream.
+
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/59691442/209728294-e10691da-eb4f-43e6-880c-522417da79c6.png" alt="screenshot" style="width: 100%;">
@@ -29,6 +31,12 @@ You can install it by typing the following command in your terminal:
 
 ```
 npm install video-stream-ascii
+```
+
+or 
+
+```
+yarn add video-stream-ascii
 ```
 
 ## Usage
