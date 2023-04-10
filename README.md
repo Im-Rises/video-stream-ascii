@@ -1,4 +1,4 @@
-# video-ascii
+# video-stream-ascii
 
 <p align="center">
     <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="javascriptLogo" style="height:50px;">
@@ -12,7 +12,7 @@
 
 This is a simple web package that converts a video stream into ASCII art.
 
-## 🚀🚀 [You can try it out](https://im-rises.github.io/video-ascii/) 🚀🚀
+## 🚀🚀 [You can try it out](https://im-rises.github.io/video-stream-ascii-website/) 🚀🚀
 
 It works on desktop and mobile as well, the example use the camera of your device and convert the video stream into
 ASCII art in real time. The output is real text, so you can copy and paste it directly.
@@ -84,9 +84,9 @@ element like a `div`, you can check the example to see how to use it.
 
 An example in the GitHub repository is available, showing how to use the camera stream to convert it into a real-time
 ASCII video
-here: [video-ascii-example](https://github.com/Im-Rises/video-ascii/blob/main/src/components/CameraAsciiPanel.tsx).
+here: [video-stream-ascii-example](https://github.com/Im-Rises/video-stream-ascii/blob/main/src/components/CameraAsciiPanel.tsx).
 
-You can test the example at this link: [video-ascii-example](https://im-rises.github.io/video-ascii/).
+You can test the example at this link: [video-stream-ascii-example](https://im-rises.github.io/video-stream-ascii/).
 It will create a video ascii from you camera and output it in real time full screen with auto aspect ratio and a copy to clipboard button.
 You can also find it below:
 
@@ -228,15 +228,13 @@ The project is also set up to use ESLint.
 
 ## GitHub Actions
 
-[![pages-build-deployment](https://github.com/Im-Rises/video-ascii/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Im-Rises/video-ascii/actions/workflows/pages/pages-build-deployment)
-[![Node.js CI](https://github.com/Im-Rises/video-ascii/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/node.js.yml)
-[![ESLint](https://github.com/Im-Rises/video-ascii/actions/workflows/eslint.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/eslint.yml)
-[![CodeQL](https://github.com/Im-Rises/video-ascii/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-ascii/actions/workflows/codeql.yml)
-[![Node.js Package](https://github.com/Im-Rises/video-ascii/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/Im-Rises/video-ascii/actions/workflows/npm-publish.yml)
+[![Node.js CI](https://github.com/Im-Rises/video-stream-ascii/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-stream-ascii/actions/workflows/node.js.yml)
+[![ESLint](https://github.com/Im-Rises/video-stream-ascii/actions/workflows/eslint.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-stream-ascii/actions/workflows/eslint.yml)
+[![CodeQL](https://github.com/Im-Rises/video-stream-ascii/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Im-Rises/video-stream-ascii/actions/workflows/codeql.yml)
+[![Node.js Package](https://github.com/Im-Rises/video-stream-ascii/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/Im-Rises/video-stream-ascii/actions/workflows/npm-publish.yml)
 
 The project is set up to run the following actions:
 
-- pages-build-deployment : Builds the website and deploys it to GitHub Pages.
 - node.js.yml : Runs the tests for the Node.js project.
 - eslint.yml : Runs the ESLint linter on the project.
 - codeql.yml : Runs the CodeQL linter on the project.
@@ -268,7 +266,7 @@ and deploy another time
 ## Links
 
 Check the source code
-on [![github](https://user-images.githubusercontent.com/59691442/223556058-6244e346-8117-43cd-97c6-bf68611bf286.svg)](https://github.com/im-rises/video-ascii)
+on [![github](https://user-images.githubusercontent.com/59691442/223556058-6244e346-8117-43cd-97c6-bf68611bf286.svg)](https://github.com/im-rises/video-stream-ascii)
 
 Check the package
 on [![npm](https://user-images.githubusercontent.com/59691442/223556055-4e9ef014-79d4-4136-ac07-b837b49066c8.svg)](https://www.npmjs.com/package/video-stream-ascii)
@@ -280,4 +278,4 @@ Quentin MOREL :
 - @Im-Rises
 - <https://github.com/Im-Rises>
 
-[![GitHub contributors](https://contrib.rocks/image?repo=Im-Rises/video-ascii)](https://github.com/Im-Rises/video-ascii/graphs/contributors)
+[![GitHub contributors](https://contrib.rocks/image?repo=Im-Rises/video-stream-ascii)](https://github.com/Im-Rises/video-stream-ascii/graphs/contributors)
