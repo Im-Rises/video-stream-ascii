@@ -12,12 +12,14 @@
 
 This is a simple web package that converts a video stream into ASCII art.
 
-## 🚀🚀 [You can try it out](https://im-rises.github.io/video-stream-ascii-website/) 🚀🚀
+## 🚀🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
 
-It works on desktop and mobile as well, the example use the camera of your device and convert the video stream into
-ASCII art in real time. The output is real text, so you can copy and paste it directly.
+It works on desktop and mobile as well, there is two demos, one for the camera and one for a video file.
+You can check them at those links:
 
-## 🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
+### 🚀🚀 [You can try it out](https://im-rises.github.io/video-stream-ascii-webcam/) 🚀🚀
+
+### 🚀🚀 [You can try it out](https://im-rises.github.io/video-stream-ascii-reader/) 🚀🚀
 
 The example is using the webcam of your device, but you can use any video stream, like a video file or a video stream.
 
