@@ -1,5 +1,12 @@
 const pixelToAsciiChar = (intensity: number, asciiChars: string) => asciiChars[Math.floor(intensity / 256 * asciiChars.length)];
 
+const pixelToAsciiCharColor = (red: number, green: number, blue: number, asciiChars: string) => {
+	const color = `rgb(${red}, ${green}, ${blue})`;
+	const colorIndex = Math.floor((red + green + blue) / 3 / 256 * asciiChars.length);
+	const asciiChar = asciiChars[colorIndex];
+	return `<span style="color: ${color}">${asciiChar}</span>`;
+};
+
 const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	const {width} = imageData;
 	const {height} = imageData;
@@ -11,6 +18,24 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 			const index = ((y * width) + x) * 4;
 			const intensity = (pixels[index] + pixels[index + 1] + pixels[index + 2]) / 3;
 			asciiImage += pixelToAsciiChar(intensity, asciiChars);
+		}
+
+		asciiImage += '\n';
+	}
+
+	return asciiImage;
+};
+
+const getAsciiFromImageColor = (imageData: ImageData, asciiChars: string) => {
+	const {width} = imageData;
+	const {height} = imageData;
+	const pixels = imageData.data;
+
+	let asciiImage = '';
+	for (let y = 0; y < height; y += 1) {
+		for (let x = 0; x < width; x++) {
+			const index = ((y * width) + x) * 4;
+			asciiImage += pixelToAsciiCharColor(pixels[index], pixels[index + 1], pixels[index + 2], asciiChars);
 		}
 
 		asciiImage += '\n';

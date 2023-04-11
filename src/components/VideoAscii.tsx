@@ -11,6 +11,7 @@ type Props = {
 	fontColor: string;
 	backgroundColor: string;
 	preTagRef?: React.RefObject<HTMLPreElement>;
+	useColor?: boolean;
 };
 
 const VideoAscii = (props: Props) => {
@@ -68,6 +69,7 @@ const VideoAscii = (props: Props) => {
 			}}>
 				{asciiText}
 			</pre>
+			{/* <div dangerouslySetInnerHTML={{__html: asciiText}}></div> */}
 		</div>
 	);
 };
