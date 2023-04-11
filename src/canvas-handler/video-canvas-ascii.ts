@@ -44,8 +44,8 @@ const getAsciiFromImageColor = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
-const incrementFontValue = 0.1; // The value to increment the font size
-const initFontSize = 1.0;// A value to small will make the text not visible on some devices
+const incrementFontValue = 0.1; // The value to increment the font size with
+const initFontSize = 1.0;// Init font size for calculation (a value to small will make the text not visible on some devices)
 const lineSpacing = 0.6;// Set the line spacing for equal distance between the lines and the letters (use em to fit the font size)
 
 const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, charsPerColumn: number, parentWidth: number, parentHeight: number) => {
@@ -106,4 +106,4 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	console.log(`Setting font size to ${fontSize}`);
 };
 
-export {getAsciiFromImage, calculateAndSetFontSize, lineSpacing};
+export {getAsciiFromImage, calculateAndSetFontSize, getAsciiFromImageColor, lineSpacing};

@@ -1,6 +1,11 @@
 import React, {useRef, useEffect, useState} from 'react';
 import {asciiChars} from '../constants/pixel-ascii';
-import {calculateAndSetFontSize, getAsciiFromImage, lineSpacing} from '../canvas-handler/video-canvas-ascii';
+import {
+	calculateAndSetFontSize,
+	getAsciiFromImage,
+	getAsciiFromImageColor,
+	lineSpacing,
+} from '../canvas-handler/video-canvas-ascii';
 
 type Props = {
 	videoStreaming: HTMLVideoElement;
@@ -41,7 +46,8 @@ const VideoAscii = (props: Props) => {
 			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
 			// Get ascii from canvas buffer and set it to the text tag
-			const text = getAsciiFromImage(imageData, asciiChars);
+			// const text = getAsciiFromImage(imageData, asciiChars);
+			const text = getAsciiFromImageColor(imageData, asciiChars);
 			setAsciiText(text);
 		};
 
@@ -69,7 +75,12 @@ const VideoAscii = (props: Props) => {
 			}}>
 				{asciiText}
 			</pre>
-			{/* <div dangerouslySetInnerHTML={{__html: asciiText}}></div> */}
+			<div dangerouslySetInnerHTML={{__html: asciiText}}
+				style={{
+					backgroundColor: props.backgroundColor,
+					color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
+				}}
+			></div>
 		</div>
 	);
 };
