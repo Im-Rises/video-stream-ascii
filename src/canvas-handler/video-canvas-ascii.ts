@@ -1,5 +1,12 @@
 const pixelToAsciiChar = (intensity: number, asciiChars: string) => asciiChars[Math.floor(intensity / 256 * asciiChars.length)];
 
+const pixelToAsciiCharColor = (red: number, green: number, blue: number, asciiChars: string) => {
+	const color = `rgb(${red}, ${green}, ${blue})`;
+	const colorIndex = Math.floor((red + green + blue) / 3 / 256 * asciiChars.length);
+	const asciiChar = asciiChars[colorIndex];
+	return `<span style="color: ${color}">${asciiChar}</span>`;
+};
+
 const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	const {width} = imageData;
 	const {height} = imageData;
@@ -19,8 +26,26 @@ const getAsciiFromImage = (imageData: ImageData, asciiChars: string) => {
 	return asciiImage;
 };
 
-const incrementFontValue = 0.1; // The value to increment the font size
-const initFontSize = 1.0;// A value to small will make the text not visible on some devices
+const getAsciiFromImageColor = (imageData: ImageData, asciiChars: string) => {
+	const {width} = imageData;
+	const {height} = imageData;
+	const pixels = imageData.data;
+
+	let asciiImage = '';
+	for (let y = 0; y < height; y += 1) {
+		for (let x = 0; x < width; x++) {
+			const index = ((y * width) + x) * 4;
+			asciiImage += pixelToAsciiCharColor(pixels[index], pixels[index + 1], pixels[index + 2], asciiChars);
+		}
+
+		asciiImage += '\n';
+	}
+
+	return asciiImage;
+};
+
+const incrementFontValue = 0.1; // The value to increment the font size with
+const initFontSize = 1.0;// Init font size for calculation (a value to small will make the text not visible on some devices)
 const lineSpacing = 0.6;// Set the line spacing for equal distance between the lines and the letters (use em to fit the font size)
 
 const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, charsPerColumn: number, parentWidth: number, parentHeight: number) => {
@@ -81,4 +106,4 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	console.log(`Setting font size to ${fontSize}`);
 };
 
-export {getAsciiFromImage, calculateAndSetFontSize, lineSpacing};
+export {getAsciiFromImage, calculateAndSetFontSize, getAsciiFromImageColor, lineSpacing};

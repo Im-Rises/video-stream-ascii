@@ -12,12 +12,16 @@
 
 This is a simple web package that converts a video stream into ASCII art.
 
-## 🚀🚀 [You can try it out](https://im-rises.github.io/video-stream-ascii-website/) 🚀🚀
+## 🚀🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
 
-It works on desktop and mobile as well, the example use the camera of your device and convert the video stream into
-ASCII art in real time. The output is real text, so you can copy and paste it directly.
+It works on desktop and mobile as well, there is two demos, one for the camera and one for a video file.
+You can check them at those links:
 
-## 🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
+### 🚀🚀 [You can try it out](https://im-rises.github.io/video-stream-ascii-webcam/) 🚀🚀
+
+### 🚀🚀 [You can try it out](https://im-rises.github.io/video-stream-ascii-reader/) 🚀🚀
+
+The example is using the webcam of your device, but you can use any video stream, like a video file or a video stream.
 
 ## Screenshots
 
@@ -29,6 +33,12 @@ You can install it by typing the following command in your terminal:
 
 ```
 npm install video-stream-ascii
+```
+
+or
+
+```
+yarn add video-stream-ascii
 ```
 
 ## Usage
@@ -44,6 +54,7 @@ Then you can create use the Component:
 ```js
 <VideoAscii videoStreaming={videoRef.current!.video!}
             parentRef={parentRef}
+            useColor={false}
             frameRate={30}
             charsPerLine={charsPerLine}
             charsPerColumn={charsPerColumn}
@@ -56,6 +67,7 @@ You can also pass a pre tag reference to the component, so it can be used to get
 ```js
 <VideoAscii videoStreaming={videoRef.current!.video!}
             parentRef={parentRef}
+            useColor={false}
             frameRate={30}
             charsPerLine={charsPerLine}
             charsPerColumn={charsPerColumn}
@@ -68,6 +80,7 @@ To use the component, you need to pass the following props:
 
 - `videoStreaming` - The video stream from the camera.
 - `parentRef` - The reference of the parent element, to fit the ascii art in it.
+- `useColor` - If the ascii art should use color or not.
 - `frameRate` - The frame rate of the video output in frames per second.
 - `charsPerLine` - The number of characters per line.
 - `charsPerColumn` - The number of characters per column.
@@ -87,7 +100,8 @@ ASCII video
 here: [video-stream-ascii-example](https://github.com/Im-Rises/video-stream-ascii/blob/main/src/components/CameraAsciiPanel.tsx).
 
 You can test the example at this link: [video-stream-ascii-example](https://im-rises.github.io/video-stream-ascii/).
-It will create a video ascii from you camera and output it in real time full screen with auto aspect ratio and a copy to clipboard button.
+It will create a video ascii from you camera and output it in real time full screen with auto aspect ratio and a copy to
+clipboard button.
 You can also find it below:
 
 <details>
@@ -117,7 +131,11 @@ const CameraAsciiPanel = () => {
 
     // Handle the webcam ready event
     const handleUserMedia = (stream: MediaStream) => {
-        const video = videoRef.current!.video!;
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
         video.srcObject = stream;
         video.onloadedmetadata = async () => {
             // Start the video
@@ -131,7 +149,11 @@ const CameraAsciiPanel = () => {
 
     // Handle orientation change
     const handleOrientationChange = () => {
-        const video = videoRef.current!.video!;
+        const video = videoRef.current
+        !
+    .
+        video
+        !;
         setCharsPerColumn(calculateCharsPerColumn(video));
     };
 
