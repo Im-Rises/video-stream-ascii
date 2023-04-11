@@ -16,7 +16,7 @@ type Props = {
 	fontColor: string;
 	backgroundColor: string;
 	preTagRef?: React.RefObject<HTMLPreElement>;
-	useColor?: boolean;
+	useColor: boolean;
 };
 
 const VideoAscii = (props: Props) => {
@@ -46,9 +46,13 @@ const VideoAscii = (props: Props) => {
 			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
 			// Get ascii from canvas buffer and set it to the text tag
-			// const text = getAsciiFromImage(imageData, asciiChars);
-			const text = getAsciiFromImageColor(imageData, asciiChars);
-			setAsciiText(text);
+			if (props.useColor) {
+				const text = getAsciiFromImageColor(imageData, asciiChars);
+				setAsciiText(text);
+			} else {
+				const text = getAsciiFromImage(imageData, asciiChars);
+				setAsciiText(text);
+			}
 		};
 
 		// Start the update loop
@@ -69,18 +73,25 @@ const VideoAscii = (props: Props) => {
 		}}>
 			<canvas ref={canvasVideoBufferRef} width={props.charsPerLine} height={props.charsPerColumn}
 				style={{display: 'none'}}/>
-			<pre ref={preTagRef} style={{
-				backgroundColor: props.backgroundColor,
-				color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
-			}}>
-				{asciiText}
-			</pre>
-			<div dangerouslySetInnerHTML={{__html: asciiText}}
-				style={{
-					backgroundColor: props.backgroundColor,
-					color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
-				}}
-			></div>
+			{
+				props.useColor
+					? (
+						<pre ref={preTagRef} dangerouslySetInnerHTML={{__html: asciiText}}
+							style={{
+								backgroundColor: props.backgroundColor,
+								color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
+							}}
+						></pre>
+					)
+					: (
+						<pre ref={preTagRef} style={{
+							backgroundColor: props.backgroundColor,
+							color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
+						}}>
+							{asciiText}
+						</pre>
+					)
+			}
 		</div>
 	);
 };

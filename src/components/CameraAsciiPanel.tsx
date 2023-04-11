@@ -68,7 +68,9 @@ const CameraAsciiPanel = () => {
 	return (
 		<div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test' ref={parentRef}>
 			<div>
-				<button className={'Button-Copy-Clipboard'} onClick={async () => copyToClipboard(preTagRef.current!.innerText)}>Copy</button>
+				<button className={'Button-Copy-Clipboard'}
+					onClick={async () => copyToClipboard(preTagRef.current!.innerText)}>Copy
+				</button>
 			</div>
 			<div>
 				<Webcam ref={videoRef}
@@ -79,6 +81,7 @@ const CameraAsciiPanel = () => {
 					<VideoAscii
 						videoStreaming={videoRef.current!.video!}
 						parentRef={parentRef}
+						useColor={false}
 						frameRate={30}
 						charsPerLine={charsPerLine}
 						charsPerColumn={charsPerColumn}
