@@ -82,7 +82,6 @@ const CameraAsciiPanel = () => {
 						videoStreaming={videoRef.current!.video!}
 						parentRef={parentRef}
 						useColor={false}
-						frameRate={30}
 						charsPerLine={charsPerLine}
 						charsPerColumn={charsPerColumn}
 						fontColor={'white'}

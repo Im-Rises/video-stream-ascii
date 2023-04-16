@@ -12,7 +12,7 @@ type Props = {
 	parentRef: React.RefObject<HTMLElement>;
 	charsPerLine: number;
 	charsPerColumn: number;
-	frameRate: number;
+	// frameRate: number;
 	fontColor: string;
 	backgroundColor: string;
 	preTagRef?: React.RefObject<HTMLPreElement>;
@@ -25,9 +25,8 @@ const VideoAscii = (props: Props) => {
 
 	const [asciiText, setAsciiText] = useState('');
 
+	// UseEffect to calculate the font size and set the resize observer (to resize the canvas and the font size, when the parent element is resized)
 	useEffect(() => {
-		const canvas = canvasVideoBufferRef.current!;
-		const context = canvas.getContext('2d', {willReadFrequently: true})!;
 		calculateAndSetFontSize(preTagRef.current!, props.charsPerLine, props.charsPerColumn, props.parentRef.current!.clientWidth, props.parentRef.current!.clientHeight);
 
 		// Set a resize observer to the parent element to resize the canvas and the font size
@@ -38,6 +37,20 @@ const VideoAscii = (props: Props) => {
 		if (props.parentRef.current) {
 			resizeObserver.observe(props.parentRef.current);
 		}
+
+		// Stop the resize observer when the component is unmounted
+		return () => {
+			resizeObserver.disconnect();
+		};
+	}, [props.charsPerLine, props.charsPerColumn]);
+
+	// UseEffect to draw the video to the canvas buffer and get the ascii from the canvas buffer on every frame
+	useEffect(() => {
+		const canvas = canvasVideoBufferRef.current!;
+		const context = canvas.getContext('2d', {willReadFrequently: true})!;
+
+		// Animation frame id
+		let animationFrameId: number;
 
 		// Refresh the ascii art text every frame
 		const updateAscii = () => {
@@ -53,17 +66,19 @@ const VideoAscii = (props: Props) => {
 				const text = getAsciiFromImage(imageData, asciiChars);
 				setAsciiText(text);
 			}
+
+			// Schedule the next frame
+			animationFrameId = requestAnimationFrame(updateAscii);
 		};
 
-		// Start the update loop
-		const intervalId = setInterval(updateAscii, 1000 / props.frameRate);
+		// Start the animation loop when the component mounts
+		updateAscii();
 
-		// Stop the update loop and the resize observer when the component is unmounted
+		// Stop the animation loop when the component unmounts
 		return () => {
-			clearInterval(intervalId);
-			resizeObserver.disconnect();
+			cancelAnimationFrame(animationFrameId);
 		};
-	}, [props.charsPerLine, props.charsPerColumn, props.frameRate]);
+	}, []);
 
 	return (
 		<div style={{
