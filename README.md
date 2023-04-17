@@ -52,28 +52,30 @@ import {VideoStreamAscii} from "video-stream-ascii";
 Then you can create use the Component:
 
 ```js
-<VideoAscii videoStreaming={videoRef.current!.video!}
-            parentRef={parentRef}
-            useColor={false}
-            frameRate={30}
-            charsPerLine={charsPerLine}
-            charsPerColumn={charsPerColumn}
-            fontColor={'white'}
-            backgroundColor={'black'}/>
+<VideoAscii
+    videoStreaming={videoRef.current!.video!}
+    parentRef={parentRef}
+    useColor={true}
+    charsPerLine={charsPerLine}
+    charsPerColumn={charsPerColumn}
+    fontColor={'white'}
+    backgroundColor={'black'}
+/>
 ```
 
 You can also pass a pre tag reference to the component, so it can be used to get the ASCII text:
 
 ```js
-<VideoAscii videoStreaming={videoRef.current!.video!}
-            parentRef={parentRef}
-            useColor={false}
-            frameRate={30}
-            charsPerLine={charsPerLine}
-            charsPerColumn={charsPerColumn}
-            fontColor={'white'}
-            backgroundColor={'black'}
-            preTagRef={preTagRef}/>
+<VideoAscii
+    videoStreaming={videoRef.current!.video!}
+    parentRef={parentRef}
+    useColor={true}
+    charsPerLine={charsPerLine}
+    charsPerColumn={charsPerColumn}
+    fontColor={'white'}
+    backgroundColor={'black'}
+    preTagRef={preTagRef}
+/>
 ```
 
 To use the component, you need to pass the following props:
@@ -81,11 +83,11 @@ To use the component, you need to pass the following props:
 - `videoStreaming` - The video stream from the camera.
 - `parentRef` - The reference of the parent element, to fit the ascii art in it.
 - `useColor` - If the ascii art should use color or not.
-- `frameRate` - The frame rate of the video output in frames per second.
 - `charsPerLine` - The number of characters per line.
 - `charsPerColumn` - The number of characters per column.
 - `fontColor` - The color of the font.
 - `backgroundColor` - The color of the background.
+- `preTagRef` - The reference of the pre tag, to get the ascii art text.
 
 The `parentRef` is used to fit the ascii art in the parent element, so you need to pass the reference of the parent
 element like a `div`, you can check the example to see how to use it.
@@ -199,7 +201,7 @@ const CameraAsciiPanel = () => {
                     <VideoAscii
                         videoStreaming={videoRef.current!.video!}
                         parentRef={parentRef}
-                        frameRate={30}
+                        useColor={true}
                         charsPerLine={charsPerLine}
                         charsPerColumn={charsPerColumn}
                         fontColor={'white'}
