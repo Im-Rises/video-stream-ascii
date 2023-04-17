@@ -12,7 +12,6 @@ type Props = {
 	parentRef: React.RefObject<HTMLElement>;
 	charsPerLine: number;
 	charsPerColumn: number;
-	// frameRate: number;
 	fontColor: string;
 	backgroundColor: string;
 	preTagRef?: React.RefObject<HTMLPreElement>;

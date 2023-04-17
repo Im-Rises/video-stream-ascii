@@ -5,7 +5,7 @@ import './CameraAsciiPanel.scss';
 
 const CameraAsciiPanel = () => {
 	// Define the ascii art chars per line
-	const charsPerLine = 200;
+	const charsPerLine = 100;
 	const [charsPerColumn, setCharsPerColumn] = useState(0);
 	const preTagRef = useRef<HTMLPreElement>(null);
 
@@ -81,7 +81,7 @@ const CameraAsciiPanel = () => {
 					<VideoAscii
 						videoStreaming={videoRef.current!.video!}
 						parentRef={parentRef}
-						useColor={false}
+						useColor={true}
 						charsPerLine={charsPerLine}
 						charsPerColumn={charsPerColumn}
 						fontColor={'white'}
