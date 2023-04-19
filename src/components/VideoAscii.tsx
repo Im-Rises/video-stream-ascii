@@ -14,8 +14,8 @@ type Props = {
 	charsPerColumn: number;
 	fontColor: string;
 	backgroundColor: string;
-	preTagRef?: React.RefObject<HTMLPreElement>;
 	useColor: boolean;
+	preTagRef?: React.RefObject<HTMLPreElement>;
 };
 
 const VideoAscii = (props: Props) => {
@@ -77,7 +77,7 @@ const VideoAscii = (props: Props) => {
 		return () => {
 			cancelAnimationFrame(animationFrameId);
 		};
-	}, []);
+	}, [props.useColor]);
 
 	return (
 		<div style={{
