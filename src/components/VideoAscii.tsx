@@ -7,6 +7,12 @@ import {
 	lineSpacing,
 } from '../canvas-handler/video-canvas-ascii';
 
+enum ArtTypeEnum {
+	ASCII = 'ASCII',
+	ASCII_COLOR = 'ASCII_COLOR',
+	ASCII_COLOR_IMAGE = 'ASCII_COLOR_IMAGE',
+}
+
 type Props = {
 	videoStreaming: HTMLVideoElement;
 	parentRef: React.RefObject<HTMLElement>;
@@ -14,7 +20,8 @@ type Props = {
 	charsPerColumn: number;
 	fontColor: string;
 	backgroundColor: string;
-	useColor: boolean;
+	// useColor: boolean;
+	artType: ArtTypeEnum;
 	preTagRef?: React.RefObject<HTMLPreElement>;
 };
 
@@ -57,13 +64,26 @@ const VideoAscii = (props: Props) => {
 			context.drawImage(props.videoStreaming, 0, 0, canvas.width, canvas.height);
 			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-			// Get ascii from canvas buffer and set it to the text tag
-			if (props.useColor) {
-				const text = getAsciiFromImageColor(imageData, asciiChars);
-				setAsciiText(text);
-			} else {
-				const text = getAsciiFromImage(imageData, asciiChars);
-				setAsciiText(text);
+			// // Get ascii from canvas buffer and set it to the text tag
+			// if (props.useColor) {
+			// 	const text = getAsciiFromImageColor(imageData, asciiChars);
+			// 	setAsciiText(text);
+			// } else {
+			// 	const text = getAsciiFromImage(imageData, asciiChars);
+			// 	setAsciiText(text);
+			// }
+			switch (props.artType) {
+				case ArtTypeEnum.ASCII:
+					setAsciiText(getAsciiFromImage(imageData, asciiChars));
+					break;
+				case ArtTypeEnum.ASCII_COLOR:
+					setAsciiText(getAsciiFromImageColor(imageData, asciiChars));
+					break;
+				case ArtTypeEnum.ASCII_COLOR_IMAGE:
+					// setAsciiText(getAsciiFromImageColor(imageData, asciiChars, true));
+					break;
+				default:
+					break;
 			}
 
 			// Schedule the next frame
@@ -77,7 +97,7 @@ const VideoAscii = (props: Props) => {
 		return () => {
 			cancelAnimationFrame(animationFrameId);
 		};
-	}, [props.useColor]);
+	}, [props.artType]);
 
 	return (
 		<div style={{
@@ -88,26 +108,40 @@ const VideoAscii = (props: Props) => {
 			<canvas ref={canvasVideoBufferRef} width={props.charsPerLine} height={props.charsPerColumn}
 				style={{display: 'none'}}/>
 			{
-				props.useColor
-					? (
-						<pre ref={preTagRef} dangerouslySetInnerHTML={{__html: asciiText}}
-							style={{
-								backgroundColor: props.backgroundColor,
-								color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
-							}}
-						></pre>
-					)
-					: (
-						<pre ref={preTagRef} style={{
-							backgroundColor: props.backgroundColor,
-							color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
-						}}>
-							{asciiText}
-						</pre>
-					)
+				(() => {
+					switch (props.artType) {
+						case ArtTypeEnum.ASCII:
+							return (
+								<pre ref={preTagRef} style={{
+									backgroundColor: props.backgroundColor,
+									color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
+								}}>
+									{asciiText}
+								</pre>
+							);
+						case ArtTypeEnum.ASCII_COLOR:
+							return (
+								<pre ref={preTagRef} dangerouslySetInnerHTML={{__html: asciiText}}
+									style={{
+										backgroundColor: props.backgroundColor,
+										color: props.fontColor,
+										padding: 0,
+										margin: 0,
+										letterSpacing: `${lineSpacing}em`,
+									}}
+								></pre>
+							);
+						case ArtTypeEnum.ASCII_COLOR_IMAGE:
+							break;
+						default:
+							return (<p>ERROR</p>);
+					}
+				})()
 			}
 		</div>
 	);
 };
 
 export default VideoAscii;
+
+export {ArtTypeEnum};
