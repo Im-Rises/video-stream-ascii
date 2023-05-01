@@ -104,7 +104,7 @@ export const VideoAscii = (props: Props) => {
 		return () => {
 			cancelAnimationFrame(animationFrameId);
 		};
-	}, [props.videoStreaming]);
+	}, [props.videoStreaming, props.artType]);
 
 	return (
 		<div style={{
