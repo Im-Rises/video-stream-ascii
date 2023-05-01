@@ -85,6 +85,7 @@ You can also pass a pre tag reference to the component, so it can be used to get
     charsPerColumn={charsPerColumn}
     fontColor={'white'}
     backgroundColor={'black'}
+    flipY={true}
     preTagRef={preTagRef}
 />
 ```
@@ -98,6 +99,7 @@ To use the component, you need to pass the following props:
 - `charsPerColumn` - The number of characters per column.
 - `fontColor` - The color of the font.
 - `backgroundColor` - The color of the background.
+- `flipY` - Flip the ascii art vertically.
 - `preTagRef` - The reference of the pre tag, to get the ascii art text.
 
 The `parentRef` is used to fit the ascii art in the parent element, so you need to pass the reference of the parent
