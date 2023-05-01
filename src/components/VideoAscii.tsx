@@ -47,7 +47,7 @@ export const VideoAscii = (props: Props) => {
 		return () => {
 			resizeObserver.disconnect();
 		};
-	}, [props.charsPerLine, props.charsPerColumn, props.artType]);
+	}, [props.videoStreaming, props.parentRef, props.charsPerLine, props.charsPerColumn, props.artType]);
 
 	// UseEffect to draw the video to the canvas buffer and get the ascii from the canvas buffer on every frame
 	useEffect(() => {
