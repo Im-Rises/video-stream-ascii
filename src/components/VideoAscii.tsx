@@ -1,4 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
+import './VideoAscii.scss';
 import {asciiChars} from '../constants/pixel-ascii';
 import {
 	calculateAndSetFontSize,
@@ -80,7 +81,7 @@ const VideoAscii = (props: Props) => {
 					setAsciiText(getAsciiFromImageColor(imageData, asciiChars));
 					break;
 				case ArtTypeEnum.ASCII_COLOR_IMAGE:
-					// setAsciiText(getAsciiFromImageColor(imageData, asciiChars, true));
+					setAsciiText(getAsciiFromImage(imageData, asciiChars));
 					break;
 				default:
 					break;
@@ -114,7 +115,10 @@ const VideoAscii = (props: Props) => {
 							return (
 								<pre ref={preTagRef} style={{
 									backgroundColor: props.backgroundColor,
-									color: props.fontColor, padding: 0, margin: 0, letterSpacing: `${lineSpacing}em`,
+									color: props.fontColor,
+									padding: 0,
+									margin: 0,
+									letterSpacing: `${lineSpacing}em`,
 								}}>
 									{asciiText}
 								</pre>
@@ -132,7 +136,18 @@ const VideoAscii = (props: Props) => {
 								></pre>
 							);
 						case ArtTypeEnum.ASCII_COLOR_IMAGE:
-							break;
+							return (
+								<div className={'clip-path-container'}>
+									<pre ref={preTagRef} style={{
+										padding: 0,
+										margin: 0,
+										letterSpacing: `${lineSpacing}em`,
+										// backgroundImage: `url(${props.videoStreaming.src})`,
+									}}>
+										{asciiText}
+									</pre>
+								</div>
+							);
 						default:
 							return (<p>ERROR</p>);
 					}
