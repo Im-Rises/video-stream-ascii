@@ -86,8 +86,8 @@ export const VideoAscii = (props: Props) => {
 					break;
 				case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
-					preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;
-					// preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;
+					// preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;
+					preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;
 					break;
 				default:
 					break;
@@ -152,6 +152,7 @@ export const VideoAscii = (props: Props) => {
 										backgroundClip: 'text',
 										WebkitBackgroundClip: 'text',
 										color: 'transparent',
+										transform: `scaleX(${flipY ? -1 : 1})`,
 										// backgroundImage: `url(${props.videoStreaming.src})`,
 									}}>
 										{asciiText}
