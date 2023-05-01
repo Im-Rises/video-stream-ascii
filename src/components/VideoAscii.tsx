@@ -63,17 +63,7 @@ export const VideoAscii = (props: Props) => {
 		const updateAscii = () => {
 			// Draw video to canvas buffer
 
-			if (flipY) {
-				context.save();
-				context.translate(canvas.width, 0);
-				context.scale(-1, 1);
-			}
-
 			context.drawImage(props.videoStreaming, 0, 0, canvas.width, canvas.height);
-
-			if (flipY) {
-				context.restore();
-			}
 
 			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
@@ -86,8 +76,8 @@ export const VideoAscii = (props: Props) => {
 					break;
 				case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
-					// preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;
-					preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;
+					// preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;// Use the resized canvas as background image
+					preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;// Use the original image as background image
 					break;
 				default:
 					break;
@@ -125,6 +115,7 @@ export const VideoAscii = (props: Props) => {
 									padding: 0,
 									margin: 0,
 									letterSpacing: `${lineSpacing}em`,
+									transform: `scaleX(${flipY ? -1 : 1})`,
 								}}>
 									{asciiText}
 								</pre>
@@ -138,6 +129,7 @@ export const VideoAscii = (props: Props) => {
 										padding: 0,
 										margin: 0,
 										letterSpacing: `${lineSpacing}em`,
+										transform: `scaleX(${flipY ? -1 : 1})`,
 									}}
 								></pre>
 							);
