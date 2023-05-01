@@ -19,7 +19,7 @@ You can check them at those links:
 
 ### 🚀🚀 [Video Ascii Webcam](https://im-rises.github.io/video-stream-ascii-webcam/) 🚀🚀
 
-### 🚀🚀 [Video Ascii Player](https://im-rises.github.io/video-stream-ascii-reader/) 🚀🚀
+### 🚀🚀 [Video Ascii Player](https://im-rises.github.io/video-stream-ascii-player/) 🚀🚀
 
 The example is using the webcam of your device, but you can use any video stream, like a video file or a video stream.
 
