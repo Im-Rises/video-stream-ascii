@@ -129,11 +129,15 @@ const VideoAscii = (props: Props) => {
 							);
 						case ArtTypeEnum.ASCII_COLOR_IMAGE:
 							return (
-								<div className={'clip-path-container'}>
+								<div style={{width: '100%', height: '100%'}}>
 									<pre ref={preTagRef} style={{
 										padding: 0,
 										margin: 0,
 										letterSpacing: `${lineSpacing}em`,
+										backgroundSize: 'cover',
+										backgroundClip: 'text',
+										WebkitBackgroundClip: 'text',
+										color: 'transparent',
 										// backgroundImage: `url(${props.videoStreaming.src})`,
 									}}>
 										{asciiText}
