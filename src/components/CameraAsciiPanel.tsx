@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import VideoAscii from './VideoAscii';
+import VideoAscii, {ArtTypeEnum} from './VideoAscii';
 import Webcam from 'react-webcam';
 import './CameraAsciiPanel.scss';
 
@@ -7,7 +7,7 @@ const CameraAsciiPanel = () => {
 	// Define the ascii art chars per line
 	const charsPerLine = 100;
 	const [charsPerColumn, setCharsPerColumn] = useState(0);
-	const [useColor, setUseColor] = useState(false);
+	// const [useColor, setUseColor] = useState(false);
 	const preTagRef = useRef<HTMLPreElement>(null);
 
 	// Define the hook state for the webcam
@@ -72,11 +72,11 @@ const CameraAsciiPanel = () => {
 				<button className={'Button-Copy-Clipboard'}
 					onClick={async () => copyToClipboard(preTagRef.current!.innerText)}>Copy
 				</button>
-				<button className={'Button-Change-Color'}
-					onClick={() => {
-						setUseColor(!useColor);
-					}}>Color
-				</button>
+				{/* <button className={'Button-Change-Color'} */}
+				{/*	onClick={() => { */}
+				{/*		setUseColor(!useColor); */}
+				{/*	}}>Color */}
+				{/* </button> */}
 			</div>
 			<div>
 				<Webcam ref={videoRef}
@@ -87,7 +87,7 @@ const CameraAsciiPanel = () => {
 					<VideoAscii
 						videoStreaming={videoRef.current!.video!}
 						parentRef={parentRef}
-						useColor={useColor}
+						artType={ArtTypeEnum.ASCII_COLOR_IMAGE}
 						charsPerLine={charsPerLine}
 						charsPerColumn={charsPerColumn}
 						fontColor={'white'}
