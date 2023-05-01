@@ -10,11 +10,11 @@
 
 ## Description
 
-This is a simple web package that converts a video stream into ASCII art.
+This is a simple web package that converts a video stream into ASCII art for React.
 
 ## 🚀🚀🚀 [The package is published on npm](https://www.npmjs.com/package/video-stream-ascii) 🚀🚀
 
-It works on desktop and mobile as well, there is two demos, one for the camera and one for a video file.
+It works on desktop and mobile as well, there is two demos, one for the camera and one for video files input.
 You can check them at those links:
 
 ### 🚀🚀 [Video Ascii Webcam](https://im-rises.github.io/video-stream-ascii-webcam/) 🚀🚀
@@ -49,13 +49,13 @@ To use the package, you need to import it into your project:
 import {VideoStreamAscii} from "video-stream-ascii";
 ```
 
-Then you can create use the Component:
+Then you can create use the Component like this in Typescript/JavaScript:
 
 ```js
 <VideoAscii
     videoStreaming={videoRef.current!.video!}
     parentRef={parentRef}
-    useColor={true}
+    artType={ArtTypeEnum.ASCII_COLOR_BG_IMAGE}
     charsPerLine={charsPerLine}
     charsPerColumn={charsPerColumn}
     fontColor={'white'}
@@ -69,7 +69,7 @@ You can also pass a pre tag reference to the component, so it can be used to get
 <VideoAscii
     videoStreaming={videoRef.current!.video!}
     parentRef={parentRef}
-    useColor={true}
+    artType={ArtTypeEnum.ASCII_COLOR_BG_IMAGE}
     charsPerLine={charsPerLine}
     charsPerColumn={charsPerColumn}
     fontColor={'white'}
@@ -82,7 +82,7 @@ To use the component, you need to pass the following props:
 
 - `videoStreaming` - The video stream from the camera.
 - `parentRef` - The reference of the parent element, to fit the ascii art in it.
-- `useColor` - If the ascii art should use color or not.
+- `artType` - The type of the ascii art, you can choose between `ASCII`, `ASCII_COLOR` and `ASCII_COLOR_BG_IMAGE`.
 - `charsPerLine` - The number of characters per line.
 - `charsPerColumn` - The number of characters per column.
 - `fontColor` - The color of the font.
@@ -96,16 +96,18 @@ element like a `div`, you can check the example to see how to use it.
 > Be careful when using this package, the camera must be working before enabling the video stream.
 > If you want to set the ascii art with a correct aspect ratio, follow the examples (webcam or video player).
 
-> **Warning**  
-> Be aware that printing ascii art with the color option enabled can be very slow, so it is recommended to not define a
-> big resolution.
+The `artType` is used to choose the type of the ascii art, you can choose between `ASCII`, `ASCII_COLOR`
+and `ASCII_COLOR_BG_IMAGE`.
 
-## Dependencies
+- `ASCII` - The ascii art will be defined only by two colors the font color and the background color. (which you can set
+  with the props `fontColor` and `backgroundColor`).
+- `ASCII_COLOR` - The ascii art will be printed with each character having the color of the pixel it represents (it is
+  an extensive mode, you should use the `ASCII_COLOR_BG_IMAGE` mode instead).
+- `ASCII_COLOR_BG_IMAGE` - The ascii art will be printed with color using the original image as background for the color
+  of the characters, you should use this mode if you want good performance instead of the `ASCII_COLOR` mode.
 
-The project is using React, TypeScript, JavaScript, TensorFlow, SCSS, CSS, etc...
-
-It uses the react-webcam library to get the video stream from the webcam.  
-<https://www.npmjs.com/package/react-webcam>
+> **Note**
+> Be sure to import the enum `ArtTypeEnum` from the package, to use it in your code.
 
 ## Code style
 
@@ -140,15 +142,6 @@ GitHub gh-pages:
 
 react-webcam:  
 <https://www.npmjs.com/package/react-webcam>
-
-<!--
-If not publishing anymore, replace the following line:
-    "deploy": "gh-pages -d build"
-with 
-    "deploy": "gh-pages-clean gh-pages -d build"
-then deploy one time and replace it with the original line again
-and deploy another time
--->
 
 ## Links
 

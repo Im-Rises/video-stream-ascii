@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
-import VideoAscii, {ArtTypeEnum} from './VideoAscii';
 import Webcam from 'react-webcam';
 import './CameraAsciiPanel.scss';
+import {VideoAscii, ArtTypeEnum} from './VideoAscii';
 
 const CameraAsciiPanel = () => {
 	// Define the ascii art chars per line
@@ -87,7 +87,7 @@ const CameraAsciiPanel = () => {
 					<VideoAscii
 						videoStreaming={videoRef.current!.video!}
 						parentRef={parentRef}
-						artType={ArtTypeEnum.ASCII_COLOR_IMAGE}
+						artType={ArtTypeEnum.ASCII_COLOR_BG_IMAGE}
 						charsPerLine={charsPerLine}
 						charsPerColumn={charsPerColumn}
 						fontColor={'white'}

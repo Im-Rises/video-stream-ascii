@@ -7,10 +7,10 @@ import {
 	lineSpacing, videoImgToUrl,
 } from '../canvas-handler/video-canvas-ascii';
 
-enum ArtTypeEnum {
+export enum ArtTypeEnum {
 	ASCII = 'ASCII',
 	ASCII_COLOR = 'ASCII_COLOR',
-	ASCII_COLOR_IMAGE = 'ASCII_COLOR_IMAGE',
+	ASCII_COLOR_BG_IMAGE = 'ASCII_COLOR_BG_IMAGE',
 }
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
 	preTagRef?: React.RefObject<HTMLPreElement>;
 };
 
-const VideoAscii = (props: Props) => {
+export const VideoAscii = (props: Props) => {
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
 	const preTagRef = props.preTagRef ?? useRef<HTMLPreElement>(null);
 
@@ -70,7 +70,7 @@ const VideoAscii = (props: Props) => {
 				case ArtTypeEnum.ASCII_COLOR:
 					setAsciiText(getAsciiFromImageColor(imageData, asciiChars));
 					break;
-				case ArtTypeEnum.ASCII_COLOR_IMAGE:
+				case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
 					preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;
 					// preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;
@@ -127,7 +127,7 @@ const VideoAscii = (props: Props) => {
 									}}
 								></pre>
 							);
-						case ArtTypeEnum.ASCII_COLOR_IMAGE:
+						case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 							return (
 								<div style={{width: '100%', height: '100%'}}>
 									<pre ref={preTagRef} style={{
@@ -152,7 +152,3 @@ const VideoAscii = (props: Props) => {
 		</div>
 	);
 };
-
-export default VideoAscii;
-
-export {ArtTypeEnum};
