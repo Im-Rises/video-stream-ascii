@@ -72,11 +72,6 @@ const CameraAsciiPanel = () => {
 				<button className={'Button-Copy-Clipboard'}
 					onClick={async () => copyToClipboard(preTagRef.current!.innerText)}>Copy
 				</button>
-				{/* <button className={'Button-Change-Color'} */}
-				{/*	onClick={() => { */}
-				{/*		setUseColor(!useColor); */}
-				{/*	}}>Color */}
-				{/* </button> */}
 			</div>
 			<div>
 				<Webcam ref={videoRef}
@@ -92,6 +87,7 @@ const CameraAsciiPanel = () => {
 						charsPerColumn={charsPerColumn}
 						fontColor={'white'}
 						backgroundColor={'black'}
+						flipY={true}
 						preTagRef={preTagRef}
 					/>
 				) : (

@@ -26,6 +26,14 @@ The source code of the examples is available on GitHub:
 - [Video Ascii Webcam](https://github.com/Im-Rises/video-stream-ascii-webcam)
 - [Video Ascii Player](https://github.com/Im-Rises/video-stream-ascii-player)
 
+## Image to ASCII art version
+
+I also made a version for images, you can check it at this link:  
+<https://github.com/Im-Rises/image-ascii-art>
+
+You can check the demo at this link:  
+<https://im-rises.github.io/image-ascii-art-website>
+
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/59691442/209728294-e10691da-eb4f-43e6-880c-522417da79c6.png" alt="screenshot" style="width: 100%;">
@@ -77,6 +85,7 @@ You can also pass a pre tag reference to the component, so it can be used to get
     charsPerColumn={charsPerColumn}
     fontColor={'white'}
     backgroundColor={'black'}
+    flipY={true}
     preTagRef={preTagRef}
 />
 ```
@@ -90,6 +99,7 @@ To use the component, you need to pass the following props:
 - `charsPerColumn` - The number of characters per column.
 - `fontColor` - The color of the font.
 - `backgroundColor` - The color of the background.
+- `flipY` - Flip the ascii art vertically.
 - `preTagRef` - The reference of the pre tag, to get the ascii art text.
 
 The `parentRef` is used to fit the ascii art in the parent element, so you need to pass the reference of the parent
