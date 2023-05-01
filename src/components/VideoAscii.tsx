@@ -21,12 +21,14 @@ type Props = {
 	fontColor: string;
 	backgroundColor: string;
 	artType: ArtTypeEnum;
+	flipY?: boolean;
 	preTagRef?: React.RefObject<HTMLPreElement>;
 };
 
 export const VideoAscii = (props: Props) => {
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
 	const preTagRef = props.preTagRef ?? useRef<HTMLPreElement>(null);
+	const flipY = props.flipY ?? false;
 
 	const [asciiText, setAsciiText] = useState('');
 
@@ -60,7 +62,19 @@ export const VideoAscii = (props: Props) => {
 		// Refresh the ascii art text every frame
 		const updateAscii = () => {
 			// Draw video to canvas buffer
+
+			if (flipY) {
+				context.save();
+				context.translate(canvas.width, 0);
+				context.scale(-1, 1);
+			}
+
 			context.drawImage(props.videoStreaming, 0, 0, canvas.width, canvas.height);
+
+			if (flipY) {
+				context.restore();
+			}
+
 			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
 			switch (props.artType) {
