@@ -21,7 +21,10 @@ You can check them at those links:
 
 ### 🚀🚀 [Video Ascii Player](https://im-rises.github.io/video-stream-ascii-player/) 🚀🚀
 
-The example is using the webcam of your device, but you can use any video stream, like a video file or a video stream.
+The source code of the examples is available on GitHub:
+
+- [Video Ascii Webcam](https://github.com/Im-Rises/video-stream-ascii-webcam)
+- [Video Ascii Player](https://github.com/Im-Rises/video-stream-ascii-player)
 
 ## Screenshots
 
