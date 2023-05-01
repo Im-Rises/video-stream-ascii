@@ -1,11 +1,10 @@
 import React, {useRef, useEffect, useState} from 'react';
-import './VideoAscii.scss';
 import {asciiChars} from '../constants/pixel-ascii';
 import {
 	calculateAndSetFontSize, canvasImgToUrl,
 	getAsciiFromImage,
 	getAsciiFromImageColor,
-	lineSpacing,
+	lineSpacing, videoImgToUrl,
 } from '../canvas-handler/video-canvas-ascii';
 
 enum ArtTypeEnum {
@@ -74,6 +73,7 @@ const VideoAscii = (props: Props) => {
 				case ArtTypeEnum.ASCII_COLOR_IMAGE:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
 					preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;
+					// preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;
 					break;
 				default:
 					break;
