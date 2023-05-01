@@ -2,7 +2,7 @@ import React, {useRef, useEffect, useState} from 'react';
 import './VideoAscii.scss';
 import {asciiChars} from '../constants/pixel-ascii';
 import {
-	calculateAndSetFontSize,
+	calculateAndSetFontSize, canvasImgToUrl,
 	getAsciiFromImage,
 	getAsciiFromImageColor,
 	lineSpacing,
@@ -21,7 +21,6 @@ type Props = {
 	charsPerColumn: number;
 	fontColor: string;
 	backgroundColor: string;
-	// useColor: boolean;
 	artType: ArtTypeEnum;
 	preTagRef?: React.RefObject<HTMLPreElement>;
 };
@@ -49,7 +48,7 @@ const VideoAscii = (props: Props) => {
 		return () => {
 			resizeObserver.disconnect();
 		};
-	}, [props.charsPerLine, props.charsPerColumn]);
+	}, [props.charsPerLine, props.charsPerColumn, props.artType]);
 
 	// UseEffect to draw the video to the canvas buffer and get the ascii from the canvas buffer on every frame
 	useEffect(() => {
@@ -65,14 +64,6 @@ const VideoAscii = (props: Props) => {
 			context.drawImage(props.videoStreaming, 0, 0, canvas.width, canvas.height);
 			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-			// // Get ascii from canvas buffer and set it to the text tag
-			// if (props.useColor) {
-			// 	const text = getAsciiFromImageColor(imageData, asciiChars);
-			// 	setAsciiText(text);
-			// } else {
-			// 	const text = getAsciiFromImage(imageData, asciiChars);
-			// 	setAsciiText(text);
-			// }
 			switch (props.artType) {
 				case ArtTypeEnum.ASCII:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
@@ -82,6 +73,7 @@ const VideoAscii = (props: Props) => {
 					break;
 				case ArtTypeEnum.ASCII_COLOR_IMAGE:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
+					preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;
 					break;
 				default:
 					break;

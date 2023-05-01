@@ -106,4 +106,19 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	console.log(`Setting font size to ${fontSize}`);
 };
 
-export {getAsciiFromImage, calculateAndSetFontSize, getAsciiFromImageColor, lineSpacing};
+const canvasImgToUrl = (canvas: HTMLCanvasElement) => {
+	const img = new Image();
+	img.src = canvas.toDataURL();
+	return img;
+};
+
+const videoImgToUrl = (video: HTMLVideoElement) => {
+	const canvas = document.createElement('canvas');
+	canvas.width = video.videoWidth;
+	canvas.height = video.videoHeight;
+	const context = canvas.getContext('2d')!;
+	context.drawImage(video, 0, 0, canvas.width, canvas.height);
+	return canvasImgToUrl(canvas);
+};
+
+export {getAsciiFromImage, calculateAndSetFontSize, getAsciiFromImageColor, lineSpacing, canvasImgToUrl, videoImgToUrl};
