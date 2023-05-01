@@ -115,6 +115,7 @@ export const VideoAscii = (props: Props) => {
 									padding: 0,
 									margin: 0,
 									letterSpacing: `${lineSpacing}em`,
+									transform: `scaleX(${flipY ? -1 : 1})`,
 								}}>
 									{asciiText}
 								</pre>
@@ -128,6 +129,7 @@ export const VideoAscii = (props: Props) => {
 										padding: 0,
 										margin: 0,
 										letterSpacing: `${lineSpacing}em`,
+										transform: `scaleX(${flipY ? -1 : 1})`,
 									}}
 								></pre>
 							);
