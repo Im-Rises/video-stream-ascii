@@ -86,6 +86,7 @@ You can also pass a pre tag reference to the component, so it can be used to get
     fontColor={'white'}
     backgroundColor={'black'}
     flipY={true}
+    frameRate={frameRate}
     preTagRef={preTagRef}
 />
 ```
@@ -100,6 +101,7 @@ To use the component, you need to pass the following props:
 - `fontColor` - The color of the font.
 - `backgroundColor` - The color of the background.
 - `flipY` - Flip the ascii art vertically.
+- `frameRate` - The frame rate of the video stream.
 - `preTagRef` - The reference of the pre tag, to get the ascii art text.
 
 The `parentRef` is used to fit the ascii art in the parent element, so you need to pass the reference of the parent

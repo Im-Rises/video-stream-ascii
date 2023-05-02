@@ -23,12 +23,14 @@ type Props = {
 	artType: ArtTypeEnum;
 	flipY?: boolean;
 	preTagRef?: React.RefObject<HTMLPreElement>;
+	frameRate?: number;
 };
 
 export const VideoAscii = (props: Props) => {
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
 	const preTagRef = props.preTagRef ?? useRef<HTMLPreElement>(null);
 	const flipY = props.flipY ?? false;
+	const frameRate = props.frameRate ?? 30;
 
 	const [asciiText, setAsciiText] = useState('');
 
@@ -56,8 +58,8 @@ export const VideoAscii = (props: Props) => {
 		const canvas = canvasVideoBufferRef.current!;
 		const context = canvas.getContext('2d', {willReadFrequently: true})!;
 
-		// Animation frame id
-		let animationFrameId: number;
+		// // Animation frame id
+		// let animationFrameId: number;
 
 		// Refresh the ascii art text every frame
 		const updateAscii = () => {
@@ -76,23 +78,31 @@ export const VideoAscii = (props: Props) => {
 					break;
 				case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
-					// preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;// Use the resized canvas as background image
-					preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;// Use the original image as background image
+					preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;// Use the resized canvas as background image
+					// preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;// Use the original image as background image
 					break;
 				default:
 					break;
 			}
 
-			// Schedule the next frame
-			animationFrameId = requestAnimationFrame(updateAscii);
+			// // Schedule the next frame
+			// animationFrameId = requestAnimationFrame(updateAscii);
 		};
 
-		// Start the animation loop when the component mounts
-		updateAscii();
+		const intervalId = setInterval(() => {
+			updateAscii();
+		}, 1000 / frameRate);
 
-		// Stop the animation loop when the component unmounts
+		// // Start the animation loop when the component mounts
+		// updateAscii();
+		//
+		// // Stop the animation loop when the component unmounts
+		// return () => {
+		// 	cancelAnimationFrame(animationFrameId);
+		// };
+
 		return () => {
-			cancelAnimationFrame(animationFrameId);
+			clearInterval(intervalId);
 		};
 	}, [props.videoStreaming, props.artType]);
 
