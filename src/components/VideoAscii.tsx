@@ -78,8 +78,8 @@ export const VideoAscii = (props: Props) => {
 					break;
 				case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
-					// preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;// Use the resized canvas as background image
-					preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;// Use the original image as background image
+					preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;// Use the resized canvas as background image
+					// preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;// Use the original image as background image
 					break;
 				default:
 					break;
