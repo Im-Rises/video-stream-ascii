@@ -94,6 +94,7 @@ const CameraAsciiPanel = () => {
 						fontColor={'white'}
 						backgroundColor={'black'}
 						flipY={true}
+						frameRate={30}
 						preTagRef={preTagRef}
 					/>
 				) : (
