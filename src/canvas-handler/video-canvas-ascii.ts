@@ -46,8 +46,13 @@ const getAsciiFromImageColor = (imageData: ImageData, asciiChars: string) => {
 
 const incrementFontValue = 0.1; // The value to increment the font size with
 const initFontSize = 1.0;// Init font size for calculation (a value to small will make the text not visible on some devices)
-const lineSpacing = 0.2;// Set the line spacing for equal distance between the lines and the letters (use em to fit the font size)
+const lineSpacing = 0.25;// Set the line spacing for equal distance between the lines and the letters (use em to fit the font size)
 const lineHeight = 0.8;// Set the line height for equal distance between the lines and the letters (use em to fit the font size)
+
+// eslint-disable-next-line no-warning-comments
+// TODO: The font size function calculateAndSetFontSize has issues with a line height below 1.0
+//  When using a value below 1.0 the text will be cut off at the bottom
+
 const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, charsPerColumn: number, parentWidth: number, parentHeight: number) => {
 	// Create one string with, one line of text filled with W
 	const filledStringLine = String('W').repeat(charsPerLine);
@@ -69,7 +74,7 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	// preElementBuffer.style.width = '0%';
 	// preElementBuffer.style.height = '0%';
 	// preElementBuffer.style.opacity = '0';
-	preElementBuffer.style.position = 'absolute';// Setting the position to absolute will in each case set the height
+	preElementBuffer.style.position = 'absolute';
 
 	// Filled the pre element with `filledStringLine` for each line
 	for (let i = 0; i < charsPerColumn; i++) {

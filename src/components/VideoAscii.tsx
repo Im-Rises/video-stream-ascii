@@ -117,6 +117,7 @@ export const VideoAscii = (props: Props) => {
 									letterSpacing: `${lineSpacing}em`,
 									lineHeight: `${lineHeight}em`,
 									transform: `scaleX(${flipY ? -1 : 1})`,
+									overflow: 'hidden',
 								}}>
 									{asciiText}
 								</pre>
@@ -132,6 +133,7 @@ export const VideoAscii = (props: Props) => {
 										letterSpacing: `${lineSpacing}em`,
 										lineHeight: `${lineHeight}em`,
 										transform: `scaleX(${flipY ? -1 : 1})`,
+										overflow: 'hidden',
 									}}
 								></pre>
 							);
@@ -147,6 +149,7 @@ export const VideoAscii = (props: Props) => {
 									WebkitBackgroundClip: 'text',
 									color: 'transparent',
 									transform: `scaleX(${flipY ? -1 : 1})`,
+									overflow: 'hidden',
 									// backgroundImage: `url(${props.videoStreaming.src})`,
 								}}>
 									{asciiText}
