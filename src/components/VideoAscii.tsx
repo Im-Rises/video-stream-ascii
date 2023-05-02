@@ -3,7 +3,7 @@ import {asciiChars} from '../constants/pixel-ascii';
 import {
 	calculateAndSetFontSize, canvasImgToUrl,
 	getAsciiFromImage,
-	getAsciiFromImageColor,
+	getAsciiFromImageColor, lineHeight,
 	lineSpacing, videoImgToUrl,
 } from '../canvas-handler/video-canvas-ascii';
 
@@ -115,7 +115,9 @@ export const VideoAscii = (props: Props) => {
 									padding: 0,
 									margin: 0,
 									letterSpacing: `${lineSpacing}em`,
+									lineHeight: `${lineHeight}em`,
 									transform: `scaleX(${flipY ? -1 : 1})`,
+									overflow: 'hidden',
 								}}>
 									{asciiText}
 								</pre>
@@ -129,27 +131,29 @@ export const VideoAscii = (props: Props) => {
 										padding: 0,
 										margin: 0,
 										letterSpacing: `${lineSpacing}em`,
+										lineHeight: `${lineHeight}em`,
 										transform: `scaleX(${flipY ? -1 : 1})`,
+										overflow: 'hidden',
 									}}
 								></pre>
 							);
 						case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 							return (
-								<div style={{width: '100%', height: '100%'}}>
-									<pre ref={preTagRef} style={{
-										padding: 0,
-										margin: 0,
-										letterSpacing: `${lineSpacing}em`,
-										backgroundSize: 'cover',
-										backgroundClip: 'text',
-										WebkitBackgroundClip: 'text',
-										color: 'transparent',
-										transform: `scaleX(${flipY ? -1 : 1})`,
-										// backgroundImage: `url(${props.videoStreaming.src})`,
-									}}>
-										{asciiText}
-									</pre>
-								</div>
+								<pre ref={preTagRef} style={{
+									padding: 0,
+									margin: 0,
+									letterSpacing: `${lineSpacing}em`,
+									lineHeight: `${lineHeight}em`,
+									backgroundSize: '100% 100%',
+									backgroundClip: 'text',
+									WebkitBackgroundClip: 'text',
+									color: 'transparent',
+									transform: `scaleX(${flipY ? -1 : 1})`,
+									overflow: 'hidden',
+									// backgroundImage: `url(${props.videoStreaming.src})`,
+								}}>
+									{asciiText}
+								</pre>
 							);
 						default:
 							return (<p>ERROR</p>);
