@@ -68,12 +68,12 @@ const CameraAsciiPanel = () => {
 	// Show the webcam only when it is ready, otherwise show a loading message
 	return (
 		<div className={'Camera-Ascii-Panel'} data-testid='camera-ascii-test' ref={parentRef}>
-			<div>
+			<>
 				<button className={'Button-Copy-Clipboard'}
 					onClick={async () => copyToClipboard(preTagRef.current!.innerText)}>Copy
 				</button>
-			</div>
-			<div>
+			</>
+			<>
 				<Webcam ref={videoRef}
 					style={{width: 0, height: 0, position: 'absolute', top: 0, left: 0}}
 					onUserMedia={handleUserMedia}
@@ -92,7 +92,7 @@ const CameraAsciiPanel = () => {
 					/>
 				) : (
 					<p className={'Camera-Ascii-Waiting'}>Camera not ready.<br/>Please wait...</p>)}
-			</div>
+			</>
 		</div>
 	);
 };
