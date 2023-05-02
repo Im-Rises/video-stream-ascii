@@ -135,21 +135,19 @@ export const VideoAscii = (props: Props) => {
 							);
 						case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 							return (
-								<div style={{width: '100%', height: '100%'}}>
-									<pre ref={preTagRef} style={{
-										padding: 0,
-										margin: 0,
-										letterSpacing: `${lineSpacing}em`,
-										backgroundSize: 'cover',
-										backgroundClip: 'text',
-										WebkitBackgroundClip: 'text',
-										color: 'transparent',
-										transform: `scaleX(${flipY ? -1 : 1})`,
-										// backgroundImage: `url(${props.videoStreaming.src})`,
-									}}>
-										{asciiText}
-									</pre>
-								</div>
+								<pre ref={preTagRef} style={{
+									padding: 0,
+									margin: 0,
+									letterSpacing: `${lineSpacing}em`,
+									backgroundSize: 'cover',
+									backgroundClip: 'text',
+									WebkitBackgroundClip: 'text',
+									color: 'transparent',
+									transform: `scaleX(${flipY ? -1 : 1})`,
+									// backgroundImage: `url(${props.videoStreaming.src})`,
+								}}>
+									{asciiText}
+								</pre>
 							);
 						default:
 							return (<p>ERROR</p>);
