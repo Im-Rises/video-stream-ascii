@@ -142,7 +142,7 @@ export const VideoAscii = (props: Props) => {
 									margin: 0,
 									letterSpacing: `${lineSpacing}em`,
 									lineHeight: `${lineHeight}em`,
-									backgroundSize: 'cover',
+									backgroundSize: '100% 100%',
 									backgroundClip: 'text',
 									WebkitBackgroundClip: 'text',
 									color: 'transparent',

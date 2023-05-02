@@ -46,8 +46,8 @@ const getAsciiFromImageColor = (imageData: ImageData, asciiChars: string) => {
 
 const incrementFontValue = 0.1; // The value to increment the font size with
 const initFontSize = 1.0;// Init font size for calculation (a value to small will make the text not visible on some devices)
-const lineSpacing = 0.4;// Set the line spacing for equal distance between the lines and the letters (use em to fit the font size)
-const lineHeight = 1.0;// Set the line height for equal distance between the lines and the letters (use em to fit the font size)
+const lineSpacing = 0.2;// Set the line spacing for equal distance between the lines and the letters (use em to fit the font size)
+const lineHeight = 0.8;// Set the line height for equal distance between the lines and the letters (use em to fit the font size)
 const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, charsPerColumn: number, parentWidth: number, parentHeight: number) => {
 	// Create one string with, one line of text filled with W
 	const filledStringLine = String('W').repeat(charsPerLine);
