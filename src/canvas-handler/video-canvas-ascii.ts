@@ -104,7 +104,10 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	pretag.style.fontSize = `${fontSize}px`;
 
 	// Debug
+	console.log('calculateAndSetFontSize');
 	console.log(`Setting font size to ${fontSize}`);
+	console.log(`parentHeight: ${parentHeight}, preHeight: ${preHeight}`);
+	console.log(`parentWidth: ${parentWidth}, preWidth: ${preWidth}`);
 };
 
 const canvasImgToUrl = (canvas: HTMLCanvasElement) => {
