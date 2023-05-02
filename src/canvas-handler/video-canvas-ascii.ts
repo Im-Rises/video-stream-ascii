@@ -47,7 +47,7 @@ const getAsciiFromImageColor = (imageData: ImageData, asciiChars: string) => {
 const incrementFontValue = 0.1; // The value to increment the font size with
 const initFontSize = 1.0;// Init font size for calculation (a value to small will make the text not visible on some devices)
 const lineSpacing = 0.6;// Set the line spacing for equal distance between the lines and the letters (use em to fit the font size)
-
+const lineHeight = 1.0;// Set the line height for equal distance between the lines and the letters (use em to fit the font size)
 const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, charsPerColumn: number, parentWidth: number, parentHeight: number) => {
 	// Create one string with, one line of text filled with W
 	const filledStringLine = String('W').repeat(charsPerLine);
@@ -60,6 +60,7 @@ const calculateAndSetFontSize = (pretag: HTMLPreElement, charsPerLine: number, c
 	preElementBuffer.style.fontSize = `${fontSize}px`;
 	preElementBuffer.style.fontFamily = 'monospace';
 	preElementBuffer.style.letterSpacing = `${lineSpacing}em`;
+	preElementBuffer.style.lineHeight = `${lineHeight}em`;
 
 	// Hide the pre buffer element (display: none, or visibility: hidden, or opacity: 0, or width: 0, or height: 0)
 	// preElementBuffer.style.display = 'none';// Setting to none will crash the browser as it becomes null or the height is 0
@@ -121,4 +122,12 @@ const videoImgToUrl = (video: HTMLVideoElement) => {
 	return canvasImgToUrl(canvas);
 };
 
-export {getAsciiFromImage, calculateAndSetFontSize, getAsciiFromImageColor, lineSpacing, canvasImgToUrl, videoImgToUrl};
+export {
+	getAsciiFromImage,
+	calculateAndSetFontSize,
+	getAsciiFromImageColor,
+	lineSpacing,
+	canvasImgToUrl,
+	videoImgToUrl,
+	lineHeight,
+};

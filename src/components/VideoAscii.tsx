@@ -3,7 +3,7 @@ import {asciiChars} from '../constants/pixel-ascii';
 import {
 	calculateAndSetFontSize, canvasImgToUrl,
 	getAsciiFromImage,
-	getAsciiFromImageColor,
+	getAsciiFromImageColor, lineHeight,
 	lineSpacing, videoImgToUrl,
 } from '../canvas-handler/video-canvas-ascii';
 
@@ -139,6 +139,7 @@ export const VideoAscii = (props: Props) => {
 									padding: 0,
 									margin: 0,
 									letterSpacing: `${lineSpacing}em`,
+									lineHeight: `${lineHeight}em`,
 									backgroundSize: 'cover',
 									backgroundClip: 'text',
 									WebkitBackgroundClip: 'text',
