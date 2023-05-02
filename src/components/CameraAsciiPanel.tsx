@@ -82,7 +82,7 @@ const CameraAsciiPanel = () => {
 					<VideoAscii
 						videoStreaming={videoRef.current!.video!}
 						parentRef={parentRef}
-						artType={ArtTypeEnum.ASCII_COLOR_BG_IMAGE}
+						artType={ArtTypeEnum.ASCII}
 						charsPerLine={charsPerLine}
 						charsPerColumn={charsPerColumn}
 						fontColor={'white'}

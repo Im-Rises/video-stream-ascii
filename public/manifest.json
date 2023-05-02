@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Video Stream Ascii",
+  "name": "Stream a video to ascii art",
   "icons": [
     {
-      "src": "face-logo.ico",
+      "src": "logo.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "face-logo192.png",
+      "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "face-logo512.png",
+      "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
