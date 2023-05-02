@@ -139,21 +139,31 @@ export const VideoAscii = (props: Props) => {
 							);
 						case ArtTypeEnum.ASCII_COLOR_BG_IMAGE:
 							return (
-								<pre ref={preTagRef} style={{
-									padding: 0,
-									margin: 0,
-									letterSpacing: `${lineSpacing}em`,
-									lineHeight: `${lineHeight}em`,
-									backgroundSize: '100% 100%',
-									backgroundClip: 'text',
-									WebkitBackgroundClip: 'text',
-									color: 'transparent',
-									transform: `scaleX(${flipY ? -1 : 1})`,
-									overflow: 'hidden',
-									// backgroundImage: `url(${props.videoStreaming.src})`,
-								}}>
-									{asciiText}
-								</pre>
+								<span>
+									{
+										/*
+                                        This span is important for the browser, it helps differentiate
+                                        the other pre tag from the one with the background image when
+                                        toggling the artType. If the pre tag is not present, the browser
+                                        might think that the change of pre tag is an update not a replace
+                                         */
+									}
+									<pre ref={preTagRef} style={{
+										padding: 0,
+										margin: 0,
+										letterSpacing: `${lineSpacing}em`,
+										lineHeight: `${lineHeight}em`,
+										backgroundSize: '100% 100%',
+										backgroundClip: 'text',
+										WebkitBackgroundClip: 'text',
+										color: 'transparent',
+										transform: `scaleX(${flipY ? -1 : 1})`,
+										overflow: 'hidden',
+										// backgroundImage: `url(${props.videoStreaming.src})`,
+									}}>
+										{asciiText}
+									</pre>
+								</span>
 							);
 						default:
 							return (<p>ERROR</p>);
