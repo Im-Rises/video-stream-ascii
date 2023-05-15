@@ -23,14 +23,14 @@ type Props = {
 	artType: ArtTypeEnum;
 	flipY?: boolean;
 	preTagRef?: React.RefObject<HTMLPreElement>;
-	frameRate?: number;
+	// frameRate?: number;
 };
 
 export const VideoAscii = (props: Props) => {
 	const canvasVideoBufferRef = useRef<HTMLCanvasElement>(null);
 	const preTagRef = props.preTagRef ?? useRef<HTMLPreElement>(null);
 	const flipY = props.flipY ?? false;
-	const frameRate = props.frameRate ?? 30;
+	// const frameRate = props.frameRate ?? 30;
 
 	const [asciiText, setAsciiText] = useState('');
 
@@ -93,6 +93,10 @@ export const VideoAscii = (props: Props) => {
 		// 	updateAscii();
 		// }, 1000 / frameRate);
 
+		// return () => {
+		// 	clearInterval(intervalId);
+		// };
+
 		// Start the animation loop when the component mounts
 		updateAscii();
 
@@ -100,10 +104,6 @@ export const VideoAscii = (props: Props) => {
 		return () => {
 			cancelAnimationFrame(animationFrameId);
 		};
-
-		// return () => {
-		// 	clearInterval(intervalId);
-		// };
 	}, [props.videoStreaming, props.artType]);
 
 	return (
