@@ -58,8 +58,8 @@ export const VideoAscii = (props: Props) => {
 		const canvas = canvasVideoBufferRef.current!;
 		const context = canvas.getContext('2d', {willReadFrequently: true})!;
 
-		// // Animation frame id
-		// let animationFrameId: number;
+		// Animation frame id
+		let animationFrameId: number;
 
 		// Refresh the ascii art text every frame
 		const updateAscii = () => {
@@ -85,25 +85,25 @@ export const VideoAscii = (props: Props) => {
 					break;
 			}
 
-			// // Schedule the next frame
-			// animationFrameId = requestAnimationFrame(updateAscii);
+			// Schedule the next frame
+			animationFrameId = requestAnimationFrame(updateAscii);
 		};
 
-		const intervalId = setInterval(() => {
-			updateAscii();
-		}, 1000 / frameRate);
+		// const intervalId = setInterval(() => {
+		// 	updateAscii();
+		// }, 1000 / frameRate);
 
-		// // Start the animation loop when the component mounts
-		// updateAscii();
-		//
-		// // Stop the animation loop when the component unmounts
-		// return () => {
-		// 	cancelAnimationFrame(animationFrameId);
-		// };
+		// Start the animation loop when the component mounts
+		updateAscii();
 
+		// Stop the animation loop when the component unmounts
 		return () => {
-			clearInterval(intervalId);
+			cancelAnimationFrame(animationFrameId);
 		};
+
+		// return () => {
+		// 	clearInterval(intervalId);
+		// };
 	}, [props.videoStreaming, props.artType]);
 
 	return (
