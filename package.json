@@ -1,6 +1,6 @@
 {
   "name": "video-stream-ascii",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Convert video stream to ascii art",
   "homepage": "https://im-rises.github.io/video-stream-ascii-webcam",
   "repository": "https://github.com/Im-Rises/video-stream-ascii",
@@ -20,14 +20,17 @@
     "dist/components/VideoAscii.js.map",
     "dist/components/VideoAscii.d.ts",
     "dist/components/VideoAscii.d.ts.map",
+    "src/components/VideoAscii.tsx",
     "dist/constants/pixel-ascii.js",
     "dist/constants/pixel-ascii.js.map",
     "dist/constants/pixel-ascii.d.ts",
     "dist/constants/pixel-ascii.d.ts.map",
+    "src/constants/pixel-ascii.ts",
     "dist/canvas-handler/video-canvas-ascii.js",
     "dist/canvas-handler/video-canvas-ascii.js.map",
     "dist/canvas-handler/video-canvas-ascii.d.ts",
-    "dist/canvas-handler/video-canvas-ascii.d.ts.map"
+    "dist/canvas-handler/video-canvas-ascii.d.ts.map",
+    "src/canvas-handler/video-canvas-ascii.ts"
   ],
   "keywords": [
     "video",
