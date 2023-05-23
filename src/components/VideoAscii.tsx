@@ -40,22 +40,22 @@ export const VideoAscii = (props: Props) => {
 
 	// UseEffect to calculate the font size and set the resize observer (to resize the canvas and the font size, when the parent element is resized)
 	useEffect(() => {
-		calculateAndSetFontSize(mergedProps.preTagRef.current!, props.charsPerLine, props.charsPerColumn, props.parentRef.current!.clientWidth, props.parentRef.current!.clientHeight);
+		calculateAndSetFontSize(mergedProps.preTagRef.current!, mergedProps.charsPerLine, mergedProps.charsPerColumn, mergedProps.parentRef.current!.clientWidth, mergedProps.parentRef.current!.clientHeight);
 
 		// Set a resize observer to the parent element to resize the canvas and the font size
 		const resizeObserver = new ResizeObserver(entries => {
 			const {width, height} = entries[0].contentRect;
-			calculateAndSetFontSize(mergedProps.preTagRef.current!, props.charsPerLine, props.charsPerColumn, width, height);
+			calculateAndSetFontSize(mergedProps.preTagRef.current!, mergedProps.charsPerLine, mergedProps.charsPerColumn, width, height);
 		});
-		if (props.parentRef.current) {
-			resizeObserver.observe(props.parentRef.current);
+		if (mergedProps.parentRef.current) {
+			resizeObserver.observe(mergedProps.parentRef.current);
 		}
 
 		// Stop the resize observer when the component is unmounted
 		return () => {
 			resizeObserver.disconnect();
 		};
-	}, [props.videoStreaming, props.parentRef, props.charsPerLine, props.charsPerColumn, props.artType]);
+	}, [mergedProps.videoStreaming, mergedProps.parentRef, mergedProps.charsPerLine, mergedProps.charsPerColumn, mergedProps.artType]);
 
 	// UseEffect to draw the video to the canvas buffer and get the ascii from the canvas buffer on every frame
 	useEffect(() => {
@@ -69,11 +69,11 @@ export const VideoAscii = (props: Props) => {
 		const updateAscii = () => {
 			// Draw video to canvas buffer
 
-			context.drawImage(props.videoStreaming, 0, 0, canvas.width, canvas.height);
+			context.drawImage(mergedProps.videoStreaming, 0, 0, canvas.width, canvas.height);
 
 			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-			switch (props.artType) {
+			switch (mergedProps.artType) {
 				case ArtTypeEnum.ASCII:
 					setAsciiText(getAsciiFromImage(imageData, asciiChars));
 					break;
@@ -85,7 +85,7 @@ export const VideoAscii = (props: Props) => {
 					// Set the background image of the pre tag to the resized canvas
 					mergedProps.preTagRef.current!.style.backgroundImage = `url(${canvasImgToUrl(canvas).src})`;
 					// // Set the background image of the pre tag to the original dimensions video
-					// mergedProps.preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(props.videoStreaming).src})`;
+					// mergedProps.preTagRef.current!.style.backgroundImage = `url(${videoImgToUrl(mergedProps.videoStreaming).src})`;
 					break;
 				default:
 					break;
@@ -102,24 +102,24 @@ export const VideoAscii = (props: Props) => {
 		return () => {
 			cancelAnimationFrame(animationFrameId);
 		};
-	}, [props.videoStreaming, props.artType]);
+	}, [mergedProps.videoStreaming, mergedProps.artType]);
 
 	return (
 		<div style={{
-			backgroundColor: props.backgroundColor,
+			backgroundColor: mergedProps.backgroundColor,
 			padding: 0, margin: 0, display: 'flex', justifyContent: 'center',
 			alignItems: 'center', width: '100%', height: '100%',
 		}}>
-			<canvas ref={canvasVideoBufferRef} width={props.charsPerLine} height={props.charsPerColumn}
+			<canvas ref={canvasVideoBufferRef} width={mergedProps.charsPerLine} height={mergedProps.charsPerColumn}
 				style={{display: 'none'}}/>
 			{
 				(() => {
-					switch (props.artType) {
+					switch (mergedProps.artType) {
 						case ArtTypeEnum.ASCII:
 							return (
 								<pre ref={mergedProps.preTagRef} style={{
-									backgroundColor: props.backgroundColor,
-									color: props.fontColor,
+									backgroundColor: mergedProps.backgroundColor,
+									color: mergedProps.fontColor,
 									padding: 0,
 									margin: 0,
 									letterSpacing: `${lineSpacing}em`,
@@ -134,8 +134,8 @@ export const VideoAscii = (props: Props) => {
 							return (
 								<pre ref={mergedProps.preTagRef} dangerouslySetInnerHTML={{__html: asciiText}}
 									style={{
-										backgroundColor: props.backgroundColor,
-										color: props.fontColor,
+										backgroundColor: mergedProps.backgroundColor,
+										color: mergedProps.fontColor,
 										padding: 0,
 										margin: 0,
 										letterSpacing: `${lineSpacing}em`,
